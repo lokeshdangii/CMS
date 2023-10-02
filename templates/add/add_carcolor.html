@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Car Color</title>
+    <link rel= "stylesheet" href="{{url_for('static', filename='css/add.css')}}"></link>
+    
+</head>
+<body>
+    <h1>Add Car Color</h1>
+    <form method="POST" action="/carcolor/add">
+        <label for="color_name">Color Name:</label>
+        <input type="text" id="color_name" name="color_name" required>
+        <br>
+        <button type="submit">Add Color</button>
+    </form>
+</body>
+</html>

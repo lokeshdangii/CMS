@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Car</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/add.css')}}">
+</head>
+<body>
+    <h1>Add Car</h1>
+    <form method="POST" action="{{ url_for('add_car') }}">
+        <label for="variant_id">Variant:</label>
+        <select id="variant_id" name="variant_id" required>
+            {% for variant in variants %}
+            <option value="{{ variant[0] }}">{{ variant[4] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="category_id">Category:</label>
+        <select id="category_id" name="category_id" required>
+            {% for category in categories %}
+            <option value="{{ category[0] }}">{{ category[1] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="engine_id">Engine:</label>
+        <select id="engine_id" name="engine_id" required>
+            {% for engine in engines %}
+            <option value="{{ engine[0] }}">{{ engine[1] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="color_id">Color:</label>
+        <select id="color_id" name="color_id" required>
+            {% for color in colors %}
+            <option value="{{ color[0] }}">{{ color[1] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="model_id">Model:</label>
+        <select id="model_id" name="model_id" required>
+            {% for model in models %}
+            <option value="{{ model[0] }}">{{ model[1] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="vin">VIN:</label>
+        <input type="text" id="vin" name="vin" required>
+        <br>
+        <label for="mileage">Mileage:</label>
+        <input type="number" step="0.01" id="mileage" name="mileage" required>
+        <br>
+        <label for="year_of_manufacture">Year of Manufacture:</label>
+        <input type="number" id="year_of_manufacture" name="year_of_manufacture" required>
+        <br>
+        <label for="brand_company">Brand/Company:</label>
+        <input type="text" id="brand_company" name="brand_company" required>
+        <br>
+        <input type="submit" value="Add Car">
+    </form>
+</body>
+</html>

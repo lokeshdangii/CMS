@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Payment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/delete/delete_payment.css') }}">
+</head>
+<body>
+    <h1>Delete Payment</h1>
+    <form method="POST" action="{{ url_for('delete_payment') }}">
+        <label for="payment_to_delete">Select Payment to Delete:</label>
+        <select id="payment_to_delete" name="payment_to_delete" required>
+            {% for payment in payments %}
+            <option value="{{ payment[0] }}">{{ payment[0] }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <input type="submit" value="Delete Payment">
+    </form>
+</body>
+</html>

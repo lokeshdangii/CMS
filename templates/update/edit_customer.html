@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Customer</title>
+</head>
+<body>
+    <h1>Edit Customer</h1>
+    <form method="POST" action="/customer/edit">
+        <label for="c_to_edit">Select Customer to Edit:</label>
+        <select id="c_to_edit" name="c_to_edit" required>
+            {% for customer in customers %}
+            <option value="{{ customer[0] }}">{{ customer[1] }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <label for="new_c_name">New Name:</label>
+        <input type="text" id="new_c_name" name="new_c_name" required>
+        <br><br>
+        <label for="new_gender">New Gender:</label>
+        <select id="new_gender" name="new_gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+        <br><br>
+        <label for="new_date_of_birth">New Date of Birth:</label>
+        <input type="date" id="new_date_of_birth" name="new_date_of_birth" required>
+        <br><br>
+        <label for="new_phone">New Phone:</label>
+        <input type="tel" id="new_phone" name="new_phone" required>
+        <br><br>
+        <label for="new_email">New Email:</label>
+        <input type="email" id="new_email" name="new_email" required>
+        <br><br>
+        <label for="new_address1">New Address Line 1:</label>
+        <input type="text" id="new_address1" name="new_address1" required>
+        <br><br>
+        <label for="new_address2">New Address Line 2:</label>
+        <input type="text" id="new_address2" name="new_address2" required>
+        <br><br>
+        <label for="new_city">New City:</label>
+        <input type="text" id="new_city" name="new_city" required>
+        <br><br>
+        <label for="new_state">New State:</label>
+        <input type="text" id="new_state" name="new_state" required>
+        <br><br>
+        <label for="new_pincode">New Pincode:</label>
+        <input type="text" id="new_pincode" name="new_pincode" required>
+        <br><br>
+        <input type="submit" value="Edit Customer">
+    </form>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit SalesPerson</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/edit.css')}}">
+</head>
+<body>
+    <h1>Edit SalesPerson</h1>
+    <form method="POST" action="{{ url_for('edit_salesperson') }}">
+        <label for="sp_to_edit">Select SalesPerson to Edit:</label>
+        <select id="sp_to_edit" name="sp_to_edit" required>
+            {% for salesperson in salespersons %}
+            <option value="{{ salesperson[0] }}">{{ salesperson[1] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="new_sp_name">New SalesPerson Name:</label>
+        <input type="text" id="new_sp_name" name="new_sp_name" required>
+        <br>
+        <label for="new_gender">New Gender:</label>
+        <select id="new_gender" name="new_gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+        <br>
+        <label for="new_date_of_birth">New Date of Birth:</label>
+        <input type="date" id="new_date_of_birth" name="new_date_of_birth" required>
+        <br>
+        <label for="new_mobile_no">New Mobile Number:</label>
+        <input type="text" id="new_mobile_no" name="new_mobile_no" required>
+        <br>
+        <label for="new_email">New Email:</label>
+        <input type="email" id="new_email" name="new_email" required>
+        <br>
+        <label for="new_address1">New Address Line 1:</label>
+        <input type="text" id="new_address1" name="new_address1" required>
+        <br>
+        <label for="new_address2">New Address Line 2:</label>
+        <input type="text" id="new_address2" name="new_address2" required>
+        <br>
+        <label for="new_city">New City:</label>
+        <input type="text" id="new_city" name="new_city" required>
+        <br>
+        <label for="new_state">New State:</label>
+        <input type="text" id="new_state" name="new_state" required>
+        <br>
+        <label for="new_pincode">New Pin Code:</label>
+        <input type="text" id="new_pincode" name="new_pincode" required>
+        <br>
+        <input type="submit" value="Edit SalesPerson">
+    </form>
+</body>
+</html>

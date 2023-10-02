@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Installment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/update/carcolor.css') }}">
+</head>
+<body>
+    <h1>Edit Installment</h1>
+    <form method="POST" action="/installment/edit">
+        <label for="installment_to_edit">Select Installment to Edit:</label>
+        <select id="installment_to_edit" name="installment_to_edit" required>
+            {% for installment in installments %}
+            <option value="{{ installment[0] }}">{{ installment[1] }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <label for="new_installment_number">New Installment Number:</label>
+        <input type="number" id="new_installment_number" name="new_installment_number" required>
+        <br><br>
+        <label for="new_due_date">New Due Date:</label>
+        <input type="date" id="new_due_date" name="new_due_date" required>
+        <br><br>
+        <label for="new_installment_amount">New Installment Amount:</label>
+        <input type="number" id="new_installment_amount" name="new_installment_amount" required>
+        <br><br>
+        <label for="new_remaining_amount">New Remaining Amount:</label>
+        <input type="number" id="new_remaining_amount" name="new_remaining_amount" required>
+        <br><br>
+        <label for="new_total_installment">New Total Installment:</label>
+        <input type="number" id="new_total_installment" name="new_total_installment" required>
+        <br><br>
+        <button type="submit">Edit Installment</button>
+    </form>
+</body>
+</html>

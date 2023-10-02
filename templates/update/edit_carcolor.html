@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Car Color</title>
+    <link rel= "stylesheet" href="{{url_for('static', filename='css/update/carcolor.css')}}"></link>
+</head>
+<body>
+    <h1>Edit Car Color</h1>
+    <form method="POST" action="/carcolor/edit">
+        <label for="color_to_edit">Select Color to Edit:</label>
+        <select id="color_to_edit" name="color_to_edit">
+            {% for color in colors %}
+                <option value="{{ color[0] }}">{{ color[1] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="new_color_name">New Color Name:</label>
+        <input type="text" id="new_color_name" name="new_color_name" required>
+        <br>
+        <button type="submit">Update Color</button>
+    </form>
+</body>
+</html>

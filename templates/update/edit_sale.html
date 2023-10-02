@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Sale</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/update/edit_sale.css') }}">
+</head>
+<body>
+    <h1>Edit Sale</h1>
+    <form method="POST" action="{{ url_for('edit_sale') }}">
+        <label for="sale_to_edit">Select Sale to Edit:</label>
+        <select id="sale_to_edit" name="sale_to_edit" required>
+            {% for sale in sales %}
+            <option value="{{ sale[0] }}">{{ sale[0] }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <label for="new_customer_id">New Customer:</label>
+        <select id="new_customer_id" name="new_customer_id" required>
+            {% for customer in customers %}
+            <option value="{{ customer[0] }}">{{ customer[1] }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <label for="new_car_id">New Car:</label>
+        <select id="new_car_id" name="new_car_id" required>
+            {% for car in cars %}
+            <option value="{{ car[0] }}">{{ car[1] }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <label for="new_salesperson_id">New Salesperson:</label>
+        <select id="new_salesperson_id" name="new_salesperson_id" required>
+            {% for salesperson in salespersons %}
+            <option value="{{ salesperson[0] }}">{{ salesperson[1] }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <label for="new_payment_id">New Payment:</label>
+        <select id="new_payment_id" name="new_payment_id" required>
+            {% for payment in payments %}
+            <option value="{{ payment[0] }}">{{ payment[1] }}</option>
+            {% endfor %}
+        </select>
+        <br><

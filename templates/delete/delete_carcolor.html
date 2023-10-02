@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Car Color</title>
+    <link rel= "stylesheet" href="{{url_for('static', filename='css/delete/carcolor.css')}}"></link>
+</head>
+<body>
+    <h1>Delete Car Color</h1>
+
+    <form method="POST" action="/carcolor/delete">
+        <label for="color_to_delete">Select Color to Delete:</label>
+        <select name="color_to_delete" id="color_to_delete">
+            {% for color in colors %}
+                <option value="{{ color[0] }}">{{ color[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Delete Car Color</button>
+    </form>
+
+    <a href="/carcolor">Back to Car Colors</a>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Car Model</title>
+    <link rel= "stylesheet" href="{{url_for('static', filename='css/update/carcolor.css')}}"></link>
+</head>
+<body>
+    <h1>Edit Car Model</h1>
+    <form method="POST" action="{{ url_for('edit_carmodel') }}">
+        <label for="model_to_edit">Select Car Model to Edit:</label>
+        <select id="model_to_edit" name="model_to_edit" required>
+            {% for model in models %}
+            <option value="{{ model[0] }}">{{ model[1] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="new_model_name">New Model Name:</label>
+        <input type="text" id="new_model_name" name="new_model_name" required>
+        <br>
+        <label for="new_category_id">New Category:</label>
+        <select id="new_category_id" name="new_category_id" required>
+            {% for category in categories %}
+            <option value="{{ category[0] }}">{{ category[1] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="new_engine_id">New Engine:</label>
+        <select id="new_engine_id" name="new_engine_id" required>
+            {% for engine in engines %}
+            <option value="{{ engine[0] }}">{{ engine[1] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <input type="submit" value="Edit Car Model">
+    </form>
+</body>
+</html>

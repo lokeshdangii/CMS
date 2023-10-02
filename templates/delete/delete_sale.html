@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Sale</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/delete/delete_sale.css') }}">
+</head>
+<body>
+    <h1>Delete Sale</h1>
+    <form method="POST" action="{{ url_for('delete_sale') }}">
+        <label for="sale_to_delete">Select Sale to Delete:</label>
+        <select id="sale_to_delete" name="sale_to_delete" required>
+            {% for sale in sales %}
+            <option value="{{ sale[0] }}">{{ sale[0] }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <input type="submit" value="Delete Sale">
+    </form>
+</body>
+</html>

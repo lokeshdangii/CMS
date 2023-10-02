@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Installment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/delete/carcolor.css') }}">
+</head>
+<body>
+    <h1>Delete Installment</h1>
+    <form method="POST" action="/installment/delete">
+        <label for="installment_to_delete">Select Installment to Delete:</label>
+        <select id="installment_to_delete" name="installment_to_delete" required>
+            {% for installment in installments %}
+            <option value="{{ installment[0] }}">{{ installment[1] }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <button type="submit">Delete Installment</button>
+    </form>
+</body>
+</html>
