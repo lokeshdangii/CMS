@@ -65,7 +65,7 @@ def edit_car_color():
 
 # --------------------------- delete Car Color ---------------------------------------------------
  
-# Route to display the Car Color deletion form
+# Route to display the Car Color to delete
 @app.route('/carcolor/delete', methods=['GET'])
 def delete_car_color_form():
     cursor.execute("SELECT ColorID, ColorName FROM CarColor")
