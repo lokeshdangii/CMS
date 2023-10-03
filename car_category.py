@@ -1,27 +1,16 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint
 import mysql.connector
+from db import db,cursor
 
 app = Flask(__name__)
 
-# Database configuration
-db_config = {
-    "host": "localhost",
-    "user": "root",
-    "password": "root",
-    "database": "cardb"
-}
-
-# Create a connection to the MySQL database
-db = mysql.connector.connect(**db_config)
-
-# Initialize a cursor
-cursor = db.cursor()
+car_category = Blueprint('car_category',__name__)
 
 
 # ------------------------------------- Display (select query) Car Categories ---------------------------------------------------
 
 # Route to display all Car Categories
-@app.route('/carcategory')
+@car_category.route('/carcategory')
 def carcategory_table():
     cursor.execute("SELECT * FROM CarCategory")
     data = cursor.fetchall()
@@ -31,7 +20,7 @@ def carcategory_table():
 # ------------------------------------ Add/Insert Car Category ---------------------------------------------------
 
 # Route to add a new Car Category
-@app.route('/carcategory/add', methods=['GET', 'POST'])
+@car_category.route('/carcategory/add', methods=['GET', 'POST'])
 def add_carcategory():
     if request.method == 'POST':
         category_id = request.form['category_id']
@@ -45,7 +34,7 @@ def add_carcategory():
 
 # ------------------------------------ Update/Edit Car Category ---------------------------------------------------
 # Route to edit a Car Category
-@app.route('/carcategory/edit', methods=['GET', 'POST'])
+@car_category.route('/carcategory/edit', methods=['GET', 'POST'])
 def edit_car_category():
     if request.method == 'POST':
         category_id = request.form['category_to_edit']
@@ -65,14 +54,14 @@ def edit_car_category():
 # --------------------------- delete Car Category ---------------------------------------------------
 
 # Route to display the Car Category deletion form
-@app.route('/carcategory/delete', methods=['GET'])
+@car_category.route('/carcategory/delete', methods=['GET'])
 def delete_car_category_form():
     cursor.execute("SELECT CategoryID, CategoryName FROM CarCategory")
     categories = cursor.fetchall()
     return render_template('delete/delete_carcategory.html', categories=categories)
 
 # Route for deleting a Car Category
-@app.route('/carcategory/delete', methods=['POST'])
+@car_category.route('/carcategory/delete', methods=['POST'])
 def delete_car_category():
     if request.method == 'POST':
         category_id = request.form.get('category_to_delete')
