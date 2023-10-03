@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Add Finance Record</h1>
-    <form method="POST" action="{{ url_for('add_finance') }}">
+    <form method="POST" action="{{ url_for('finance.add_finance') }}">
         <label for="sale_id">Sale:</label>
         <select id="sale_id" name="sale_id" required>
             {% for sale in sales %}

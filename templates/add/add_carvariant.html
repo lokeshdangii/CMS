@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Add Car Variant</h1>
-    <form method="POST" action="{{ url_for('add_carvariant') }}">
+    <form method="POST" action="{{ url_for('car_variant.add_carvariant') }}">
         <label for="model_id">Model:</label>
         <select id="model_id" name="model_id" required>
             {% for model in models %}

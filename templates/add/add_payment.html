@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Add Payment</h1>
-    <form method="POST" action="{{ url_for('add_payment') }}">
+    <form method="POST" action="{{ url_for('payment.add_payment') }}">
         <label for="installment_id">Installment ID:</label>
         <select id="installment_id" name="installment_id" required>
             {% for installment in installments %}
