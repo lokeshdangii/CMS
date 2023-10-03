@@ -12,7 +12,7 @@
         <label for="installment_to_delete">Select Installment to Delete:</label>
         <select id="installment_to_delete" name="installment_to_delete" required>
             {% for installment in installments %}
-            <option value="{{ installment[0] }}">{{ installment[1] }}</option>
+            <option value="{{ installment[0] }}">{{ installment[0] }}</option>
             {% endfor %}
         </select>
         <br><br>

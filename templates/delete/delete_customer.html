@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Customer</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/delete.css')}}">
 </head>
 <body>
     <h1>Delete Customer</h1>
@@ -11,11 +12,18 @@
         <label for="c_to_delete">Select Customer to Delete:</label>
         <select id="c_to_delete" name="c_to_delete" required>
             {% for customer in customers %}
-            <option value="{{ customer[0] }}">{{ customer[1] }}</option>
+            <option value="{{ customer[0] }}"> [ {{ customer[0] }} ] {{ customer[1] }}</option>
             {% endfor %}
         </select>
         <br><br>
         <button type="submit">Delete Customer</button>
     </form>
+
+    <!-- Display flashed messages -->
+    {% for message in get_flashed_messages() %}
+    <div class="flash-message">
+        {{ message }}
+    </div>
+    {% endfor %}
 </body>
 </html>

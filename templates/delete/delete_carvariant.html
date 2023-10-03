@@ -12,7 +12,7 @@
         <label for="variant_to_delete">Select Car Variant to Delete:</label>
         <select id="variant_to_delete" name="variant_to_delete" required>
             {% for variant in variants %}
-            <option value="{{ variant[0] }}">{{ variant[0] }}</option>
+            <option value="{{ variant[0] }}">{{ variant[0] }} [ {{ variant[1] }} ] </option>
             {% endfor %}
         </select>
         <br>

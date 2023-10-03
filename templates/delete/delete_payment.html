@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Payment</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/delete/delete_payment.css') }}">
+    <link rel= "stylesheet" href="{{url_for('static', filename='css/delete.css')}}"></link>
 </head>
 <body>
     <h1>Delete Payment</h1>
@@ -16,7 +16,7 @@
             {% endfor %}
         </select>
         <br><br>
-        <input type="submit" value="Delete Payment">
+        <button type="submit">Delete Payment </button>
     </form>
 </body>
 </html>

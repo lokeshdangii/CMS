@@ -8,15 +8,23 @@
 </head>
 <body>
     <h1>Delete Car</h1>
+
     <form method="POST" action="{{ url_for('delete_car') }}">
         <label for="car_to_delete">Select Car to Delete:</label>
         <select id="car_to_delete" name="car_to_delete" required>
             {% for car in cars %}
-            <option value="{{ car[0] }}">{{ car[6] }} (VIN: {{ car[7] }})</option>
+            <option value="{{ car[0] }}">{{ car[0] }} (VIN: {{ car[1] }}) (Company: {{ car[2] }}) </option>
             {% endfor %}
         </select>
         <br>
-        <input type="submit" value="Delete Car">
+        <button type="submit">Delete Car </button>
     </form>
+
+    <!-- Display flashed messages -->
+    {% for message in get_flashed_messages() %}
+    <div class="flash-message">
+        {{ message }}
+    </div>
+    {% endfor %}
 </body>
 </html>

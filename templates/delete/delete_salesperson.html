@@ -12,11 +12,11 @@
         <label for="sp_to_delete">Select SalesPerson to Delete:</label>
         <select id="sp_to_delete" name="sp_to_delete" required>
             {% for salesperson in salespersons %}
-            <option value="{{ salesperson[0] }}">{{ salesperson[1] }}</option>
+            <option value="{{ salesperson[0] }}"> [ {{ salesperson[0] }} ] {{ salesperson[1] }}</option>
             {% endfor %}
         </select>
         <br>
-        <input type="submit" value="Delete SalesPerson">
+        <button type="submit">Delete SalesPerson</button>
     </form>
 </body>
 </html>
