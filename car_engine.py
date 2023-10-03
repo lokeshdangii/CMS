@@ -1,26 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint
+from db import db,cursor
 import mysql.connector
 
-app = Flask(__name__)
-
-# Database configuration
-db_config = {
-    "host": "localhost",
-    "user": "root",
-    "password": "root",
-    "database": "cardb"
-}
-
-# Create a connection to the MySQL database
-db = mysql.connector.connect(**db_config)
-
-# Initialize a cursor
-cursor = db.cursor()
+car_engine = Blueprint('car_engine',__name__)
 
 # ------------------------------------- Display (select query) Car Engine ---------------------------------------------------
 
 # Route to display all Car Engines
-@app.route('/carengine')
+@car_engine.route('/carengine')
 def carengine_table():
     cursor.execute("SELECT * FROM CarEngine")
     data = cursor.fetchall()
@@ -30,7 +17,7 @@ def carengine_table():
 # ------------------------------------ Add/Insert Car Engine ---------------------------------------------------
 
 # Route to add a new Car Engine
-@app.route('/carengine/add', methods=['GET', 'POST'])
+@car_engine.route('/carengine/add', methods=['GET', 'POST'])
 def add_carengine():
     if request.method == 'POST':
         engine_id = request.form['engine_id']
@@ -52,7 +39,7 @@ def add_carengine():
 
 # ------------------------------------ Update/Edit Car Engine ---------------------------------------------------
 # Route to edit a Car Engine
-@app.route('/carengine/edit', methods=['GET', 'POST'])
+@car_engine.route('/carengine/edit', methods=['GET', 'POST'])
 def edit_car_engine():
     if request.method == 'POST':
         engine_id = request.form['engine_to_edit']
@@ -72,14 +59,14 @@ def edit_car_engine():
 # --------------------------- delete Car Engine ---------------------------------------------------
 
 # Route to display the Car Engine deletion form
-@app.route('/carengine/delete', methods=['GET'])
+@car_engine.route('/carengine/delete', methods=['GET'])
 def delete_car_engine_form():
     cursor.execute("SELECT EngineID, EngineName FROM CarEngine")
     engines = cursor.fetchall()
     return render_template('delete/delete_carengine.html', engines=engines)
 
 # Route for deleting a Car Engine
-@app.route('/carengine/delete', methods=['POST'])
+@car_engine.route('/carengine/delete', methods=['POST'])
 def delete_car_engine():
     if request.method == 'POST':
         engine_id = request.form.get('engine_to_delete')
@@ -94,6 +81,3 @@ def delete_car_engine():
 
         # Redirect back to the Car Engine deletion form
         return redirect('/carengine/delete')
-
-if __name__ == '__main__':
-    app.run(debug=True)
