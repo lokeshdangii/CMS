@@ -47,3 +47,12 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #555;
 }
+
+.flash-message {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    text-align: center;
+}
