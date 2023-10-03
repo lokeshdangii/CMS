@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Edit Customer</h1>
-    <form method="POST" action="{{ url_for('edit_customer') }}">
+    <form method="POST" action="{{ url_for('customer.edit_customer') }}">
         <label for="customer_id">Select Customer to Edit:</label>
         <select id="customer_id" name="customer_id" required>
             {% for customer in customers %}

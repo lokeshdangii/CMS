@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Edit SalesPerson</h1>
-    <form method="POST" action="{{ url_for('edit_salesperson') }}">
+    <form method="POST" action="{{ url_for('salesperson.edit_salesperson') }}">
         <label for="salesperson_id">Select SalesPerson to Edit:</label>
         <select id="salesperson_id" name="salesperson_id" required>
             {% for salesperson in salespersons %}

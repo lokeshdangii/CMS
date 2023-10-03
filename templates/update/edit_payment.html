@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Edit Payment</h1>
-    <form method="POST" action="{{ url_for('edit_payment') }}">
+    <form method="POST" action="{{ url_for('payment.edit_payment') }}">
         <label for="payment_to_edit">Select Payment to Edit:</label>
         <select id="payment_to_edit" name="payment_to_edit" required>
             {% for payment in payments %}
