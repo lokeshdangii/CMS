@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Sale</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/update/edit_sale.css') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/update/carcolor.css')}}">
 </head>
 <body>
     <h1>Edit Sale</h1>
@@ -43,4 +43,14 @@
             <option value="{{ payment[0] }}">{{ payment[1] }}</option>
             {% endfor %}
         </select>
-        <br><
+        <br><br>
+        <label for="new_sale_date">New Sale Date:</label>
+        <input type="date" id="new_sale_date" name="new_sale_date" required>
+        <br><br>
+        <label for="new_sale_price">New Sale Price:</label>
+        <input type="number" step="0.01" id="new_sale_price" name="new_sale_price" required>
+        <br><br>
+        <input type="submit" value="Update Sale">
+    </form>
+</body>
+</html>
