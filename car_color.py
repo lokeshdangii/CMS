@@ -1,28 +1,16 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint
 import mysql.connector
+from db import db, cursor
 
-app = Flask(__name__)
 
-
-# Database configuration
-db_config = {
-    "host": "localhost",
-    "user": "root",
-    "password": "root",
-    "database": "cardb"
-}
-
-# Create a connection to the MySQL database
-db = mysql.connector.connect(**db_config)
-
-# Initialize a cursor
-cursor = db.cursor()
+# BluePrint
+carcolor = Blueprint('carcolor',__name__)
 
 
 # ------------------------------------- Display(select query) Car Color ---------------------------------------------------
 
 # Route to display all Car Colors
-@app.route('/carcolor')
+@carcolor.route('/carcolor')
 def carcolor_table():
     cursor.execute("SELECT * FROM CarColor")
     data = cursor.fetchall()
@@ -32,7 +20,7 @@ def carcolor_table():
 # ------------------------------------ Add/Insert Car Color ---------------------------------------------------
 
 # Route to add a new Car Color
-@app.route('/carcolor/add', methods=['GET', 'POST'])
+@carcolor.route('/carcolor/add', methods=['GET', 'POST'])
 def add_carcolor():
     if request.method == 'POST':
         color_name = request.form['color_name']
@@ -45,7 +33,7 @@ def add_carcolor():
 
 # ------------------------------------ Update/Edit Car Color ---------------------------------------------------
 # Route to edit a Car Color
-@app.route('/carcolor/edit', methods=['GET', 'POST'])
+@carcolor.route('/carcolor/edit', methods=['GET', 'POST'])
 def edit_car_color():
     if request.method == 'POST':
         color_id = request.form['color_to_edit']
@@ -65,15 +53,15 @@ def edit_car_color():
 
 # --------------------------- delete Car Color ---------------------------------------------------
  
-# Route to display the Car Color to delete
-@app.route('/carcolor/delete', methods=['GET'])
+# Route to display the Car Color deletion form
+@carcolor.route('/carcolor/delete', methods=['GET'])
 def delete_car_color_form():
     cursor.execute("SELECT ColorID, ColorName FROM CarColor")
     colors = cursor.fetchall()
     return render_template('delete/delete_carcolor.html', colors=colors)
 
 # Route for deleting a Car Color
-@app.route('/carcolor/delete', methods=['POST'])
+@carcolor.route('/carcolor/delete', methods=['POST'])
 def delete_car_color():
     if request.method == 'POST':
         color_id = request.form.get('color_to_delete')
@@ -90,5 +78,3 @@ def delete_car_color():
         return redirect('/carcolor')
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
