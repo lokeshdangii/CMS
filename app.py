@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, Blu
 import mysql.connector
 from db import db, cursor
 
-# import scripts
+# import blueprint from scripts
 from car_color import carcolor
 from car_category import car_category
 from car_engine import car_engine
@@ -15,6 +15,7 @@ from installment import installment
 from payment import payment
 from sale import sale
 from finance import finance
+from auth import auth
 
 
 app = Flask(__name__)
@@ -38,6 +39,7 @@ app.register_blueprint(installment)
 app.register_blueprint(payment)
 app.register_blueprint(sale)
 app.register_blueprint(finance)
+app.register_blueprint(auth)
 
 
 if __name__ == '__main__':
