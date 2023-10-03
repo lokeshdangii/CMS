@@ -96,7 +96,7 @@ def edit_car():
             flash(f'Error updating Car: {e}', 'danger')
 
     # Fetch the list of cars to populate the dropdown in the form
-    cursor.execute("SELECT CarID, VIN FROM Car")
+    cursor.execute("SELECT Car.CarID, CarModel.ModelName from Car INNER JOIN CarModel ON Car.ModelID = CarModel.ModelID")
     cars = cursor.fetchall()
 
     return render_template('update/edit_car.html', cars=cars)
@@ -107,7 +107,7 @@ def edit_car():
 # Route to display the Car deletion form
 @car.route('/car/delete', methods=['GET'])
 def delete_car_form():
-    cursor.execute("SELECT CarID, VIN, BrandCompany FROM Car")
+    cursor.execute("SELECT Car.CarID, CarModel.ModelName from Car INNER JOIN CarModel ON Car.ModelID = CarModel.ModelID;")
     cars = cursor.fetchall()
     return render_template('delete/delete_car.html', cars=cars)
 
