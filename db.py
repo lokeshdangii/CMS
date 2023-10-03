@@ -1,7 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
 import mysql.connector
 
-app = Flask(__name__)
 
 # Database configuration
 db_config = {
