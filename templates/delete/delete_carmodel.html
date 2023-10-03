@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>Delete Car Model</h1>
-    <form method="POST" action="{{ url_for('delete_carmodel') }}">
+    <form method="POST" action="{{ url_for('car_model.delete_carmodel') }}">
         <label for="model_to_delete">Select Car Model to Delete:</label>
         <select id="model_to_delete" name="model_to_delete" required>
             {% for model in models %}

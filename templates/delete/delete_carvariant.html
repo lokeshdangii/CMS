@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Delete Car Variant</h1>
-    <form method="POST" action="{{ url_for('delete_carvariant') }}">
+    <form method="POST" action="{{ url_for('car_variant.delete_carvariant') }}">
         <label for="variant_to_delete">Select Car Variant to Delete:</label>
         <select id="variant_to_delete" name="variant_to_delete" required>
             {% for variant in variants %}

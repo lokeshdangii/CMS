@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Delete SalesPerson</h1>
-    <form method="POST" action="{{ url_for('delete_salesperson') }}">
+    <form method="POST" action="{{ url_for('salesperson.delete_salesperson') }}">
         <label for="sp_to_delete">Select SalesPerson to Delete:</label>
         <select id="sp_to_delete" name="sp_to_delete" required>
             {% for salesperson in salespersons %}

@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Delete Payment</h1>
-    <form method="POST" action="{{ url_for('delete_payment') }}">
+    <form method="POST" action="{{ url_for('payment.delete_payment') }}">
         <label for="payment_to_delete">Select Payment to Delete:</label>
         <select id="payment_to_delete" name="payment_to_delete" required>
             {% for payment in payments %}

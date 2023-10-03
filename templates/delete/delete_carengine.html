@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Delete Car Engine</h1>
-    <form method="POST">
+    <form method="POST" action="/carengine/delete">
         <label for="engine_to_delete">Select Engine to Delete:</label>
         <select id="engine_to_delete" name="engine_to_delete">
             {% for engine in engines %}
