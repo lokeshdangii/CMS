@@ -20,6 +20,10 @@ from finance import finance
 app = Flask(__name__)
 app.secret_key = '1df90c98804d9e99099c4356a9d4c3989b681e578d413d79f7759c305b18e6b1'
 
+@app.route("/")
+def index():
+    return render_template('index.html')
+
 
 # register blueprint
 app.register_blueprint(carcolor)
@@ -39,7 +43,5 @@ app.register_blueprint(finance)
 if __name__ == '__main__':
     app.run(debug=True)
     
-    
-    
-    
+     
 # carmodel, carvariant, car, salesperson, customer(edit), Payment, sale and finance
