@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Installment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add.css') }}">
+</head>
+<body>
+    <h1>Add Installment</h1>
+    <form method="POST" action="/installment/add">
+        <label for="installment_number">Installment Number:</label>
+        <input type="number" id="installment_number" name="installment_number" required>
+        <br><br>
+        <label for="due_date">Due Date:</label>
+        <input type="date" id="due_date" name="due_date" required>
+        <br><br>
+        <label for="installment_amount">Installment Amount:</label>
+        <input type="number" id="installment_amount" name="installment_amount" required>
+        <br><br>
+        <label for="remaining_amount">Remaining Amount:</label>
+        <input type="number" id="remaining_amount" name="remaining_amount" required>
+        <br><br>
+        <label for="total_installment">Total Installment:</label>
+        <input type="number" id="total_installment" name="total_installment" required>
+        <br><br>
+        <button type="submit">Add Installment</button>
+    </form>
+</body>
+</html>
