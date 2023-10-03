@@ -1,26 +1,15 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint
 import mysql.connector
+from db import db, cursor
 
 app = Flask(__name__)
 
-# Database configuration
-db_config = {
-    "host": "localhost",
-    "user": "root",
-    "password": "root",
-    "database": "cardb"
-}
-
-# Create a connection to the MySQL database
-db = mysql.connector.connect(**db_config)
-
-# Initialize a cursor
-cursor = db.cursor()
+car_model = Blueprint('car_model',__name__)
 
 # ------------------------------------- Display (select query) Car Engine ---------------------------------------------------
 
 # Route to display all Car Models
-@app.route('/carmodel')
+@car_model.route('/carmodel')
 def carengine_table():
     cursor.execute("SELECT * FROM CarModel")
     data = cursor.fetchall()
@@ -30,7 +19,7 @@ def carengine_table():
 # ------------------------------------ Add/Insert Car Model ---------------------------------------------------
 
 # Route to add a new Car Model
-@app.route('/carmodel/add', methods=['GET', 'POST'])
+@car_model.route('/carmodel/add', methods=['GET', 'POST'])
 def add_carmodel():
     if request.method == 'POST':
         model_name = request.form['model_name']
@@ -58,7 +47,7 @@ def add_carmodel():
 # ------------------------------------ Update/Edit Car Model ---------------------------------------------------
 
 # Route to edit a Car Model
-@app.route('/carmodel/edit', methods=['GET', 'POST'])
+@car_model.route('/carmodel/edit', methods=['GET', 'POST'])
 def edit_carmodel():
     if request.method == 'POST':
         model_id = request.form['model_to_edit']
@@ -90,14 +79,14 @@ def edit_carmodel():
 # --------------------------- Delete Car Model ---------------------------------------------------
 
 # Route to display the Car Model deletion form
-@app.route('/carmodel/delete', methods=['GET'])
+@car_model.route('/carmodel/delete', methods=['GET'])
 def delete_carmodel_form():
     cursor.execute("SELECT ModelID, ModelName FROM CarModel")
     models = cursor.fetchall()
     return render_template('delete/delete_carmodel.html', models=models)
 
 # Route for deleting a Car Model
-@app.route('/carmodel/delete', methods=['POST'])
+@car_model.route('/carmodel/delete', methods=['POST'])
 def delete_carmodel():
     if request.method == 'POST':
         model_id = request.form.get('model_to_delete')
@@ -112,6 +101,3 @@ def delete_carmodel():
 
         return redirect('/carmodel')
 
-
-if __name__ == '__main__':
-    app.run(debug=True)
