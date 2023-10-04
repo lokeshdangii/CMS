@@ -1,0 +1,45 @@
+/* Apply styles to the <body> element */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style the <h1> element */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
+/* Style the <table> element */
+table {
+    width: 60%; /* Adjust the width as needed */
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    table-layout: fixed; /* Fix table layout */
+}
+
+/* Style the table header cells (<th>) */
+th {
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px;
+}
+
+/* Style the table data cells (<td>) */
+td {
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    word-wrap: break-word; /* Wrap long text */
+}
+
+/* Add a hover effect to table rows */
+tr:hover {
+    background-color: #f5f5f5;
+}
