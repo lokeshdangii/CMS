@@ -1,3 +1,8 @@
+body, h1, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
@@ -26,13 +31,14 @@ label {
     margin-bottom: 10px;
 }
 
-input[type="text"] {
+select, input[type="text"], input[type="number"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
 }
+
 
 button[type="submit"] {
     background-color: #333;
@@ -45,5 +51,14 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #555;
+    background-color: #45a049;
+}
+
+.flash-message {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    text-align: center;
 }
