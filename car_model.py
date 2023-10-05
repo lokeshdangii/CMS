@@ -10,7 +10,7 @@ car_model = Blueprint('car_model',__name__)
 
 # Route to display all Car Models
 @car_model.route('/carmodel')
-def carengine_table():
+def carmodel_table():
     cursor.execute("SELECT * FROM CarModel")
     data = cursor.fetchall()
     return render_template('view/carModel.html', data=data)
