@@ -16,6 +16,7 @@ from payment import payment
 from sale import sale
 from finance import finance
 from auth import auth
+from dashboard import dashboard
 
 
 app = Flask(__name__)
@@ -23,7 +24,7 @@ app.secret_key = '1df90c98804d9e99099c4356a9d4c3989b681e578d413d79f7759c305b18e6
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template('auth/login.html')
 
 
 # register blueprint
@@ -40,6 +41,7 @@ app.register_blueprint(payment)
 app.register_blueprint(sale)
 app.register_blueprint(finance)
 app.register_blueprint(auth)
+app.register_blueprint(dashboard)
 
 
 if __name__ == '__main__':
