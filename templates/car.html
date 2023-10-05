@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DASHBOARD</title>
+    <link rel="stylesheet" href="{{ url_for('static' , filename = 'css/car_pages.css') }}">
+</head>
+
+<body>
+    <h1>Car Page</h1>
+    <div class="button-container">
+
+        <div>
+            <a href="{{ url_for('car.car_table')}}" class="">View Cars</a>
+        </div>
+
+        <div>
+            <a href="{{ url_for('car.add_car') }}" class="">Add Car</a>
+        </div>
+
+        <div>
+            <a href="{{url_for('car.edit_car')}}" class="">Edit Car</a>
+        </div>
+
+        <div>
+            <a href="{{url_for('car.delete_car')}}" class="">Delete Car</a>
+        </div>
+
+    </div>
+</body>
+
+</html>
+
+</body>
+
+</html>
