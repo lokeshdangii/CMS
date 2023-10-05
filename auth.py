@@ -76,6 +76,7 @@ def login():
 def dashboard():
     # Check if the user is logged in
     if 'username' in session:
-        return f'Hello, {session["username"]}! Welcome to the dashboard.'
+        return render_template('dashboard.html')
+        # return f'Hello, {session["username"]}! Welcome to the dashboard.'
     else:
         return redirect(url_for('auth.login_form'))
