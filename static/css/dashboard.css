@@ -1,0 +1,41 @@
+/* Reset some default styles */
+body, h1 {
+    margin: 0;
+    padding: 0;
+}
+
+/* Center align the heading */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Style the container for buttons */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Style each button */
+.button-container div {
+    margin: 20px;
+    text-align: center;
+}
+
+/* Style the links */
+.button-container a {
+    text-decoration: none;
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+/* Change link color on hover */
+.button-container a:hover {
+    background-color: #0056b3;
+}
