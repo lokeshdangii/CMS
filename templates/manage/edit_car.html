@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Car</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='manage/edit.css') }}">
+
+</head>
+<body>
+    <h1>Edit Car</h1>
+    <form method="POST" action="{{ url_for('manage_car.edit_car', car_id=car_data[0]) }}">
+        <label for="variant_id">Variant ID:</label>
+        <input type="text" id="variant_id" name="variant_id" value="{{ car_data[1] }}" required />
+        <br />
+
+        <label for="category_id">Category ID:</label>
+        <input type="text" id="category_id" name="category_id" value="{{ car_data[2] }}" required />
+        <br />
+
+        <label for="engine_id">Engine ID:</label>
+        <input type="text" id="engine_id" name="engine_id" value="{{ car_data[3] }}" required />
+        <br />
+
+        <label for="color_id">Color ID:</label>
+        <input type="text" id="color_id" name="color_id" value="{{ car_data[4] }}" required />
+        <br />
+
+        <label for="model_id">Model ID:</label>
+        <input type="text" id="model_id" name="model_id" value="{{ car_data[5] }}" required />
+        <br />
+
+        <label for="vin">VIN:</label>
+        <input type="text" id="vin" name="vin" value="{{ car_data[6] }}" required />
+        <br />
+
+        <label for="mileage">Mileage:</label>
+        <input type="text" id="mileage" name="mileage" value="{{ car_data[7] }}" required />
+        <br />
+
+        <label for="year_manufacture">Year of Manufacture:</label>
+        <input type="text" id="year_manufacture" name="year_manufacture" value="{{ car_data[8] }}" required />
+        <br />
+
+        <label for="brand_company">Brand/Company:</label>
+        <input type="text" id="brand_company" name="brand_company" value="{{ car_data[9] }}" required />
+        <br />
+
+        <input type="submit" value="Update" />
+    </form>
+</body>
+</html>
