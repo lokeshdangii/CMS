@@ -17,6 +17,7 @@ from sale import sale
 from finance import finance
 from auth import auth
 from dashboard import dashboard
+from manage_car import manage_car
 
 
 app = Flask(__name__)
@@ -42,6 +43,7 @@ app.register_blueprint(sale)
 app.register_blueprint(finance)
 app.register_blueprint(auth)
 app.register_blueprint(dashboard)
+app.register_blueprint(manage_car)
 
 
 if __name__ == '__main__':
