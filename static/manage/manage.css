@@ -1,10 +1,24 @@
+/* CSS for Manage Cars Page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
 h1 {
     text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
 }
 
 table {
-    width: 70%;
-    margin-left: 250px;
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 /* Style for the table header */
@@ -12,6 +26,7 @@ table th {
     background-color: #333;
     color: #fff;
     text-align: center;
+    padding: 10px;
 }
 
 /* Style for the table rows */
@@ -21,7 +36,7 @@ table tr {
 
 /* Style for table cells */
 table td {
-    padding: 8px;
+    padding: 10px;
 }
 
 /* Style for the "Edit" and "Delete" links */
@@ -43,8 +58,8 @@ a.delete-link {
 
 /* Flash messages */
 .flash-messages {
-    width: 70%;
-    margin-left: 250px;
+    width: 90%;
+    margin: 20px auto;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -53,6 +68,7 @@ a.delete-link {
     padding: 10px;
     border-radius: 5px;
     margin: 10px 0;
+    font-weight: bold;
 }
 
 /* Style for success flash messages */

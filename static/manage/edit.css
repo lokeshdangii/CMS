@@ -24,15 +24,27 @@ form {
 
 form label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
 }
 
 form input[type="text"] {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 3px;
+    font-size: 16px;
+}
+
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
 }
 
 form input[type="submit"] {
@@ -42,10 +54,35 @@ form input[type="submit"] {
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    font-size: 16px;
 }
 
 form input[type="submit"]:hover {
     background-color: #555;
 }
 
-/* Add more CSS rules as needed */
+/* Flash messages */
+.flash-messages {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.flash-message {
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+/* Style for success flash messages */
+.flash-message.success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+/* Style for danger flash messages */
+.flash-message.danger {
+    background-color: #dc3545;
+    color: #fff;
+}
