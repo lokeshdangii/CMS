@@ -23,7 +23,7 @@ def register():
         # Check if the password and confirmation match
         if password != confirm_password:
             flash('Password and confirmation do not match', 'danger')
-            return redirect(url_for('auth.login_form'))
+            return redirect(url_for('auth.register_form'))
 
         # Hash the password before storing it in the database
         hashed_password = generate_password_hash(password, method='sha256')
@@ -80,3 +80,8 @@ def dashboard():
         # return f'Hello, {session["username"]}! Welcome to the dashboard.'
     else:
         return redirect(url_for('auth.login_form'))
+    
+    
+@auth.route('/mydash')
+def mydash():
+    return render_template('dashboard.html')
