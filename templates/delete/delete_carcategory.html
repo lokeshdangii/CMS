@@ -19,8 +19,16 @@
         </select>
 
         <button type="submit">Delete Car Category</button>
+
+        <!-- Display flashed messages -->
+        {% for message in get_flashed_messages() %}
+        <div class="flash-message">
+            {{ message }}
+        </div>
+        {% endfor %}
     </form>
 
     <a href="/carcategory">Back to Car Category</a>
+    
 </body>
 </html>

@@ -17,6 +17,12 @@
         </select>
         <br><br>
         <button type="submit">Delete Customer</button>
+        <!-- Display flashed messages -->
+        {% for message in get_flashed_messages() %}
+        <div class="flash-message">
+            {{ message }}
+        </div>
+        {% endfor %}
     </form>
 
     <!-- Display flashed messages -->

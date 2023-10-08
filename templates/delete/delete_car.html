@@ -18,13 +18,15 @@
         </select>
         <br>
         <button type="submit">Delete Car </button>
+
+        <!-- Display flashed messages -->
+        {% for message in get_flashed_messages() %}
+        <div class="flash-message">
+            {{ message }}
+        </div>
+        {% endfor %}
     </form>
 
-    <!-- Display flashed messages -->
-    {% for message in get_flashed_messages() %}
-    <div class="flash-message">
-        {{ message }}
-    </div>
-    {% endfor %}
+    
 </body>
 </html>
