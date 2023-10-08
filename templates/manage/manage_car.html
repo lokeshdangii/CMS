@@ -9,18 +9,6 @@
 <body>
     <h1>Manage Cars</h1>
     
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    <div class="flash-messages">
-        {% for category, message in messages %}
-        <div class="flash-message {{ category }}">
-            {{ message }}
-        </div>
-        {% endfor %}
-    </div>
-    {% endif %}
-    {% endwith %}
-    
     <table class="table table-bordered table-hover" border="2">
         <thead>
             <tr>
@@ -38,7 +26,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for car in cars %}
+            {% for car in cars%}
             <tr>
                 <td>{{ car[0] }}</td>
                 <td>{{ car[1] }}</td>
@@ -60,3 +48,5 @@
     </table>
 </body>
 </html>
+
+
