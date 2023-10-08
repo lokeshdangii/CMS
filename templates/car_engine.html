@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Engine</title>
+    <link rel="stylesheet" href="{{ url_for('static' , filename = 'css/car_pages.css') }}">
+</head>
+
+<body>
+    <h1>Car Engine Page</h1>
+    <div class="button-container">
+
+        <div>
+            <a href="{{ url_for('car_engine.carengine_table')}}" class="">View Car Engines</a>
+        </div>
+
+        <div>
+            <a href="{{ url_for('car_engine.add_carengine') }}" class="">Add New Car Engine</a>
+        </div>
+
+        <div>
+            <a href="{{url_for('car_engine.edit_car_engine')}}" class="">Edit Car Engine</a>
+        </div>
+
+        <div>
+            <a href="{{url_for('car_engine.delete_car_engine')}}" class="">Delete Car Engine</a>
+        </div>
+
+    </div>
+</body>
+
+</html>
+
+</body>
+
+</html>
