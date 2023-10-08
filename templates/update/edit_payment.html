@@ -42,6 +42,12 @@
         <input type="number" step="0.01" id="new_down_payment" name="new_down_payment" required>
         <br><br>
         <input type="submit" value="Edit Payment">
+
+            <div class="flash-messages">
+            {% for msg in get_flashed_messages() %}
+                <div class="flash-message">{{ msg }}</div>
+            {% endfor %}
+            </div>
     </form>
 </body>
 </html>

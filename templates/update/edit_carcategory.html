@@ -20,6 +20,13 @@
         <input type="text" id="new_category_name" name="new_category_name" required>
         <br><br>
         <input type="submit" value="Edit Category">
+
+        <div class="flash-messages">
+            {% for msg in get_flashed_messages() %}
+                <div class="flash-message">{{ msg }}</div>
+            {% endfor %}
+        </div>
+
     </form>
 </body>
 </html>

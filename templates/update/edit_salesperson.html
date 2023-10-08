@@ -37,12 +37,14 @@
         <br>
 
         <input type="submit" value="Update">
+
+        <div class="flash-messages">
+            {% for msg in get_flashed_messages() %}
+                <div class="flash-message">{{ msg }}</div>
+            {% endfor %}
+        </div>
     </form>
 
-    <div class="flash-messages">
-        {% for msg in get_flashed_messages() %}
-            <div class="flash-message">{{ msg }}</div>
-        {% endfor %}
-    </div>
+    
 </body>
 </html>

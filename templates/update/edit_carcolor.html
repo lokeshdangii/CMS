@@ -17,9 +17,15 @@
         </select>
         <br>
         <label for="new_color_name">New Color Name:</label>
-        <input type="text" id="new_color_name" name="new_color_name" required>
+        <input type="text" id="new_color_name" name="new_color_name" maxlength="15" required>
         <br>
         <button type="submit">Update Color</button>
+
+        <div class="flash-messages">
+            {% for msg in get_flashed_messages() %}
+                <div class="flash-message">{{ msg }}</div>
+            {% endfor %}
+        </div>
     </form>
 </body>
 </html>

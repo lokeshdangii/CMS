@@ -34,6 +34,13 @@
         </select>
         <br>
         <input type="submit" value="Edit Car Model">
+
+        <div class="flash-messages">
+            {% for msg in get_flashed_messages() %}
+                <div class="flash-message">{{ msg }}</div>
+            {% endfor %}
+        </div>
+
     </form>
 </body>
 </html>

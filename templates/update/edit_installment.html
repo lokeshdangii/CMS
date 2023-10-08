@@ -32,6 +32,13 @@
         <input type="number" id="new_total_installment" name="new_total_installment" required>
         <br><br>
         <button type="submit">Edit Installment</button>
+
+            <div class="flash-messages">
+            {% for msg in get_flashed_messages() %}
+                <div class="flash-message">{{ msg }}</div>
+            {% endfor %}
+            </div>
+        
     </form>
 </body>
 </html>

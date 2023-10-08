@@ -1,45 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit Car</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/edit.css')}}">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/edit.css')}}"
+    />
+  </head>
+  <body>
     <h1>Edit Car</h1>
     <form method="POST" action="{{ url_for('car.edit_car') }}">
-        <label for="car_id">Select Car to Edit:</label>
-        <select id="car_id" name="car_id" required>
-            {% for car in cars %}
-            <option value="{{ car[0] }}"> [ {{ car[0] }} ] {{ car[1] }}</option>
-            {% endfor %}
-        </select>
-        <br>
+      <label for="car_id">Select Car to Edit:</label>
+      <select id="car_id" name="car_id" required>
+        {% for car in cars %}
+        <option value="{{ car[0] }}">[ {{ car[0] }} ] {{ car[1] }}</option>
+        {% endfor %}
+      </select>
+      <br />
 
-        <label for="field_to_update">Field to Update:</label>
-        <select id="field_to_update" name="field_to_update" required>
-            <option value="VariantID">Variant</option>
-            <option value="CategoryID">Category</option>
-            <option value="EngineID">Engine</option>
-            <option value="ColorID">Color</option>
-            <option value="ModelID">Model</option>
-            <option value="VIN">VIN</option>
-            <option value="Mileage">Mileage</option>
-            <option value="YearOfManufacture">Year of Manufacture</option>
-            <option value="BrandCompany">Brand/Company</option>
-        </select>
-        <br>
+      <label for="field_to_update">Field to Update:</label>
+      <select id="field_to_update" name="field_to_update" required>
+        <option value="VariantID">Variant</option>
+        <option value="CategoryID">Category</option>
+        <option value="EngineID">Engine</option>
+        <option value="ColorID">Color</option>
+        <option value="ModelID">Model</option>
+        <option value="VIN">VIN</option>
+        <option value="Mileage">Mileage</option>
+        <option value="YearOfManufacture">Year of Manufacture</option>
+        <option value="BrandCompany">Brand/Company</option>
+      </select>
+      <br />
 
-        <label for="updated_value">New Value:</label>
-        <input type="text" id="updated_value" name="updated_value" required>
-        <br>
+      <label for="updated_value">New Value:</label>
+      <input type="text" id="updated_value" name="updated_value" required />
+      <br />
 
-        <input type="submit" value="Update">
+      <input type="submit" value="Update" />
+
+        <div class="flash-messages">
+        {% for msg in get_flashed_messages() %}
+            <div class="flash-message">{{ msg }}</div>
+        {% endfor %}
+        </div>
     </form>
-
-    {% for msg in get_flashed_messages() %}
-        <div>{{ msg }}</div>
-    {% endfor %}
-</body>
+  </body>
 </html>
