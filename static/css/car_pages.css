@@ -8,7 +8,6 @@ body, h1 {
 h1 {
     text-align: center;
     margin-top: 20px;
-    font-size: 24px;
 }
 
 /* Style the container for buttons */
@@ -16,12 +15,12 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    height: 100vh;
 }
 
 /* Style each button */
 .button-container div {
-    margin: 0 20px;
+    margin: 20px;
     text-align: center;
 }
 
