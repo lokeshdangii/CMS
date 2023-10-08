@@ -27,6 +27,7 @@ def car_table():
         JOIN CarCategory AS CAT ON C.CategoryID = CAT.CategoryID
         JOIN CarEngine AS CE ON C.EngineID = CE.EngineID
         JOIN CarModel AS CM ON C.ModelID = CM.ModelID
+        ORDER BY CarID ASC
     """)
     data = cursor.fetchall()
     return render_template('view/car.html', data=data)
