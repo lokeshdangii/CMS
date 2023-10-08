@@ -10,7 +10,7 @@
 <body>
     <h1>User Registration</h1>
     <form method="POST" action="{{ url_for('auth.register') }}">
-        <!-- Display validation errors if any -->
+        
         {% if errors %}
         <ul>
             {% for error in errors %}
@@ -19,22 +19,22 @@
         </ul>
         {% endif %}
 
-        <!-- Username -->
+        
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
         <br><br>
 
-        <!-- Password -->
+       
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
         <br><br>
 
-        <!-- Password Confirmation -->
+       
         <label for="confirm_password">Confirm Password:</label>
         <input type="password" id="confirm_password" name="confirm_password" required>
         <br><br>
 
-        <!-- Submit Button -->
+        
         <input type="submit" value="Register">
     </form>
 
