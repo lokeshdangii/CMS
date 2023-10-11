@@ -5,6 +5,8 @@ from db import db, cursor
 # BluePrint
 manage_car = Blueprint('manage_car', __name__)
 
+#--------------------------- Route to fetch car table --------------------------------------------------------
+
 @manage_car.route('/manage_car')
 def manage_car_table():
     cursor.execute("""
@@ -28,7 +30,47 @@ def manage_car_table():
         ORDER BY C.CarID ASC
     """)
     cars = cursor.fetchall()
-    return render_template('manage/manage_car.html', cars=cars)
+    return render_template('manage/view/manage_car.html', cars=cars)
+
+# ------------------------------------ Add/Insert Car ---------------------------------------------------
+
+# Route to add a new Car
+@manage_car.route('/manage_car/add', methods=['GET', 'POST'])
+def add_car():
+    if request.method == 'POST':
+        variant_id = request.form['variant_id']
+        category_id = request.form['category_id']
+        engine_id = request.form['engine_id']
+        color_id = request.form['color_id']
+        model_id = request.form['model_id']
+        vin = request.form['vin']
+        mileage = request.form['mileage']
+        year_of_manufacture = request.form['year_of_manufacture']
+        brand_company = request.form['brand_company']
+        
+        try:
+            cursor.execute("INSERT INTO Car (VariantID, CategoryID, EngineID, ColorID, ModelID, VIN, Mileage, YearOfManufacture, BrandCompany) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                           (variant_id, category_id, engine_id, color_id, model_id, vin, mileage, year_of_manufacture, brand_company))
+            db.commit()
+            flash('Car added successfully', 'success')
+            return redirect('/car')
+        except mysql.connector.IntegrityError as e:
+            db.rollback()
+            flash(f'Error adding Car: {e}', 'danger')
+
+    # Fetch the list of variants, categories, engines, colors, and models to populate dropdowns in the form
+    cursor.execute("SELECT VariantID, VariantName FROM CarVariant")
+    variants = cursor.fetchall()
+    cursor.execute("SELECT CategoryID, CategoryName FROM CarCategory")
+    categories = cursor.fetchall()
+    cursor.execute("SELECT EngineID, EngineName FROM CarEngine")
+    engines = cursor.fetchall()
+    cursor.execute("SELECT ColorID, ColorName FROM CarColor")
+    colors = cursor.fetchall()
+    cursor.execute("SELECT ModelID, ModelName FROM CarModel")
+    models = cursor.fetchall()
+
+    return render_template('manage/add/car.html', variants=variants, categories=categories, engines=engines, colors=colors, models=models)
 
 
 
@@ -89,8 +131,7 @@ def edit_car(car_id):
         """
     cursor.execute(fetch_query, (car_id,))
     car_data = cursor.fetchone()
-    print(type(car_data))
-    print(car_data)
+  
 
     if car_data is None:
         flash('Car not found', 'danger')
@@ -114,7 +155,7 @@ def edit_car(car_id):
     models = cursor.fetchall()
 
     # Pass the data to the HTML template
-    return render_template('manage/edit_car.html', car_data=car_data, variants=variants, categories=categories, engines=engines, colors=colors, models=models)
+    return render_template('manage/edit/edit_car.html', car_data=car_data, variants=variants, categories=categories, engines=engines, colors=colors, models=models)
 
 
 
@@ -160,7 +201,9 @@ def delete_car(car_id):
         flash('Car not found', 'danger')
         return redirect(url_for('manage_car.manage_car_table'))  # Redirect to the manage car page
 
-    return render_template('manage/delete_car.html', car_data=car_data)
+    return render_template('manage/delete/delete_car.html', car_data=car_data)
+
+
 
 
 
