@@ -27,7 +27,7 @@ def add_carengine():
             cursor.execute("INSERT INTO CarEngine (EngineID, EngineName) VALUES (%s, %s)", (engine_id, engine_name))
             db.commit()
             flash('Car Engine added successfully', 'success')
-            return render_template('add/add_carengine.html')
+            return render_template('success.html')
         except mysql.connector.IntegrityError as e:
             db.rollback()
             return f'Error adding Car Engine: {e}', 'danger'
@@ -48,8 +48,7 @@ def edit_car_engine():
         update_query = "UPDATE CarEngine SET EngineName = %s WHERE EngineID = %s"
         cursor.execute(update_query, (new_engine_name, engine_id))
         db.commit()
-
-        return redirect('/carengine')  # Redirect to the Car Engine list after editing
+        return render_template('success.html')  # Redirect to the Car Engine list after editing
     else:
         cursor.execute("SELECT * FROM CarEngine")
         engines = cursor.fetchall()
@@ -75,6 +74,7 @@ def delete_car_engine():
         try:
             cursor.execute("DELETE FROM CarEngine WHERE EngineID = %s", (engine_id,))
             db.commit()
+            return render_template('success.html')
         except mysql.connector.Error as err:
             db.rollback()
             return f"Error deleting Car Engine: {err}"
