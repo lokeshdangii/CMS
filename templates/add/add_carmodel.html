@@ -10,7 +10,7 @@
     <h1>Add Car Model</h1>
     <form method="POST" action="{{ url_for('car_model.add_carmodel') }}">
         <label for="model_name">Model Name:</label>
-        <input type="text" id="model_name" name="model_name" required>
+        <input type="text" id="model_name" name="model_name" required maxlength="100">
         <br><br>
         <label for="category_id">Category:</label>
         <select id="category_id" name="category_id" required>
@@ -25,6 +25,9 @@
             <option value="{{ engine[0] }}">{{ engine[1] }}</option>
             {% endfor %}
         </select>
+        <br><br>
+        <label for="model_specifications">Model Specifications:</label>
+        <input type="text" id="model_specifications" name="model_specifications" required>
         <br><br>
         <input type="submit" value="Add Car Model">
     </form>

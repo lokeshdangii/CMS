@@ -10,10 +10,10 @@
     <h1>Add Car Category</h1>
     <form method="POST">
         <label for="category_id">Category ID</label>
-        <input type="text" id="category_id" name="category_id" required>
+        <input type="text" id="category_id" name="category_id" required min="1" max="2147483647">
         <br><br>
         <label for="category_name">Category Name:</label>
-        <input type="text" id="category_name" name="category_name" required>
+        <input type="text" id="category_name" name="category_name" required maxlength="100">
         <br><br>
         <input type="submit" value="Add Category">
     </form>
