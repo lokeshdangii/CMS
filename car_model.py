@@ -1,19 +1,26 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint
+from flask import Flask, render_template, Blueprint, request, redirect, url_for, flash
 import mysql.connector
 from db import db, cursor
 
-app = Flask(__name__)
+# BluePrint
+car_model = Blueprint('car_model', __name__)
 
-car_model = Blueprint('car_model',__name__)
-
-# ------------------------------------- Display (select query) Car Engine ---------------------------------------------------
+# ------------------------------------- Display (select query) Car Model ---------------------------------------------------
 
 # Route to display all Car Models
 @car_model.route('/carmodel')
 def carmodel_table():
-    cursor.execute("SELECT * FROM CarModel")
-    data = cursor.fetchall()
-    return render_template('view/carModel.html', data=data)
+    cursor.execute("""
+                   select 
+                   CM.ModelID, CM.ModelName, CAT.CategoryName,CE.EngineID,CM.Modelspecifications 
+                   from CarModel as CM 
+                   inner join CarCategory as CAT ON CM.CategoryID = CAT.CategoryID 
+                   inner join CarEngine as CE on CM.EngineID = CE.EngineID
+                """)
+    
+    car_models = cursor.fetchall()
+    return render_template('manage/view/car_model.html', car_models=car_models)
+
 
 
 # ------------------------------------ Add/Insert Car Model ---------------------------------------------------
@@ -25,12 +32,13 @@ def add_carmodel():
         model_name = request.form['model_name']
         category_id = request.form['category_id']
         engine_id = request.form['engine_id']
+        model_specifications = request.form['model_specifications']
         
         try:
-            cursor.execute("INSERT INTO CarModel (ModelName, CategoryID, EngineID) VALUES (%s, %s, %s)", (model_name, category_id, engine_id))
+            cursor.execute("INSERT INTO CarModel (ModelName, CategoryID, EngineID, ModelSpecifications) VALUES (%s, %s, %s, %s)", (model_name, category_id, engine_id,model_specifications))
             db.commit()
             flash('Car Model added successfully', 'success')
-            return redirect('/carmodel')
+            return render_template('success.html')
         except mysql.connector.IntegrityError as e:
             db.rollback()
             flash(f'Error adding Car Model: {e}', 'danger')
@@ -47,7 +55,7 @@ def add_carmodel():
 # ------------------------------------ Update/Edit Car Model ---------------------------------------------------
 
 # Route to edit a Car Model
-@car_model.route('/carmodel/edit', methods=['GET', 'POST'])
+@car_model.route('/carmodel2/edit', methods=['GET', 'POST'])
 def edit_carmodel():
     if request.method == 'POST':
         model_id = request.form['model_to_edit']
@@ -60,7 +68,7 @@ def edit_carmodel():
             cursor.execute(update_query, (new_model_name, new_category_id, new_engine_id, model_id))
             db.commit()
             flash('Car Model updated successfully', 'success')
-            return redirect('/carmodel')  # Redirect to the Car Model list after editing
+            return render_template('success.html')  # Redirect to the Car Model list after editing
         except mysql.connector.Error as e:
             db.rollback()
             flash(f'Error updating Car Model: {e}', 'danger')
