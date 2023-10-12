@@ -1,14 +1,14 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint
+from flask import Flask, render_template, Blueprint, request, redirect, url_for, flash
 import mysql.connector
-from db import db,cursor
+from db import db, cursor
 
-car = Blueprint('car',__name__)
+# BluePrint
+manage_car = Blueprint('manage_car', __name__)
 
-# ------------------------------------- Display (select query) Car ---------------------------------------------------
+#--------------------------- Route to fetch car table --------------------------------------------------------
 
-# Route to display all Cars with related information
-@car.route('/car')
-def car_table():
+@manage_car.route('/manage_car')
+def manage_car_table():
     cursor.execute("""
         SELECT 
             C.CarID, 
@@ -27,17 +27,15 @@ def car_table():
         JOIN CarCategory AS CAT ON C.CategoryID = CAT.CategoryID
         JOIN CarEngine AS CE ON C.EngineID = CE.EngineID
         JOIN CarModel AS CM ON C.ModelID = CM.ModelID
-        ORDER BY CarID ASC
+        ORDER BY C.CarID ASC
     """)
-    data = cursor.fetchall()
-    return render_template('view/car.html', data=data)
-
-
+    cars = cursor.fetchall()
+    return render_template('view/car.html', cars=cars)
 
 # ------------------------------------ Add/Insert Car ---------------------------------------------------
 
 # Route to add a new Car
-@car.route('/car/add', methods=['GET', 'POST'])
+@manage_car.route('/manage_car/add', methods=['GET', 'POST'])
 def add_car():
     if request.method == 'POST':
         variant_id = request.form['variant_id']
@@ -75,56 +73,133 @@ def add_car():
     return render_template('add/add_car.html', variants=variants, categories=categories, engines=engines, colors=colors, models=models)
 
 
-# ------------------------------------ Update/Edit Car ---------------------------------------------------
 
-# Route to edit a Car
-@car.route('/car/edit', methods=['GET', 'POST'])
-def edit_car():
+# ---------------------------------- Route to edit Car ----------------------------------------------------------------
+
+# Route to edit a car record
+@manage_car.route('/car/edit/<int:car_id>', methods=['GET', 'POST'])
+def edit_car(car_id):
     if request.method == 'POST':
-        car_id = request.form['car_id']
-        field_to_update = request.form['field_to_update']
-        updated_value = request.form['updated_value']
+        variant_id = request.form.get('variant_id')
+        category_id = request.form.get('category_id')
+        engine_id = request.form.get('engine_id')
+        color_id = request.form.get('color_id')
+        model_id = request.form.get('model_id')
+        mileage = request.form.get('mileage')
+        year_manufacture = request.form.get('year_manufacture')
+        brand_company = request.form.get('brand_company')
 
         try:
-            # update query on the selected field
-            update_query = f"UPDATE Car SET {field_to_update} = %s WHERE CarID = %s"
-            cursor.execute(update_query, (updated_value, car_id))
+            update_query = """
+                UPDATE Car
+                SET VariantID = %s, CategoryID = %s, EngineID = %s,
+                    ColorID = %s, ModelID = %s, 
+                    Mileage = %s, YearOfManufacture = %s, BrandCompany = %s
+                WHERE CarID = %s
+            """
+            cursor.execute(update_query, (variant_id, category_id, engine_id, color_id, model_id,
+                                             mileage, year_manufacture, brand_company, car_id))
             db.commit()
-            flash(f'Car {field_to_update} updated successfully', 'success')
-            return redirect('/car/edit')  
+            flash('Car updated successfully', 'success')
+            return render_template('success.html')
+            # return redirect(url_for('manage_car.manage_car_table'))  # Redirect to the manage car page
+            # return render_template('manage/edit_car.html')
+        
         except mysql.connector.Error as e:
             db.rollback()
-            flash(f'Error updating Car: {e}', 'danger')
+            flash(f'Error updating car: {e}', 'danger')
 
-    # Fetch the list of cars to populate the dropdown in the form
-    cursor.execute("SELECT Car.CarID, CarModel.ModelName from Car INNER JOIN CarModel ON Car.ModelID = CarModel.ModelID")
-    cars = cursor.fetchall()
+    # Fetch car data for editing and dropdowns
+    fetch_query = """
+        SELECT
+        C.CarID,
+        CV.VariantId, 
+        CAT.CategoryID, 
+        CE.EngineID, 
+        CC.ColorId, 
+        CM.ModelId,  
+        C.Mileage, 
+        C.YearOfManufacture, 
+        C.BrandCompany 
+        FROM Car AS C         
+        JOIN CarVariant AS CV ON C.VariantID = CV.VariantID
+        JOIN CarColor AS CC ON C.ColorID = CC.ColorID         
+        JOIN CarCategory AS CAT ON C.CategoryID = CAT.CategoryID         
+        JOIN CarEngine AS CE ON C.EngineID = CE.EngineID         
+        JOIN CarModel AS CM ON C.ModelID = CM.ModelID 
+        WHERE C.CarID = %s 
+        """
+    cursor.execute(fetch_query, (car_id,))
+    car_data = cursor.fetchone()
+  
 
-    return render_template('update/edit_car.html', cars=cars)
+    if car_data is None:
+        flash('Car not found', 'danger')
+        return redirect(url_for('manage_car.manage_car_table'))  # Redirect to the manage car page
+
+    # Fetch data for dropdowns
+    cursor.execute("SELECT * FROM CarVariant")
+    variants = cursor.fetchall()
+    # print("variants = ", variants)
+
+    cursor.execute("SELECT * FROM CarCategory")
+    categories = cursor.fetchall()
+
+    cursor.execute("SELECT * FROM CarEngine")
+    engines = cursor.fetchall()
+
+    cursor.execute("SELECT * FROM CarColor")
+    colors = cursor.fetchall()
+
+    cursor.execute("SELECT * FROM CarModel")
+    models = cursor.fetchall()
+
+    # Pass the data to the HTML template
+    return render_template('update/edit_car.html', car_data=car_data, variants=variants, categories=categories, engines=engines, colors=colors, models=models)
 
 
-# --------------------------- Delete Car ---------------------------------------------------
 
-# Route to display the Car deletion form
-@car.route('/car/delete', methods=['GET'])
-def delete_car_form():
-    cursor.execute("SELECT Car.CarID, CarModel.ModelName from Car INNER JOIN CarModel ON Car.ModelID = CarModel.ModelID;")
-    cars = cursor.fetchall()
-    return render_template('delete/delete_car.html', cars=cars)
-
-# Route for deleting a Car
-@car.route('/car/delete', methods=['POST'])
-def delete_car():
+# --------------------------------- Route to delete Car ------------------------------------------------------
+@manage_car.route('/car/delete/<int:car_id>', methods=['GET', 'POST'])
+def delete_car(car_id):
     if request.method == 'POST':
-        car_id = request.form.get('car_to_delete')
-
         try:
-            cursor.execute("DELETE FROM Car WHERE CarID = %s", (car_id,))
+            delete_query = "DELETE FROM Car WHERE CarID = %s"
+            cursor.execute(delete_query, (car_id,))
             db.commit()
-            flash('Car deleted successfully', 'success')
+            flash(f'Car with CarID: { car_id } deleted successfully', 'success')
+            # return redirect(url_for('manage_car.manage_car_table'))  # Redirect to the manage car page
+            return render_template('success.html')
         except mysql.connector.Error as e:
             db.rollback()
-            flash(f'Error deleting Car: {e}', 'danger')
+            flash(f'Error deleting car: {e}', 'danger')
 
-        return redirect('/car/delete')
+    # Fetch car data for confirmation
+    fetch_query = """
+        SELECT
+        C.CarID,
+        CV.VariantName, 
+        CAT.CategoryName, 
+        CE.EngineName, 
+        CC.ColorName, 
+        CM.ModelName, 
+        C.Mileage, 
+        C.YearOfManufacture, 
+        C.BrandCompany 
+        FROM Car AS C         
+        JOIN CarVariant AS CV ON C.VariantID = CV.VariantID
+        JOIN CarColor AS CC ON C.ColorID = CC.ColorID         
+        JOIN CarCategory AS CAT ON C.CategoryID = CAT.CategoryID         
+        JOIN CarEngine AS CE ON C.EngineID = CE.EngineID         
+        JOIN CarModel AS CM ON C.ModelID = CM.ModelID 
+        WHERE C.CarID = %s 
+        """
+    cursor.execute(fetch_query, (car_id,))
+    car_data = cursor.fetchone()
+
+    if car_data is None:
+        flash('Car not found', 'danger')
+        return redirect(url_for('manage_car.manage_car_table'))  # Redirect to the manage car page
+
+    return render_template('delete/delete_car.html', car_data=car_data)
 
