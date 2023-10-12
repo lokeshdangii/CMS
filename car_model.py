@@ -3,30 +3,28 @@ import mysql.connector
 from db import db, cursor
 
 # BluePrint
-car_model = Blueprint('car_model', __name__)
+manage_car_model = Blueprint('manage_car_model', __name__)
 
 # ------------------------------------- Display (select query) Car Model ---------------------------------------------------
 
 # Route to display all Car Models
-@car_model.route('/carmodel')
+@manage_car_model.route('/manage_car_model')
 def carmodel_table():
     cursor.execute("""
                    select 
-                   CM.ModelID, CM.ModelName, CAT.CategoryName,CE.EngineID,CM.Modelspecifications 
+                   CM.ModelID, CM.ModelName, CAT.CategoryName,CE.EngineName,CM.Modelspecifications 
                    from CarModel as CM 
                    inner join CarCategory as CAT ON CM.CategoryID = CAT.CategoryID 
-                   inner join CarEngine as CE on CM.EngineID = CE.EngineID
+                   inner join CarEngine as CE on CM.EngineID = CE.EngineID ORDER BY ModelID ASC
                 """)
     
-    car_models = cursor.fetchall()
-    return render_template('manage/view/car_model.html', car_models=car_models)
-
-
+    models = cursor.fetchall()
+    return render_template('view/car_model.html', models = models)
 
 # ------------------------------------ Add/Insert Car Model ---------------------------------------------------
 
 # Route to add a new Car Model
-@car_model.route('/carmodel/add', methods=['GET', 'POST'])
+@manage_car_model.route('/manage_car_model/add', methods=['GET', 'POST'])
 def add_carmodel():
     if request.method == 'POST':
         model_name = request.form['model_name']
@@ -55,10 +53,10 @@ def add_carmodel():
 # ------------------------------------ Update/Edit Car Model ---------------------------------------------------
 
 # Route to edit a Car Model
-@car_model.route('/carmodel2/edit', methods=['GET', 'POST'])
-def edit_carmodel():
+@manage_car_model.route('/carmodel/edit/<int:model_id>', methods=['GET', 'POST'])
+def edit_carmodel(model_id):
     if request.method == 'POST':
-        model_id = request.form['model_to_edit']
+
         new_model_name = request.form['new_model_name']
         new_category_id = request.form['new_category_id']
         new_engine_id = request.form['new_engine_id']
@@ -73,39 +71,64 @@ def edit_carmodel():
             db.rollback()
             flash(f'Error updating Car Model: {e}', 'danger')
 
-    # Fetch the list of categories and engines to populate dropdowns in the form
-    cursor.execute("SELECT ModelID, ModelName, CategoryID, EngineID FROM CarModel")
-    models = cursor.fetchall()
+    # Fetch car models for editing and dropdowns
+    fetch_query = """
+                select 
+                CM.ModelID, CM.ModelName, CAT.CategoryName,CE.EngineName,CM.Modelspecifications 
+                from CarModel as CM 
+                inner join CarCategory as CAT ON CM.CategoryID = CAT.CategoryID 
+                inner join CarEngine as CE on CM.EngineID = CE.EngineID
+                WHERE CM.ModelID = %s
+                """
+
+    cursor.execute(fetch_query, (model_id,))
+    model_data = cursor.fetchone()
+
+    if model_data is None:
+        flash('Car Model not found','danger')
+        return redirect(url_for('manage_car_model.carmodel_table'))  # Redirect to manage models page
+
+
     cursor.execute("SELECT CategoryID, CategoryName FROM CarCategory")
     categories = cursor.fetchall()
+
     cursor.execute("SELECT EngineID, EngineName FROM CarEngine")
     engines = cursor.fetchall()
 
-    return render_template('update/edit_carmodel.html', models=models, categories=categories, engines=engines)
 
+    return render_template('update/edit_car_model.html', model_data = model_data, categories=categories, engines=engines)  
+    
 
-# --------------------------- Delete Car Model ---------------------------------------------------
-
-# Route to display the Car Model deletion form
-@car_model.route('/carmodel/delete', methods=['GET'])
-def delete_carmodel_form():
-    cursor.execute("SELECT ModelID, ModelName FROM CarModel")
-    models = cursor.fetchall()
-    return render_template('delete/delete_carmodel.html', models=models)
-
-# Route for deleting a Car Model
-@car_model.route('/carmodel/delete', methods=['POST'])
-def delete_carmodel():
+# --------------------------------- Route to delete Car Model -------------------------------------------------------------------
+@manage_car_model.route('/carmodel/delete/<int:model_id>', methods = ['GET','POST'])
+def delete_carmodel(model_id):
     if request.method == 'POST':
-        model_id = request.form.get('model_to_delete')
-
         try:
-            cursor.execute("DELETE FROM CarModel WHERE ModelID = %s", (model_id,))
+            delete_query = "DELETE from CarModel where ModelID = %s"
+            cursor.execute(delete_query,(model_id,))
             db.commit()
-            flash('Car Model deleted successfully', 'success')
+            flash(f"Car Model with ModelID: { model_id } deleted successfully", 'success')
+            return render_template('success.html')
+
         except mysql.connector.Error as e:
             db.rollback()
             flash(f'Error deleting Car Model: {e}', 'danger')
 
-        return redirect('/carmodel')
+         
+    # fetch car model data for confirmation
+    fetch_query = """
+                   select 
+                   CM.ModelID, CM.ModelName, CAT.CategoryName,CE.EngineName,CM.Modelspecifications 
+                   from CarModel as CM 
+                   inner join CarCategory as CAT ON CM.CategoryID = CAT.CategoryID 
+                   inner join CarEngine as CE on CM.EngineID = CE.EngineID where ModelID = %s
+                """
+    
+    cursor.execute(fetch_query, (model_id,))
+    model_data = cursor.fetchone()
 
+    if model_data is None:
+        flash("Car Model not found", 'danger')
+        return redirect(url_for('manage_car_model.carmodel_table'))
+    
+    return render_template('delete/delete_car_model.html', model_data = model_data)
