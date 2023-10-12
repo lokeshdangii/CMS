@@ -8,18 +8,13 @@
 </head>
 <body>
     <h1>Edit Car Engine</h1>
-    <form method="POST">
-        <label for="engine_to_edit">Select Engine to Edit:</label>
-        <select id="engine_to_edit" name="engine_to_edit">
-            {% for engine in engines %}
-            <option value="{{ engine[0] }}">{{ engine[1] }}</option>
-            {% endfor %}
-        </select>
-        <br><br>
+    <form method="POST"  action="{{ url_for('manage_car_engine.edit_car_engine', engine_id = engine_data[0]) }}">
+      
         <label for="new_engine_name">New Engine Name:</label>
-        <input type="text" id="new_engine_name" name="new_engine_name" required>
-        <br><br>
-        <input type="submit" value="Edit Engine">
+        <input type="text" id="new_engine_name" name="new_engine_name" value="{{ engine_data[1] }}" maxlength="15" required>
+        <br>
+
+        <input type="submit" value="Save New Engine Name">
         
         <div class="flash-messages">
             {% for msg in get_flashed_messages() %}

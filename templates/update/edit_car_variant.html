@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Car Variant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='manage/edit.css') }}">
+</head>
+<body>
+    <h1>Edit Car Variant</h1>
+    <form method="POST" action="{{ url_for('manage_car_variant.edit_carvariant', variant_id=variant_data[0]) }}">
+        
+        <label for="new_model_id">New Model:</label>
+        <select id="new_model_id" name="new_model_id" required>
+            {% for model in models %}
+            <option value="{{ model[0] }}" {% if model[0] == variant_data[1] %}selected{% endif %}>{{ model[1] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="new_color_id">New Color:</label>
+        <select id="new_color_id" name="new_color_id" required>
+            {% for color in colors %}
+            <option value="{{ color[0] }}" {% if color[0] == variant_data[2] %}selected{% endif %}>{{ color[1] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="new_category_id">New Category:</label>
+        <select id="new_category_id" name="new_category_id" required>
+            {% for category in categories %}
+            <option value="{{ category[0] }}" {% if category[0] == variant_data[3] %}selected{% endif %}>{{ category[1] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="new_variant_name">New Variant Name:</label>
+        <input type="text" id="new_variant_name" name="new_variant_name" value="{{ variant_data[4] }}">
+        <br>
+        <label for="new_mileage">New Mileage:</label>
+        <input type="text" id="new_mileage" name="new_mileage" value="{{ variant_data[5] }}">
+        <br>
+        <label for="new_price">New Price:</label>
+        <input type="text" id="new_price" name="new_price" value="{{ variant_data[6] }}">
+        <br>
+
+        <input type="submit" value="Edit Car Variant">
+
+        <div class="flash-messages">
+            {% for msg in get_flashed_messages() %}
+                <div class="flash-message">{{ msg }}</div>
+            {% endfor %}
+        </div>
+
+    </form>
+</body>
+</html>
