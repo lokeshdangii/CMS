@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Car Variant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='manage/delete.css') }}">
+</head>
+<body>
+    <h1>Delete Car Variant</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for category, message in messages %}
+        <div class="flash-message {{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    
+    <form method="POST" action="{{ url_for('manage_car_variant.delete_carvariant', variant_id=variant_data[0]) }}">
+
+        <p>Are you sure you want to delete the following Car Variant?</p>
+        <p>Variant ID: {{ variant_data[0] }}</p>
+        <p>Model Name: {{ variant_data[1] }}</p>
+        <p>Color: {{ variant_data[2] }}</p>
+        <p>Category: {{ variant_data[3] }}</p>
+        <p>Variant Name: {{ variant_data[4] }}</p>
+        <p>Mileage: {{ variant_data[5] }}</p>
+        <p>Price: {{ variant_data[6] }}</p>
+
+        <button type="submit">Delete Car Variant</button>
+    </form>
+</body>
+</html>

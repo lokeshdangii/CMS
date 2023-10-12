@@ -21,18 +21,14 @@
     {% endif %}
     {% endwith %}
     
-    <form method="POST" action="{{ url_for('manage_car.delete_car', car_id=car_data[0]) }}">
-        <p>Are you sure you want to delete the following car?</p>
-        <p>Car ID: {{ car_data[0] }}</p>
-        <p>Variant : {{ car_data[1] }}</p>
-        <p>Category : {{ car_data[2] }}</p>
-        <p>Engine : {{ car_data[3] }}</p>
-        <p>Color : {{ car_data[4] }}</p>
-        <p>Model : {{ car_data[5] }}</p>
-        <p>Mileage: {{ car_data[6] }}</p>
-        <p>MFD Year: {{ car_data[7] }}</p>
-        <p>Company: {{ car_data[8] }}</p>
-        
+    <form method="POST" action="{{ url_for('manage_car_model.delete_carmodel', model_id=model_data[0]) }}">
+
+        <p>Are you sure you want to delete the following Model ?</p>
+        <p>Model ID: {{ model_data[0] }}</p>
+        <p>Model : {{ model_data[1] }}</p>
+        <p>Category : {{ model_data[2] }}</p>
+        <p>Engine : {{ model_data[3] }}</p>
+        <p>Model Specifications : {{ model_data[4] }}</p>
 
         <button type="submit">Delete Car</button>
     </form>
