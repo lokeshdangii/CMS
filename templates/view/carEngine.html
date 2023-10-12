@@ -12,18 +12,31 @@
     <table border="2">
         <thead>
             <tr>
-                <th>EngineID</th>
+                <th>S.NO.</th>
                 <th>EngineName</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             {% for row in data %}
             <tr>
-                <td>{{ row[0] }}</td>
+                <td>{{ loop.index }}</td>
                 <td>{{ row[1] }}</td>
+                <td>
+                    <a href="{{ url_for('manage_car_engine.edit_car_engine' , engine_id = row[0]) }}">Edit</a>
+                    <a href="{{ url_for('manage_car_engine.delete_car_engine' , engine_id = row[0]) }}" >Delete</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <script>
+        function confirmDelete(event) {
+            if (!confirm("Are you sure you want to delete this Car Engine")) {
+                event.preventDefault(); // Prevent the default link behavior
+            }
+        }
+    </script>
 </body>
 </html>

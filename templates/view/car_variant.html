@@ -12,27 +12,30 @@
     <table border="2">
         <thead>
             <tr>
-                <th>Variant Name</th>
+                <th>S.NO.</th>
                 <th>Model Name</th>
                 <th>Color Name</th>
                 <th>Category Name</th>
                 <th>Variant Name</th>
                 <th>Mileage</th>
-                <th>Engine Type</th>
                 <th>Price</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             {% for row in data %}
             <tr>
-                <td>{{ row[0] }}</td>
+                <td>{{ loop.index }}</td>
                 <td>{{ row[1] }}</td>
                 <td>{{ row[2] }}</td>
                 <td>{{ row[3] }}</td>
                 <td>{{ row[4] }}</td>
                 <td>{{ row[5] }}</td>
                 <td>{{ row[6] }}</td>
-                <td>{{ row[7] }}</td>
+                <td>
+                    <a href="{{ url_for('manage_car_variant.edit_carvariant', variant_id=row[0]) }}">Edit</a>
+                    <a href="{{ url_for('manage_car_variant.delete_carvariant', variant_id=row[0]) }}">Delete</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
