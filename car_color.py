@@ -4,23 +4,23 @@ from db import db, cursor
 
 
 # BluePrint
-carcolor = Blueprint('carcolor',__name__)
+manage_car_color = Blueprint('manage_car_color',__name__)
 
 
 # ------------------------------------- Display(select query) Car Color ---------------------------------------------------
 
 # Route to display all Car Colors
-@carcolor.route('/carcolor')
+@manage_car_color.route('/manage_car_color')
 def carcolor_table():
     cursor.execute("SELECT * FROM CarColor")
-    data = cursor.fetchall()
-    return render_template('view/carColor.html', data=data)
+    colors = cursor.fetchall()
+    return render_template('view/carColor.html', colors = colors)
 
 
 # ------------------------------------ Add/Insert Car Color ---------------------------------------------------
 
 # Route to add a new Car Color
-@carcolor.route('/carcolor/add', methods=['GET', 'POST'])
+@manage_car_color.route('/manage_car_color/add', methods=['GET', 'POST'])
 def add_carcolor():
     if request.method == 'POST':
         color_name = request.form['color_name']
@@ -31,50 +31,54 @@ def add_carcolor():
     return render_template('add/add_carcolor.html')
 
 
+
 # ------------------------------------ Update/Edit Car Color ---------------------------------------------------
 # Route to edit a Car Color
-@carcolor.route('/carcolor/edit', methods=['GET', 'POST'])
-def edit_car_color():
+@manage_car_color.route('/manage_car_color/edit/<int:color_id>', methods=['GET', 'POST'])
+def edit_car_color(color_id):
     if request.method == 'POST':
-        color_id = request.form['color_to_edit']
+        
         new_color_name = request.form['new_color_name']
         
-    
-        update_query = "UPDATE CarColor SET ColorName = %s WHERE ColorID = %s"
-        cursor.execute(update_query, (new_color_name,color_id))
-        db.commit()
+        try:
+            update_query = "UPDATE CarColor SET ColorName = %s WHERE ColorID = %s"
+            cursor.execute(update_query, (new_color_name,color_id))
+            db.commit()
+            flash('Color updated successfully', 'success')
+            return render_template('success.html')
         
-        return redirect('/carcolor')  # Redirect to the Car Color list after editing
-    else:
-        cursor.execute("SELECT * FROM CarColor")
-        colors = cursor.fetchall()
-        return render_template('update/edit_carcolor.html', colors=colors)
+        except mysql.connector.Error as e:
+            db.rollback()
+            flash(f'Error updating Color : {e}', 'danger')
+        
+    # fetch car color to edit
+    fetch_query = "Select ColorID,ColorName from CarColor where ColorID = %s"
+    cursor.execute(fetch_query,(color_id,))
+    color_data = cursor.fetchone()
+
+    if color_data is None:
+        flash('Car Color not found','danger')
+        return redirect(url_for('manage_car_color.carcolor_table'))
+    
+    return render_template('update/edit_carcolor.html', color_data = color_data)
+
 
 
 # --------------------------- delete Car Color ---------------------------------------------------
- 
-# Route to display the Car Color deletion form
-@carcolor.route('/carcolor/delete', methods=['GET'])
-def delete_car_color_form():
-    cursor.execute("SELECT ColorID, ColorName FROM CarColor")
-    colors = cursor.fetchall()
-    return render_template('delete/delete_carcolor.html', colors=colors)
 
 # Route for deleting a Car Color
-@carcolor.route('/carcolor/delete', methods=['POST'])
-def delete_car_color():
-    if request.method == 'POST':
-        color_id = request.form.get('color_to_delete')
+@manage_car_color.route('/manage_car_color/delete/<int:color_id>', methods=['GET', 'POST'])
+def delete_car_color(color_id):
 
-        # Perform the deletion
-        try:
-            cursor.execute("DELETE FROM CarColor WHERE ColorID = %s", (color_id,))
-            db.commit()
-        except mysql.connector.Error as err:
-            db.rollback()
-            return f"Error deleting Car Color: {err}"
+    try:
+        delete_query = "DELETE from CarColor where ColorID = %s"
+        cursor.execute(delete_query,(color_id,))
+        db.commit()
+        flash(f"Car Color with ColorID: { color_id } deleted successfully", 'success')
+        return render_template('success.html')
 
-        # Redirect back to the Car Color form
-        return redirect('/carcolor')
+    except mysql.connector.Error as e:
+        db.rollback()
+        flash(f'Error deleting Car Color: {e}', 'danger')
 
-
+    return redirect(url_for('manage_car_color.carcolor_table'))
