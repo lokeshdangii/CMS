@@ -76,7 +76,7 @@ def login():
 def dashboard():
     # Check if the user is logged in
     if 'username' in session:
-        return render_template('car_dashboard.html')
+        return render_template('dashboard/car_dashboard.html')
         # return f'Hello, {session["username"]}! Welcome to the dashboard.'
     else:
         return redirect(url_for('auth.login_form'))
@@ -84,4 +84,4 @@ def dashboard():
     
 @auth.route('/mydash')
 def mydash():
-    return render_template('dashboard.html')
+    return render_template('dashboard/car_dashboard.html')
