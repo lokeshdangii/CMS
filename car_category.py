@@ -2,15 +2,14 @@ from flask import Flask, render_template, request, redirect, url_for, flash, Blu
 import mysql.connector
 from db import db,cursor
 
-app = Flask(__name__)
 
-car_category = Blueprint('car_category',__name__)
+manage_car_category = Blueprint('manage_car_category',__name__)
 
 
 # ------------------------------------- Display (select query) Car Categories ---------------------------------------------------
 
 # Route to display all Car Categories
-@car_category.route('/carcategory')
+@manage_car_category.route('/manage_car_category')
 def carcategory_table():
     cursor.execute("SELECT * FROM CarCategory")
     data = cursor.fetchall()
@@ -20,7 +19,7 @@ def carcategory_table():
 # ------------------------------------ Add/Insert Car Category ---------------------------------------------------
 
 # Route to add a new Car Category
-@car_category.route('/carcategory/add', methods=['GET', 'POST'])
+@manage_car_category.route('/manage_car_category/add', methods=['GET', 'POST'])
 def add_carcategory():
     if request.method == 'POST':
         category_id = request.form['category_id']
@@ -34,49 +33,52 @@ def add_carcategory():
 
 # ------------------------------------ Update/Edit Car Category ---------------------------------------------------
 # Route to edit a Car Category
-@car_category.route('/carcategory/edit', methods=['GET', 'POST'])
-def edit_car_category():
+@manage_car_category.route('/manage_car_category/edit/<int:category_id>', methods=['GET', 'POST'])
+def edit_car_category(category_id):
     if request.method == 'POST':
-        category_id = request.form['category_to_edit']
+
         new_category_name = request.form['new_category_name']
 
-        update_query = "UPDATE CarCategory SET CategoryName = %s WHERE CategoryID = %s"
-        cursor.execute(update_query, (new_category_name, category_id))
-        db.commit()
+        try:
+            update_query = "UPDATE CarCategory SET CategoryName = %s WHERE CategoryID = %s"
+            cursor.execute(update_query, (new_category_name,category_id))
+            db.commit()
+            flash('Category updated successfully', 'success')
+            return render_template('success.html')
+        
+        except mysql.connector.Error as e:
+            db.rollback()
+            flash(f'Error updating Category : {e}', 'danger')
+        
+    # fetch car color to edit
+    fetch_query = "Select CategoryID,CategoryName from CarCategory where CategoryID = %s"
+    cursor.execute(fetch_query,(category_id,))
+    category_data = cursor.fetchone()
 
-        return redirect('/carcategory')  # Redirect to the Car Category list after editing
-    else:
-        cursor.execute("SELECT * FROM CarCategory")
-        categories = cursor.fetchall()
-        return render_template('update/edit_carcategory.html', categories=categories)
+    if category_data is None:
+        flash('Car Category not found','danger')
+        return redirect(url_for('manage_car_category.carcategory_table'))
+    
+    return render_template('update/edit_carcategory.html', category_data = category_data)
 
 
 # --------------------------- delete Car Category ---------------------------------------------------
 
-# Route to display the Car Category deletion form
-@car_category.route('/carcategory/delete', methods=['GET'])
-def delete_car_category_form():
-    cursor.execute("SELECT CategoryID, CategoryName FROM CarCategory")
-    categories = cursor.fetchall()
-    return render_template('delete/delete_carcategory.html', categories=categories)
-
 # Route for deleting a Car Category
-@car_category.route('/carcategory/delete', methods=['POST'])
-def delete_car_category():
-    if request.method == 'POST':
-        category_id = request.form.get('category_to_delete')
+@manage_car_category.route('/manage_car_category/delete/<int:category_id>', methods=['GET','POST'])
+def delete_car_category(category_id):
+    
+    try:
+        delete_query = "DELETE from CarCategory where CategoryID = %s"
+        cursor.execute(delete_query,(category_id,))
+        db.commit()
+        flash(f"Car Category with CategoryID: { category_id } deleted successfully", 'success')
+        return render_template('success.html')
 
-        # Perform the deletion
-        try:
-            cursor.execute("DELETE FROM CarCategory WHERE CategoryID = %s", (category_id,))
-            db.commit()
-        except mysql.connector.Error as err:
-            db.rollback()
-            return f"Error deleting Car Category: {err}"
+    except mysql.connector.Error as e:
+        db.rollback()
+        flash(f'Error deleting Car Category: {e}', 'danger')
 
-        # Redirect back to the Car Category form
-        return redirect('/carcategory')
+    return redirect(url_for('manage_car_category.carcategory_table'))
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
