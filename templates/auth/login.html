@@ -8,7 +8,16 @@
 </head>
 <body>
     <h1>User Login</h1>
+    
     <form method="POST" action="{{ url_for('auth.login') }}">
+        
+        <!-- flash message -->
+        <div class="flash-messages">
+            {% for msg in get_flashed_messages() %}
+                <div class="flash-message">{{ msg }}</div>
+            {% endfor %}
+        </div>
+
         <!-- Display validation errors if any -->
         {% if errors %}
         <ul>
@@ -20,12 +29,12 @@
 
         <!-- Username -->
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+        <input type="text" id="username" name="username" required maxlength="255">
         <br><br>
 
         <!-- Password -->
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="password" required maxlength="200">
         <br><br>
 
         <!-- Submit Button -->
