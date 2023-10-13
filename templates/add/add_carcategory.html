@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Add Car Category</h1>
-    <form method="POST">
+    <form method="POST"  action="{{ url_for('manage_car_category.add_carcategory') }}">
         <label for="category_id">Category ID</label>
         <input type="text" id="category_id" name="category_id" required min="1" max="2147483647">
         <br><br>
