@@ -1,41 +1,82 @@
-/* Reset some default styles */
-body, h1 {
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f2f2f2;
 }
 
-/* Center align the heading */
+.navbar {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styles */
 h1 {
     text-align: center;
-    margin-top: 20px;
+    font-size: 36px;
+    margin-bottom: 20px;
 }
 
-/* Style the container for buttons */
-.button-container {
+/* Info card styles */
+.info-cards {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    justify-content: space-around;
+    margin-bottom: 20px;
 }
 
-/* Style each button */
-.button-container div {
-    margin: 20px;
+.info-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
     text-align: center;
 }
 
-/* Style the links */
-.button-container a {
-    text-decoration: none;
-    background-color: #007BFF;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s;
+.info-card h2 {
+    font-size: 20px;
+    margin: 0;
 }
 
-/* Change link color on hover */
-.button-container a:hover {
+.info-card p {
+    font-size: 24px;
+    margin: 10px 0;
+    color: #333;
+}
+
+/* Section links styles */
+.section-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.section {
+    background-color: #007BFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 200px;
+}
+
+.section a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    font-size: 18px;
+}
+
+.section a:hover {
     background-color: #0056b3;
 }
