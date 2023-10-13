@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint,session
+from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint,session,g
 import mysql.connector
 from werkzeug.security import generate_password_hash, check_password_hash
 from db import db, cursor
+from dashboard import dashboard
+from functools import wraps
 
 # Blueprint
 auth = Blueprint('auth',__name__)
+
 
 
 # ------------------------------------------------Registration Code -----------------------------------------
@@ -70,18 +73,84 @@ def login():
     return render_template('auth/login.html')
 
 
+
+# ------------------------------------------------Logout Code -----------------------------------------
+
+@auth.route('/logout')
+def logout():
+    # Clear the session to log the user out
+    session.pop('username', None)
+    flash('You have been logged out.', 'info')
+    return redirect(url_for('auth.login_form'))
+
+
+# ------------------------------------------- Login Required for Authentification -------------------------
+
+# the login_required function
+def login_required(view):
+    @wraps(view)
+    def wrapped_view(*args, **kwargs):
+        if session.get('username'):
+            # User is authenticated, execute the original view function
+            return view(*args, **kwargs)
+        else:
+            # User is not authenticated, redirect to the login page
+            flash("You are not logged in..! Login to perform action")
+            return redirect(url_for('auth.login_form'))
+
+    return wrapped_view
+
+
+
 # ------------------------------------------------ Dashboard -----------------------------------------
+
+# Fetch count of tables
+
+# Car Count
+cursor.execute("SELECT COUNT(*) FROM Car")
+result = cursor.fetchall()
+car_count = result[0][0]
+print("car count = ", car_count)
+
+# Car Model Count
+cursor.execute("SELECT COUNT(*) FROM CarModel")
+model_count = cursor.fetchone()
+print("model count = ", model_count)
+print("model_count = ", model_count[0])
+
+# Variant Count
+cursor.execute("SELECT COUNT(*) FROM CarVariant")
+variant_count = cursor.fetchone()
+print("variant count = ", variant_count)
+
+# Color Count 
+cursor.execute("SELECT COUNT(*) FROM CarColor")
+color_count = cursor.fetchone()
+
+# Engine Count
+cursor.execute("SELECT COUNT(*) FROM CarEngine")
+engine_count = cursor.fetchone()
+
+# Category Count
+cursor.execute("SELECT COUNT(*) FROM CarCategory")
+category_count = cursor.fetchone()
+# Mock counts for demonstration purposes
+
+
+# ---------------------------- Route for DASHBOARD ------------------------------------------
 
 @auth.route('/dashboard')
 def dashboard():
     # Check if the user is logged in
     if 'username' in session:
-        return render_template('dashboard/car_dashboard.html')
+    
+        return render_template('dashboard/dashboard.html',
+                           car_count=car_count,  # Access the count value directly
+                           model_count=model_count[0],  # Access the first element of the tuple
+                           variant_count=variant_count[0],
+                           color_count=color_count[0],
+                           engine_count=engine_count[0],
+                           category_count=category_count[0], username=session["username"])
         # return f'Hello, {session["username"]}! Welcome to the dashboard.'
     else:
         return redirect(url_for('auth.login_form'))
-    
-    
-@auth.route('/mydash')
-def mydash():
-    return render_template('dashboard/car_dashboard.html')
