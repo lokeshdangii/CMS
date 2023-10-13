@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint
 import mysql.connector
 from db import db, cursor
-
+from auth import login_required
 
 # BluePrint
 manage_car_color = Blueprint('manage_car_color',__name__)
@@ -21,6 +21,7 @@ def carcolor_table():
 
 # Route to add a new Car Color
 @manage_car_color.route('/manage_car_color/add', methods=['GET', 'POST'])
+@login_required
 def add_carcolor():
     if request.method == 'POST':
         color_name = request.form['color_name']
@@ -35,6 +36,7 @@ def add_carcolor():
 # ------------------------------------ Update/Edit Car Color ---------------------------------------------------
 # Route to edit a Car Color
 @manage_car_color.route('/manage_car_color/edit/<int:color_id>', methods=['GET', 'POST'])
+@login_required
 def edit_car_color(color_id):
     if request.method == 'POST':
         
@@ -68,6 +70,7 @@ def edit_car_color(color_id):
 
 # Route for deleting a Car Color
 @manage_car_color.route('/manage_car_color/delete/<int:color_id>', methods=['GET', 'POST'])
+@login_required
 def delete_car_color(color_id):
 
     try:
