@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint
 import mysql.connector
 from db import db,cursor
+from auth import login_required
 
 
 manage_car_category = Blueprint('manage_car_category',__name__)
@@ -20,6 +21,7 @@ def carcategory_table():
 
 # Route to add a new Car Category
 @manage_car_category.route('/manage_car_category/add', methods=['GET', 'POST'])
+@login_required
 def add_carcategory():
     if request.method == 'POST':
         category_id = request.form['category_id']
@@ -34,6 +36,7 @@ def add_carcategory():
 # ------------------------------------ Update/Edit Car Category ---------------------------------------------------
 # Route to edit a Car Category
 @manage_car_category.route('/manage_car_category/edit/<int:category_id>', methods=['GET', 'POST'])
+@login_required
 def edit_car_category(category_id):
     if request.method == 'POST':
 
@@ -66,6 +69,7 @@ def edit_car_category(category_id):
 
 # Route for deleting a Car Category
 @manage_car_category.route('/manage_car_category/delete/<int:category_id>', methods=['GET','POST'])
+@login_required
 def delete_car_category(category_id):
     
     try:
