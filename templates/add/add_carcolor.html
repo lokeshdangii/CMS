@@ -11,7 +11,7 @@
     <h1>Add Car Color</h1>
     <form method="POST" action="{{ url_for('manage_car_color.add_carcolor') }}"">
         <label for="color_name">Color Name:</label>
-        <input type="text" id="color_name" name="color_name" required maxlength="50">
+        <input type="text" id="color_name" name="color_name" required maxlength="15">
         <br>
         <button type="submit">Add Color</button>
     </form>

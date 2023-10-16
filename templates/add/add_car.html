@@ -45,16 +45,16 @@
         </select>
         <br>
         <label for="vin">VIN:</label>
-        <input type="text" id="vin" name="vin" required max="17">
+        <input type="number" id="vin" name="vin" required maxlength="17" max = "9147483647">
         <br>
         <label for="mileage">Mileage:</label>
-        <input type="number" step="1.0" id="mileage" name="mileage" required min="10" max="30">
+        <input type="number" step="0.01" id="mileage" name="mileage" required min="10.00" max="30.00" maxlength="4">
         <br>
         <label for="year_of_manufacture">Year of Manufacture:</label>
-        <input type="number" id="year_of_manufacture" name="year_of_manufacture" required min="1900" max="2999">
+        <input type="number" id="year_of_manufacture" name="year_of_manufacture" required min="1900" max="2999" >
         <br>
         <label for="brand_company">Brand/Company:</label>
-        <input type="text" id="brand_company" name="brand_company" required maxlength="100">
+        <input type="text" id="brand_company" name="brand_company" required maxlength="25">
         <br>
         <input type="submit" value="Add Car">
     </form>

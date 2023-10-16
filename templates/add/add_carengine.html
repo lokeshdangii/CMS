@@ -10,9 +10,7 @@
 <body>
     <h1>Add Car Engine</h1>
     <form method="POST" action="{{ url_for('manage_car_engine.add_carengine') }}">
-        <label for="engine_id">Engine ID:</label>
-        <input type="text" id="engine_id" name="engine_id" required>
-        <br><br>
+    
         <label for="engine_name">Engine Name:</label>
         <input type="text" id="engine_name" name="engine_name" required maxlength="100">
         <br><br>
