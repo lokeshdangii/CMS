@@ -32,13 +32,13 @@
         </select>
         <br>
         <label for="new_variant_name">New Variant Name:</label>
-        <input type="text" id="new_variant_name" name="new_variant_name" value="{{ variant_data[4] }}">
+        <input type="text" id="new_variant_name" name="new_variant_name" value="{{ variant_data[4] }}" maxlength="20">
         <br>
         <label for="new_mileage">New Mileage:</label>
-        <input type="text" id="new_mileage" name="new_mileage" value="{{ variant_data[5] }}">
+        <input type="number" id="new_mileage" name="new_mileage" value="{{ variant_data[5] }}" min="10.00" max="30.00" maxlength="4" step="0.01">
         <br>
         <label for="new_price">New Price:</label>
-        <input type="text" id="new_price" name="new_price" value="{{ variant_data[6] }}">
+        <input type="number" id="new_price" name="new_price" value="{{ variant_data[6] }}" max="5000000" step="0.01">
         <br>
 
         <input type="submit" value="Edit Car Variant">

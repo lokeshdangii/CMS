@@ -64,15 +64,15 @@
         <br />
 
         <label for="mileage">Mileage:</label>
-        <input type="text" id="mileage" name="mileage" value="{{ car_data[6] }}" required />
+        <input type="text" id="mileage" name="mileage" value="{{ car_data[6] }}" required min="10.00" max="30.00" maxlength="4" step="0.01" />
         <br />
 
         <label for="year_manufacture">Year of Manufacture:</label>
-        <input type="text" id="year_manufacture" name="year_manufacture" value="{{ car_data[7] }}" required />
+        <input type="text" id="year_manufacture" name="year_manufacture" value="{{ car_data[7] }}" required maxlength="4" placeholder="YYYY" />
         <br />
 
         <label for="brand_company">Brand/Company:</label>
-        <input type="text" id="brand_company" name="brand_company" value="{{ car_data[8] }}" required />
+        <input type="text" id="brand_company" name="brand_company" value="{{ car_data[8] }}" required maxlength="25" />
         <br />
 
         <input type="submit" value="Update" />
