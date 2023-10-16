@@ -91,7 +91,9 @@ def edit_carvariant(variant_id):
             cursor.execute(update_query, (new_variant_name, new_model_id, new_color_id, new_category_id, new_mileage, new_price, variant_id))
             db.commit()
             flash('Car Variant updated successfully', 'success')
-            return render_template('success.html')  # Redirect to the Car Variant list after editing
+            # return render_template('success.html')  # Redirect to the Car Variant list after editing
+            return redirect(url_for('manage_car_variant.carvariant_table'))
+        
         except mysql.connector.Error as e:
             db.rollback()
             flash(f'Error updating Car Variant: {e}', 'danger')
@@ -132,7 +134,8 @@ def delete_carvariant(variant_id):
             cursor.execute(delete_query, (variant_id,))
             db.commit()
             flash(f"Car Variant with VariantID: {variant_id} deleted successfully", 'success')
-            return render_template('success.html')
+            # return render_template('success.html')
+            return redirect(url_for('manage_car_variant.carvariant_table'))
 
         except mysql.connector.Error as e:
             db.rollback()
