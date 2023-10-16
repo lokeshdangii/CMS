@@ -6,7 +6,7 @@ db_config = {
     "host": "localhost",
     "user": "root",
     "password": "root",
-    "database": "cardb"
+    "database": "newcardb2"
 }
 
 # Create a connection to the MySQL database
