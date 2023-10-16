@@ -166,3 +166,12 @@ def dashboard():
         # return f'Hello, {session["username"]}! Welcome to the dashboard.'
     else:
         return redirect(url_for('auth.login_form'))
+    
+
+# @auth.route('/')
+# def index():
+#     if 'username' in session:
+        
+#         return render_template('index.html')
+#     else:
+#         return redirect(url_for('auth.login_form'))
