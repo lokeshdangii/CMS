@@ -63,13 +63,14 @@ def edit_carmodel(model_id):
         new_model_name = request.form['new_model_name']
         new_category_id = request.form['new_category_id']
         new_engine_id = request.form['new_engine_id']
+        new_model_specification = request.form['new_model_specification']
         
         try:
-            update_query = "UPDATE CarModel SET ModelName = %s, CategoryID = %s, EngineID = %s WHERE ModelID = %s"
-            cursor.execute(update_query, (new_model_name, new_category_id, new_engine_id, model_id))
+            update_query = "UPDATE CarModel SET ModelName = %s, CategoryID = %s, EngineID = %s, ModelSpecifications = %s WHERE ModelID = %s"
+            cursor.execute(update_query, (new_model_name, new_category_id, new_engine_id, new_model_specification, model_id))
             db.commit()
-            flash('Car Model updated successfully', 'success')
-            return render_template('success.html')  # Redirect to the Car Model list after editing
+            flash(f'Car Model with ModelID:{model_id} updated successfully', 'success')
+            return redirect(url_for('manage_car_model.carmodel_table'))  # Redirect to the Car Model list after editing
         except mysql.connector.Error as e:
             db.rollback()
             flash(f'Error updating Car Model: {e}', 'danger')
@@ -112,7 +113,8 @@ def delete_carmodel(model_id):
             cursor.execute(delete_query,(model_id,))
             db.commit()
             flash(f"Car Model with ModelID: { model_id } deleted successfully", 'success')
-            return render_template('success.html')
+            # return render_template('success.html')
+            return redirect(url_for('manage_car_model.carmodel_table'))
 
         except mysql.connector.Error as e:
             db.rollback()
