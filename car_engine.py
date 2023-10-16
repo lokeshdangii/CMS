@@ -22,14 +22,14 @@ def carengine_table():
 @login_required
 def add_carengine():
     if request.method == 'POST':
-        engine_id = request.form['engine_id']
+        # engine_id = request.form['engine_id']
         engine_name = request.form['engine_name']
         
         try:
-            cursor.execute("INSERT INTO CarEngine (EngineID, EngineName) VALUES (%s, %s)", (engine_id, engine_name))
+            cursor.execute("INSERT INTO CarEngine (EngineName) VALUES (%s)", (engine_name,))
             db.commit()
             flash('Car Engine added successfully', 'success')
-            return render_template('success.html')
+            return redirect(url_for('manage_car_engine.carengine_table'))
         except mysql.connector.IntegrityError as e:
             db.rollback()
             return f'Error adding Car Engine: {e}', 'danger'
@@ -53,7 +53,8 @@ def edit_car_engine(engine_id):
             cursor.execute(update_query, (new_engine_name,engine_id))
             db.commit()
             flash('Car Engine updated successfully', 'success')
-            return render_template('success.html')
+            # return render_template('success.html')
+            return redirect(url_for('manage_car_engine.carengine_table'))
         
         except mysql.connector.Error as e:
             db.rollback()
@@ -84,7 +85,8 @@ def delete_car_engine(engine_id):
         cursor.execute(delete_query,(engine_id,))
         db.commit()
         flash(f"Car Engine with EngineID: { engine_id} deleted successfully", 'success')
-        return render_template('success.html')
+        # return render_template('success.html')
+        return redirect(url_for('manage_car_engine.carengine_table'))
 
     except mysql.connector.Error as e:
         db.rollback()
