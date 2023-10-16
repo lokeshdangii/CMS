@@ -27,12 +27,21 @@ def register():
         if password != confirm_password:
             flash('Password and confirmation do not match', 'danger')
             return redirect(url_for('auth.register_form'))
+        
+        # Check if the username already exists
+        check_user_query = "SELECT Username FROM User WHERE Username = %s"
+        cursor.execute(check_user_query, (username,))
+        existing_user = cursor.fetchone()   
+
+        if existing_user:
+            flash('Username already exists. Please choose a different username.', 'danger')
+            return redirect(url_for('auth.register_form'))
 
         # Hash the password before storing it in the database
         hashed_password = generate_password_hash(password, method='sha256')
 
         # Insert the user into the database
-        insert_user_query = "INSERT INTO User (username, password) VALUES (%s, %s)"
+        insert_user_query = "INSERT INTO User (Username, Password) VALUES (%s, %s)"
         user_data = (username, hashed_password)
 
         try:
@@ -58,7 +67,7 @@ def login():
         password = request.form['password']
 
         # Query the database to fetch the user's hashed password
-        get_user_query = "SELECT username, password FROM User WHERE username = %s"
+        get_user_query = "SELECT Username, Password FROM User WHERE Username = %s"
         cursor.execute(get_user_query, (username,))
         user_data = cursor.fetchone()
 
@@ -99,6 +108,9 @@ def login_required(view):
             return redirect(url_for('auth.login_form'))
 
     return wrapped_view
+
+
+
 
 
 
