@@ -24,12 +24,12 @@ def carcategory_table():
 @login_required
 def add_carcategory():
     if request.method == 'POST':
-        category_id = request.form['category_id']
+        # category_id = request.form['category_id']
         category_name = request.form['category_name']
-        cursor.execute("INSERT INTO CarCategory (CategoryID,CategoryName) VALUES (%s,%s)", (category_id,category_name,))
+        cursor.execute("INSERT INTO CarCategory (CategoryName) VALUES (%s)", (category_name,))
         db.commit()
         flash('Car Category added successfully', 'success')
-        return redirect(url_for('carcategory_table'))
+        return redirect(url_for('manage_car_category.carcategory_table'))
     return render_template('add/add_carcategory.html')
 
 
@@ -47,7 +47,8 @@ def edit_car_category(category_id):
             cursor.execute(update_query, (new_category_name,category_id))
             db.commit()
             flash('Category updated successfully', 'success')
-            return render_template('success.html')
+            # return render_template('success.html')
+            return redirect(url_for('manage_car_category.carcategory_table'))
         
         except mysql.connector.Error as e:
             db.rollback()
@@ -77,7 +78,8 @@ def delete_car_category(category_id):
         cursor.execute(delete_query,(category_id,))
         db.commit()
         flash(f"Car Category with CategoryID: { category_id } deleted successfully", 'success')
-        return render_template('success.html')
+        # return render_template('success.html')
+        return redirect(url_for('carcategory_table'))
 
     except mysql.connector.Error as e:
         db.rollback()
