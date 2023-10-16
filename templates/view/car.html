@@ -8,6 +8,11 @@
 </head>
 <body>
     <h1>Manage Cars</h1>
+    <div class="flash-messages">
+        {% for msg in get_flashed_messages() %}
+            <div class="flash-message">{{ msg }}</div>
+        {% endfor %}
+    </div>
     
     <table class="table table-bordered table-hover" border="2">
         <thead>

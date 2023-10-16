@@ -9,6 +9,12 @@
 <body>
     <h1>Car Categories</h1>
 
+    <div class="flash-messages">
+        {% for msg in get_flashed_messages() %}
+            <div class="flash-message">{{ msg }}</div>
+        {% endfor %}
+    </div>
+
     <table border="2">
         <thead>
             <tr>
