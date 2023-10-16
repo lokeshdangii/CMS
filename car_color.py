@@ -28,7 +28,7 @@ def add_carcolor():
         cursor.execute("INSERT INTO CarColor (ColorName) VALUES (%s)", (color_name,))
         db.commit()
         flash('Car Color added successfully', 'success')
-        return redirect(url_for('carcolor_table'))
+        return redirect(url_for('manage_car_color.carcolor_table'))
     return render_template('add/add_carcolor.html')
 
 
@@ -47,8 +47,9 @@ def edit_car_color(color_id):
             cursor.execute(update_query, (new_color_name,color_id))
             db.commit()
             flash('Color updated successfully', 'success')
-            return render_template('success.html')
-        
+            # return render_template('success.html')
+            return redirect(url_for('manage_car_color.carcolor_table'))
+
         except mysql.connector.Error as e:
             db.rollback()
             flash(f'Error updating Color : {e}', 'danger')
@@ -78,7 +79,8 @@ def delete_car_color(color_id):
         cursor.execute(delete_query,(color_id,))
         db.commit()
         flash(f"Car Color with ColorID: { color_id } deleted successfully", 'success')
-        return render_template('success.html')
+        # return render_template('success.html')
+        return redirect(url_for('manage_car_color.carcolor_table'))
 
     except mysql.connector.Error as e:
         db.rollback()
