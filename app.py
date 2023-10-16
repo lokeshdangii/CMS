@@ -32,7 +32,7 @@ app.secret_key = '1df90c98804d9e99099c4356a9d4c3989b681e578d413d79f7759c305b18e6
 
 @app.route("/")
 def index():
-    return render_template('auth/login.html')
+    return render_template('index.html')
 
 
 # register blueprint
@@ -60,7 +60,7 @@ app.register_blueprint(dashboard)
 # app.register_blueprint(manage_car_engine)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=4500)
     
      
 # carmodel, carvariant, car, salesperson, customer(edit), Payment, sale and finance
