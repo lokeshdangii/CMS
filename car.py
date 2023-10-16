@@ -55,7 +55,8 @@ def add_car():
                            (variant_id, category_id, engine_id, color_id, model_id, vin, mileage, year_of_manufacture, brand_company))
             db.commit()
             flash('Car added successfully', 'success')
-            return redirect('/car')
+            return redirect(url_for('manage_car.manage_car_table'))  # Redirect to the manage car page
+        
         except mysql.connector.IntegrityError as e:
             db.rollback()
             flash(f'Error adding Car: {e}', 'danger')
@@ -104,9 +105,8 @@ def edit_car(car_id):
                                              mileage, year_manufacture, brand_company, car_id))
             db.commit()
             flash('Car updated successfully', 'success')
-            return render_template('success.html')
-            # return redirect(url_for('manage_car.manage_car_table'))  # Redirect to the manage car page
-            # return render_template('manage/edit_car.html')
+            # return render_template('success.html')
+            return redirect(url_for('manage_car.manage_car_table'))  # Redirect to the manage car page
         
         except mysql.connector.Error as e:
             db.rollback()
@@ -172,8 +172,9 @@ def delete_car(car_id):
             cursor.execute(delete_query, (car_id,))
             db.commit()
             flash(f'Car with CarID: { car_id } deleted successfully', 'success')
-            # return redirect(url_for('manage_car.manage_car_table'))  # Redirect to the manage car page
-            return render_template('success.html')
+            return redirect(url_for('manage_car.manage_car_table'))  # Redirect to the manage car page
+            # return render_template('success.html')
+            
         except mysql.connector.Error as e:
             db.rollback()
             flash(f'Error deleting car: {e}', 'danger')
