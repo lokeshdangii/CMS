@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint
+from flask import Flask, render_template, Blueprint
 import mysql.connector
 from db import db, cursor
 
