@@ -1,21 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Colors</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/view.css') }}">
-</head>
-<body>
+{% extends 'layout.html' %}
+
+{% block title %} Car Colors {% endblock %}
+
+{% block stylesheet %} <link rel="stylesheet" href="{{ url_for('static', filename='css/view.css') }}">  {% endblock %}
+
+
+{% block body %}
+
     <h1>Car Colors</h1>
 
     <div class="flash-messages">
         {% for msg in get_flashed_messages() %}
-            <div class="flash-message">{{ msg }}</div>
+            <div class="flash-message sucess danger">{{ msg }}</div>
         {% endfor %}
     </div>
 
-    <table border="1">
+    <table>
         <thead>
             <tr>
                 <th>S.NO.</th>
@@ -29,8 +29,8 @@
                 <td>{{ loop.index }}</td>
                 <td>{{ color[1] }}</td>
                 <td>
-                    <a href="{{ url_for('manage_car_color.edit_car_color', color_id=color[0]) }}">Edit</a>
-                    <a href="{{ url_for('manage_car_color.delete_car_color', color_id=color[0]) }}" onclick="return confirmDelete(event)" >Delete</a>
+                    <a class="edit-link" href="{{ url_for('manage_car_color.edit_car_color', color_id=color[0]) }}">Edit</a>
+                    <a class="delete-link" href="{{ url_for('manage_car_color.delete_car_color', color_id=color[0]) }}" onclick="return confirmDelete(event)" >Delete</a>
                 </td>
             </tr>
             {% endfor %}
@@ -44,7 +44,7 @@
             }
         }
     </script>
-</body>
-</html>
+
+{% endblock %}
 
 

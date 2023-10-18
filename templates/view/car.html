@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Cars</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='manage/manage.css') }}">
-</head>
-<body>
-    <h1>Manage Cars</h1>
+{% extends 'layout.html' %}
+
+{% block title %} Car {% endblock %}
+
+{% block stylesheet %} <link rel="stylesheet" href="{{ url_for('static', filename='css/view.css') }}">  {% endblock %}
+
+
+{% block body %}
+
+    <h1>Cars</h1>
     <div class="flash-messages">
         {% for msg in get_flashed_messages() %}
-            <div class="flash-message">{{ msg }}</div>
+            <div class="flash-message sucess danger">{{ msg }}</div>
         {% endfor %}
     </div>
     
@@ -46,14 +46,14 @@
                 <td>{{ car[8] }}</td>
                 <td>{{ car[9] }}</td>
                 <td>
-                    <a href="{{ url_for('manage_car.edit_car', car_id=car[0]) }}">Edit</a>
-                    <a href="{{ url_for('manage_car.delete_car', car_id=car[0]) }}">Delete</a>
+                    <a class="edit-link" href="{{ url_for('manage_car.edit_car', car_id=car[0]) }}">Edit</a>
+                    <a class="delete-link" href="{{ url_for('manage_car.delete_car', car_id=car[0]) }}">Delete</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-</body>
-</html>
+
+    {% endblock %}
 
 
