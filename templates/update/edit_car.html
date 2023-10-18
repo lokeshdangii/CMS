@@ -1,25 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Car</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='manage/edit.css') }}">
-</head>
-<body>
-    <h1>Edit Car</h1>
+{% extends 'layout.html' %}
 
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        <div class="flash-messages">
-            {% for category, message in messages %}
-            <div class="flash-message {{ category }}">
-                {{ message }}
-            </div>
-            {% endfor %}
-        </div>
-        {% endif %}
-        {% endwith %}
+{% block title %} Edit Car {% endblock %}
+
+{% block stylesheet %} <link rel= "stylesheet" href="{{url_for('static', filename='css/edit.css')}}"></link>  {% endblock %}
+
+
+{% block body %}
+
+    <h1>Edit Car</h1>
 
     <form method="POST" action="{{ url_for('manage_car.edit_car', car_id=car_data[0]) }}">
         
@@ -76,6 +64,13 @@
         <br />
 
         <input type="submit" value="Update" />
+
+        <div class="flash-messages">
+            {% for msg in get_flashed_messages() %}
+                <div class="flash-message">{{ msg }}</div>
+            {% endfor %}
+        </div>
+
     </form>
-</body>
-</html>
+
+{% endblock %}

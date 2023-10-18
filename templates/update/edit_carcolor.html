@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Car Color</title>
-    <link rel= "stylesheet" href="{{url_for('static', filename='css/edit.css')}}"></link>
-</head>
-<body>
+{% extends 'layout.html' %}
+
+{% block title %} Edit Color {% endblock %}
+
+{% block stylesheet %} <link rel= "stylesheet" href="{{url_for('static', filename='css/edit.css')}}"></link>  {% endblock %}
+
+
+{% block body %}
+
     <h1>Edit Car Color</h1>
     <form method="POST" action="{{ url_for('manage_car_color.edit_car_color', color_id = color_data[0]) }}">
 
@@ -22,5 +22,5 @@
             {% endfor %}
         </div>
     </form>
-</body>
-</html>
+
+{% endblock %}
