@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Car Model</title>
-    <link rel= "stylesheet" href="{{url_for('static', filename='css/add.css')}}"></link>
-</head>
-<body>
+{% extends 'layout.html' %}
+
+{% block title %} Add Model {% endblock %}
+
+{% block stylesheet %} <link rel= "stylesheet" href="{{url_for('static', filename='css/add.css')}}"></link>  {% endblock %}
+
+
+{% block body %}
+
     <h1>Add Car Model</h1>
     <form method="POST" action="{{ url_for('manage_car_model.add_carmodel') }}">
         <label for="model_name">Model Name:</label>
@@ -30,6 +30,12 @@
         <input type="text" id="model_specifications" name="model_specifications" required maxlength="150">
         <br><br>
         <input type="submit" value="Add Car Model">
+
+        <div class="flash-messages">
+            {% for msg in get_flashed_messages() %}
+                <div class="flash-message">{{ msg }}</div>
+            {% endfor %}
+        </div>
     </form>
-</body>
-</html>
+
+{% endblock %}
