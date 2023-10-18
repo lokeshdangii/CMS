@@ -1,19 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Car Color</title>
-    <link rel= "stylesheet" href="{{url_for('static', filename='css/add.css')}}"></link>
-    
-</head>
-<body>
+{% extends 'layout.html' %}
+
+{% block title %} Add Color {% endblock %}
+
+{% block stylesheet %} <link rel= "stylesheet" href="{{url_for('static', filename='css/add.css')}}"></link>  {% endblock %}
+
+
+{% block body %}
+
     <h1>Add Car Color</h1>
     <form method="POST" action="{{ url_for('manage_car_color.add_carcolor') }}"">
         <label for="color_name">Color Name:</label>
         <input type="text" id="color_name" name="color_name" required maxlength="15">
         <br>
         <button type="submit">Add Color</button>
+
+        <div class="flash-messages">
+            {% for msg in get_flashed_messages() %}
+                <div class="flash-message">{{ msg }}</div>
+            {% endfor %}
+        </div>
+
     </form>
-</body>
-</html>
+
+{% endblock %}
