@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Car Engine</title>
-    <link rel= "stylesheet" href="{{url_for('static', filename='css/delete.css')}}"></link>
-</head>
-<body>
+{% extends 'layout.html' %}
+
+{% block title %} Delete Engine {% endblock %}
+
+{% block stylesheet %} <link rel="stylesheet" href="{{ url_for('static', filename='css/delete.css') }}">  {% endblock %}
+
+
+{% block body %}
+
     <h1>Delete Car Engine</h1>
     <form method="POST" action="/carengine/delete">
         <label for="engine_to_delete">Select Engine to Delete:</label>
@@ -25,5 +25,5 @@
         </div>
         {% endfor %}
     </form>
-</body>
-</html>
+
+{% endblock %}

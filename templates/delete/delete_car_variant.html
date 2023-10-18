@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Car Variant</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='manage/delete.css') }}">
-</head>
-<body>
+{% extends 'layout.html' %}
+
+{% block title %} Delete Variant {% endblock %}
+
+{% block stylesheet %} <link rel="stylesheet" href="{{ url_for('static', filename='css/delete.css') }}">  {% endblock %}
+
+
+{% block body %}
+
     <h1>Delete Car Variant</h1>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -34,5 +34,5 @@
 
         <button type="submit">Delete Car Variant</button>
     </form>
-</body>
-</html>
+
+{% endblock %}
