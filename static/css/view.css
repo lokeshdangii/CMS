@@ -1,4 +1,117 @@
-/* Apply styles to the <body> element */
+/* CSS for View Page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    /* background-color: #f0f0f0; */
+
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    padding: 20px; 
+    margin-top: 20px;
+
+    /* background-color: #333; */
+    /* color: #fff; */
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    table-layout: fixed;
+    border: 1px slategrey;
+}
+
+/* Style for the table header */
+table th {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    /* border: 1px slategrey; */
+    /* font-weight: bold; */
+}
+
+/* Style for the table rows */
+table tr {
+    text-align: center;
+    
+}
+
+/* Style for table cells */
+table td {
+    padding: 10px;
+}
+
+/* th {
+    
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px;
+    border: 1px slategrey;
+} */
+
+/* Style for the "Edit" and "Delete" links */
+a {
+    text-decoration: none;
+    color: #007bff;
+    margin-right: 10px;
+}
+
+/* Style for the "Edit" link */
+a.edit-link {
+    color: #28a745;
+}
+
+/* Style for the "Delete" link */
+a.delete-link {
+    color: #dc3545;
+}
+
+/* Flash messages */
+.flash-messages {
+    width: 90%;
+    margin: 20px auto;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.flash-message {
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+/* Style for success flash messages */
+.flash-message.success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+/* Style for danger flash messages */
+.flash-message.danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+    
+}
+
+
+
+
+/*
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -6,49 +119,52 @@ body {
     padding: 0;
 }
 
-/* Style the <h1> element */
+
 h1 {
     text-align: center;
     color: #333;
     margin-top: 20px;
 }
 
-/* Style the <table> element */
 table {
-    width: 88%; /* Adjust the width as needed */
+    width: 88%;  
     margin: 20px auto;
     border-collapse: collapse;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    table-layout: fixed; /* Fix table layout */
+    table-layout: fixed;
+    border: 1px slategrey;
 }
 
-/* Style the table header cells (<th>) */
+
 th {
+    
     background-color: #333;
     color: #fff;
     font-weight: bold;
     padding: 10px;
+    border: 1px slategrey;
 }
 
-/* Style the table data cells (<td>) */
+
 td {
     text-align: center;
     padding: 10px;
     border-bottom: 1px solid #ddd;
-    word-wrap: break-word; /* Wrap long text */
+    word-wrap: break-word; 
+    border: 1px slategrey;
 }
 
-/* Add a hover effect to table rows */
+
 tr:hover {
     background-color: #f5f5f5;
 }
 
-/* Add styles for the flash messages */
+
 .flash-messages {
     text-align: center;
-    margin: 0 auto; /* This centers the container horizontally */
-    width: max-content; /* This limits the width to the content */
+    margin: 0 auto; 
+    width: max-content; 
     margin-bottom: 20px;
 }
 
@@ -60,3 +176,4 @@ tr:hover {
     border-radius: 5px;
 }
 
+*/
