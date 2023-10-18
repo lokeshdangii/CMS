@@ -122,18 +122,14 @@ def login_required(view):
 cursor.execute("SELECT COUNT(*) FROM Car")
 result = cursor.fetchall()
 car_count = result[0][0]
-print("car count = ", car_count)
 
 # Car Model Count
 cursor.execute("SELECT COUNT(*) FROM CarModel")
 model_count = cursor.fetchone()
-print("model count = ", model_count)
-print("model_count = ", model_count[0])
 
 # Variant Count
 cursor.execute("SELECT COUNT(*) FROM CarVariant")
 variant_count = cursor.fetchone()
-print("variant count = ", variant_count)
 
 # Color Count 
 cursor.execute("SELECT COUNT(*) FROM CarColor")
@@ -146,7 +142,6 @@ engine_count = cursor.fetchone()
 # Category Count
 cursor.execute("SELECT COUNT(*) FROM CarCategory")
 category_count = cursor.fetchone()
-# Mock counts for demonstration purposes
 
 
 # ---------------------------- Route for DASHBOARD ------------------------------------------
@@ -155,7 +150,7 @@ category_count = cursor.fetchone()
 def dashboard():
     # Check if the user is logged in
     if 'username' in session:
-    
+        
         return render_template('dashboard/dashboard.html',
                            car_count=car_count,  # Access the count value directly
                            model_count=model_count[0],  # Access the first element of the tuple
@@ -168,10 +163,9 @@ def dashboard():
         return redirect(url_for('auth.login_form'))
     
 
-# @auth.route('/')
-# def index():
-#     if 'username' in session:
-        
-#         return render_template('index.html')
-#     else:
-#         return redirect(url_for('auth.login_form'))
+@auth.route('/dash')
+def layout():
+    if 'username' in session:
+        return render_template('layout.html',username=session["username"])
+    else:
+        return redirect(url_for('auth.login_form'))
