@@ -1,204 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Management System Dashboard</title>
+{% extends 'layout.html' %}
 
-    <!-- Bootstrap CSS Link -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">  
-      <!-- Own CSS Link  -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
-</head>
-<body>
+{% block title %} CMS Dashboard {% endblock %}
 
-    <!-- ------------------------------------------ Navbar Start --------------------------- -->
-      <!-- navbar from bootstrap -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Car Management System (CMS)</a>
-			</div>
-			<font style="color: white"><span><strong>Welcome: {{ username }} </strong></span></font>
-			<!-- <font style="color: white"><span><strong>Email:</strong></font> -->
-		    <ul class="nav navbar-nav navbar-right">
-		      <!-- <li class="nav-item dropdown">
-	        	<a class="nav-link dropdown-toggle" data-toggle="dropdown">My Profile </a>
-	        	<div class="dropdown-menu">
-	        		<a class="dropdown-item" href="view_profile.php">View Profile</a>
-	        		<div class="dropdown-divider"></div>
-	        		<a class="dropdown-item" href="edit_profile.php">Edit Profile</a>
-	        		<div class="dropdown-divider"></div>
-	        		<a class="dropdown-item" href="change_password.php">Change Password</a>
-	        	</div>
-		      </li> -->
-		      <li class="nav-item">
-		        <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
-		      </li>
-		    </ul>
-		</div>
-	</nav><br>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">CMS </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
+{% block stylesheet %} <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">  {% endblock %}
 
-              <!-- Car Link -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Car
-                </a>
-                <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{url_for('manage_car.manage_car_table')}}">View & Manage Car</a></li>
-                <li><a class="dropdown-item" href="{{ url_for('manage_car.add_car') }}">Add New Car</a></li>
-                  
-                </ul>
-              </li>
 
-              <!-- Car Variant -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Variant
-                </a>
-                <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{url_for('manage_car_variant.carvariant_table')}}">View & Manage Variant</a></li>
-                <li><a class="dropdown-item" href="{{ url_for('manage_car_variant.add_carvariant') }}">Add New Variant</a></li>
-                
-                </ul>
-              </li>
+{% block body %}
 
-              <!-- Car Variant -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Model
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{{ url_for('manage_car_model.carmodel_table') }}">View & Manage Model</a></li>
-                  <li><a class="dropdown-item" href="{{ url_for('manage_car_model.add_carmodel')}}">Add New Model</a></li>
-                  </ul>
-              </li>
-            
-              <!-- Car Color -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Color
-                </a>
-                <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{ url_for('manage_car_color.carcolor_table')}}">View & Manage Color</a></li>
-                <li><a class="dropdown-item" href="{{url_for('manage_car_color.add_carcolor')}}">Add New Color</a></li>
-                  
-                </ul>
-              </li>
-
-              <!-- Car Category -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Category
-                </a>
-                <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{ url_for('manage_car_color.carcolor_table')}}">View & Manage Category</a></li>
-                <li><a class="dropdown-item" href="{{ url_for('manage_car_category.add_carcategory')}}">Add New Category</a></li>
-                  
-                </ul>
-              </li>
-
-              <!-- Car Engine -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Engine
-                </a>
-                <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{url_for('manage_car_engine.carengine_table')}}">View & Manage Engine</a></li>
-                <li><a class="dropdown-item" href="{{ url_for('manage_car_engine.add_carengine')}}">Add New Engine</a></li>
-                  
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-<!-- ---------------------------------------------------- Navbar End ----------------------------------- -->
     <!-- Div -->
     <div class="content">
         <h1>Car Management System Dashboard</h1>
 
         <!-- flash message -->
-        <div class="flash-messages">
+      <div class="flash-messages">
           {% for msg in get_flashed_messages() %}
               <div class="flash-message">{{ msg }}</div>
           {% endfor %}
       </div>
         
         <!-- Row 1 -->
-        <div class="row">
+      <div class="row">
         
            <div class="col-md-3" style="margin: 0px">
-               <div class="card bg-light" style="width: 300px">
+               <div class="card bg-light" style="width: 350px">
                    <div class="card-header">Total Car</div>
                    <div class="card-body">
                        <p class="card-text">No of cars : {{ car_count }} </p>
-                       <a class="btn btn-success" href="{{url_for('manage_car.manage_car_table')}}" >View Cars</a>
+                       <a class="btn btn-success" href="{{url_for('manage_car.manage_car_table')}}" >View Cars</a> &nbsp &nbsp &nbsp
+                       <a class="btn btn-success" href="{{url_for('manage_car.add_car')}}" >Add Car</a>
                    </div>
                </div>
-           </div> &nbsp &nbsp &nbsp
+           </div> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
            <div class="col-md-3" style="margin: 0px">
-               <div class="card bg-light" style="width: 300px">
+               <div class="card bg-light" style="width: 350px">
                    <div class="card-header">Model</div>
                    <div class="card-body">
                        <p class="card-text">No of Total Models: {{ model_count }} </p>
                        <a class="btn btn-warning" href="{{ url_for('manage_car_model.carmodel_table') }}" >View Models</a>
+                       &nbsp &nbsp &nbsp
+                       <a class="btn btn-warning" href="{{ url_for('manage_car_model.add_carmodel') }}" >Add Model</a>
+                       
                    </div>
                </div>
-           </div> &nbsp &nbsp &nbsp
+           </div> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
            <div class="col-md-3" style="margin: 0px">
-               <div class="card bg-light" style="width: 300px">
+               <div class="card bg-light" style="width: 350px">
                    <div class="card-header">No. of Variant</div>
                    <div class="card-body">
                        <p class="card-text">No of Variants: {{ variant_count }}</p>
-                       <a class="btn btn-primary" href="{{url_for('manage_car_variant.carvariant_table')}}" >View Variants</a>
+                       <a class="btn btn-primary" href="{{url_for('manage_car_variant.carvariant_table')}}" >View Variants</a>&nbsp &nbsp &nbsp
+                       <a class="btn btn-primary" href="{{url_for('manage_car_variant.add_carvariant')}}" >Add Variant</a>
                    </div>
                </div>
            </div>
-       </div>&nbsp &nbsp &nbsp
+       </div>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
 
        <!-- Row 2 -->
-       <div class="row">
+      <div class="row">
         
         <div class="col-md-3" style="margin: 0px">
-            <div class="card bg-light" style="width: 300px">
+            <div class="card bg-light" style="width: 350px">
                 <div class="card-header">Car Calors</div>
                 <div class="card-body">
                     <p class="card-text">No of Total Colors: {{ color_count }}</p>
-                    <a class="btn btn-success" href="{{url_for('manage_car_color.carcolor_table')}}" >View Colors</a>
+                    <a class="btn btn-success" href="{{url_for('manage_car_color.carcolor_table')}}" >View Colors</a>&nbsp &nbsp &nbsp
+                    <a class="btn btn-success" href="{{url_for('manage_car_color.add_carcolor')}}" >Add Color</a>
                 </div>
             </div>
-        </div> &nbsp &nbsp &nbsp
+        </div> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         <div class="col-md-3" style="margin: 0px">
-            <div class="card bg-light" style="width: 300px">
+            <div class="card bg-light" style="width: 350px">
                 <div class="card-header">Car Engine</div>
                 <div class="card-body">
                     <p class="card-text">No of Total Engines: {{ engine_count }}</p>
-                    <a class="btn btn-warning" href="{{url_for('manage_car_engine.carengine_table')}}" >View Engines</a>
+                    <a class="btn btn-warning" href="{{url_for('manage_car_engine.carengine_table')}}" >View Engines</a>&nbsp &nbsp &nbsp
+                    <a class="btn btn-warning" href="{{url_for('manage_car_engine.add_carengine')}}" >Add Engine</a>
                 </div>
             </div>
-        </div> &nbsp &nbsp &nbsp
+        </div> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         <div class="col-md-3" style="margin: 0px">
-            <div class="card bg-light" style="width: 300px">
+            <div class="card bg-light" style="width: 350px">
                 <div class="card-header">Car Category</div>
                 <div class="card-body">
                     <p class="card-text">No of Categories: {{ category_count }}</p>
-                    <a class="btn btn-primary" href="{{url_for('manage_car_category.carcategory_table')}}" >View Categories</a>
+                    <a class="btn btn-primary" href="{{url_for('manage_car_category.carcategory_table')}}" >View Categories</a>&nbsp &nbsp &nbsp
+                    <a class="btn btn-primary" href="{{url_for('manage_car_category.add_carcategory')}}" >Add Categories</a>
                 </div>
             </div>
         </div>
-    </div>&nbsp &nbsp &nbsp
+      </div>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
 
-    
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-</body>
-</html>
+
+
+{% endblock %}
+
