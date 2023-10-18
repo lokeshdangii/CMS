@@ -1,69 +1,88 @@
+/* CSS for Edit Car Page */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
 }
 
 h1 {
-    background-color: #333;
+    /* background-color: #333; */
     color: #fff;
-    padding: 10px;
+    padding: 20px;
     text-align: center;
 }
 
 form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
     margin: 20px auto;
-    width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-label {
+form label {
     display: block;
     margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
 }
 
-select, input[type="text"] {
+form input[type="text"] {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 3px;
+    font-size: 16px;
 }
 
-button[type="submit"] {
-    background-color: #4caf50;
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+form input[type="submit"] {
+    background-color: #333;
     color: #fff;
-    border: none;
     padding: 10px 20px;
+    border: none;
     border-radius: 3px;
     cursor: pointer;
+    font-size: 16px;
+}
+
+form input[type="submit"]:hover {
+    background-color: #555;
+}
+
+/* Flash messages */
+.flash-messages {
     width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
 }
-
-button[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-/* Styling for flash messages */
-/* .flash-messages {
-    background-color: #fff;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    margin: 20px auto;
-    width: 300px;
-} */
 
 .flash-message {
-    background-color: #4caf50;
-    color: #fff;
     padding: 10px;
-    border-radius: 3px;
-    margin-bottom: 5px;
-    text-align: center;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+/* Style for success flash messages */
+.flash-message.success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+/* Style for danger flash messages */
+.flash-message.danger {
+    background-color: #dc3545;
+    color: #fff;
 }
