@@ -1,6 +1,5 @@
-from flask import Flask, render_template, Blueprint
-import mysql.connector
-from db import db, cursor
+from flask import Flask, render_template
+
 
 # import blueprint from scripts
 from car_color import manage_car_color
@@ -17,14 +16,7 @@ from sale import sale
 from finance import finance
 from auth import auth
 from dashboard import dashboard
-
-# # manage part
-# from manage_car import manage_car
-# from manage_car_model import manage_car_model
-# from manage_car_variant import manage_car_variant
-# from manage_car_color import manage_car_color
-# from manage_car_category import manage_car_category
-# from manage_car_engine import manage_car_engine
+from links import links
 
 
 app = Flask(__name__)
@@ -50,17 +42,9 @@ app.register_blueprint(sale)
 app.register_blueprint(finance)
 app.register_blueprint(auth)
 app.register_blueprint(dashboard)
+app.register_blueprint(links)
 
-# # manage_car
-# app.register_blueprint(manage_car)
-# app.register_blueprint(manage_car_model)
-# app.register_blueprint(manage_car_variant)
-# app.register_blueprint(manage_car_color)
-# app.register_blueprint(manage_car_category)
-# app.register_blueprint(manage_car_engine)
 
 if __name__ == '__main__':
     # app.run(debug=True, host="0.0.0.0", port=4500)
     app.run(debug=True)
-     
-# carmodel, carvariant, car, salesperson, customer(edit), Payment, sale and finance
