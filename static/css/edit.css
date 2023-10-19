@@ -81,8 +81,8 @@ form input[type="submit"]:hover {
     color: #fff;
 }
 
-/* Style for danger flash messages */
+/* Style for danger flash messages
 .flash-message.danger {
     background-color: #dc3545;
     color: #fff;
-}
+} */
