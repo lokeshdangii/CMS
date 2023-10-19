@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint
+from flask import render_template, request, redirect, url_for, flash, Blueprint, session
 from db import db,cursor
 import mysql.connector
 from auth import login_required
@@ -12,7 +12,7 @@ manage_car_engine = Blueprint('manage_car_engine',__name__)
 def carengine_table():
     cursor.execute("SELECT EngineID,EngineName FROM CarEngine")
     data = cursor.fetchall()
-    return render_template('view/carEngine.html', data=data)
+    return render_template('view/carEngine.html', data=data,  username=session["username"])
 
 
 # ------------------------------------ Add/Insert Car Engine ---------------------------------------------------
