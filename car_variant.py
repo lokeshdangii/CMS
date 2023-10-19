@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Blueprint, request, redirect, url_for, flash
+from flask import render_template, Blueprint, request, redirect, url_for, flash, session
 import mysql.connector
 from db import db, cursor
 from auth import login_required
@@ -26,7 +26,7 @@ def carvariant_table():
     """
     cursor.execute(query)
     data = cursor.fetchall()
-    return render_template('view/car_variant.html', data=data)
+    return render_template('view/car_variant.html', data=data, username=session["username"])
 
 
 # ------------------------------------ Add/Insert Car Variant ---------------------------------------------------
