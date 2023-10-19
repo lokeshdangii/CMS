@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Blueprint, request, redirect, url_for, flash
+from flask import Flask, render_template, Blueprint, request, redirect, url_for, flash, session
 import mysql.connector
 from db import db, cursor
 from auth import login_required
@@ -12,26 +12,30 @@ manage_car = Blueprint('manage_car', __name__)
 def manage_car_table():
     cursor.execute("""
         SELECT 
-            C.CarID, 
-            CV.VariantName, 
-            CC.ColorName, 
-            CAT.CategoryName, 
-            CE.EngineName, 
-            CM.ModelName, 
-            C.VIN, 
-            C.Mileage, 
-            C.YearOfManufacture, 
-            C.BrandCompany 
-        FROM Car AS C
-        JOIN CarVariant AS CV ON C.VariantID = CV.VariantID
-        JOIN CarColor AS CC ON C.ColorID = CC.ColorID
-        JOIN CarCategory AS CAT ON C.CategoryID = CAT.CategoryID
-        JOIN CarEngine AS CE ON C.EngineID = CE.EngineID
-        JOIN CarModel AS CM ON C.ModelID = CM.ModelID
-        ORDER BY C.CarID ASC
+    C.CarID, 
+    CV.VariantName, 
+    CC.ColorName, 
+    CAT.CategoryName, 
+    CE.EngineName, 
+    CM.ModelName, 
+    C.VIN, 
+    C.Mileage, 
+    C.YearOfManufacture, 
+    C.BrandCompany,  
+    CV.VariantID,     
+    CC.ColorID,       
+    CAT.CategoryID,   
+    CE.EngineID  
+FROM Car AS C
+JOIN CarVariant AS CV ON C.VariantID = CV.VariantID
+JOIN CarColor AS CC ON C.ColorID = CC.ColorID
+JOIN CarCategory AS CAT ON C.CategoryID = CAT.CategoryID
+JOIN CarEngine AS CE ON C.EngineID = CE.EngineID
+JOIN CarModel AS CM ON C.ModelID = CM.ModelID
+ORDER BY C.CarID ASC
     """)
     cars = cursor.fetchall()
-    return render_template('view/car.html', cars=cars)
+    return render_template('view/car.html', cars=cars, username=session["username"])
 
 # ------------------------------------ Add/Insert Car ---------------------------------------------------
 
