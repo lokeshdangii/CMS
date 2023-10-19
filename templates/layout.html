@@ -24,7 +24,7 @@
 			<div class="navbar-header">
 				<a class="navbar-brand" href="{{ url_for('auth.dashboard') }}">Car Management System (CMS)</a>
 			</div>
-			<font style="color: white"><span><strong>Welcome to CMS {{ username }} </strong></span></font>
+			<font style="color: white"><span><strong>Welcome to CMS : {{ username }} </strong></span></font>
 			<!-- <font style="color: white"><span><strong>Email:</strong></font> -->
 		    <ul class="nav navbar-nav navbar-right">
 		      <!-- <li class="nav-item dropdown">
@@ -105,7 +105,7 @@
                   Category
                 </a>
                 <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{ url_for('manage_car_color.carcolor_table')}}">Manage Category</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('manage_car_category.carcategory_table')}}">Manage Category</a></li>
                 <li><a class="dropdown-item" href="{{ url_for('manage_car_category.add_carcategory')}}">Add New Category</a></li>
                   
                 </ul>
@@ -144,7 +144,7 @@
 <footer id="footer" class="bg-dark text-white text-center py-3">
   <div class="container">
       <p>&copy; {{ current_year }} Car Management System. All rights reserved.</p>
-      <p>Developed by <a href="#" target="_blank" class="text-info">Lokesh Dangi</a></p>
+      <p>Developed by <a href="https://www.linkedin.com/in/lokeshdangi/" target="_blank" class="text-info">Lokesh Dangi</a></p>
   </div>
 </footer>
 
