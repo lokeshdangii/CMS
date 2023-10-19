@@ -14,19 +14,21 @@
         {% endfor %}
     </div>
     
-    <table class="table table-bordered table-hover" border="2">
+    <!-- <table class=" table-bordered table-hover" border="2"> -->
+
+    <table class="  table-hover" border="2">
         <thead>
             <tr>
                 <th>Serial No.</th>
+                <th>Model</th>
                 <th>Variant</th>
                 <th>Color</th>
                 <th>Category</th>
                 <th>Engine</th>
-                <th>Model</th>
                 <th>VIN</th>
                 <th>Mileage</th>
-                <th>Year of Manufacture</th>
-                <th>Brand/Company</th>
+                <th>MFD Year</th>
+                <th>Company</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -36,11 +38,12 @@
                 
             <tr>
                 <td>{{ loop.index }}</td> 
-                <td>{{ car[1] }}</td>
-                <td>{{ car[2] }}</td>
-                <td>{{ car[3] }}</td>
-                <td>{{ car[4] }}</td>
                 <td>{{ car[5] }}</td>
+                <td><a class="link" href="{{ url_for('links.variant_table', variant_id=car[10]) }}">{{ car[1] }}</a></td>
+                <td><a class="link" href="{{ url_for('links.color_table', color_id=car[11]) }}">{{ car[2] }}</a></td>
+                <td><a class="link" href="{{ url_for('links.category_table', category_id=car[12]) }}">{{ car[3] }}</a></td>
+                <td><a class="link" href="{{ url_for('links.engine_table', engine_id=car[13]) }}">{{ car[4] }}</a></td>
+                
                 <td>{{ car[6] }}</td>
                 <td>{{ car[7] }}</td>
                 <td>{{ car[8] }}</td>
