@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint
+from flask import render_template, request, redirect, url_for, flash, Blueprint, session
 import mysql.connector
 from db import db, cursor
 from auth import login_required
@@ -14,7 +14,7 @@ manage_car_color = Blueprint('manage_car_color',__name__)
 def carcolor_table():
     cursor.execute("SELECT * FROM CarColor")
     colors = cursor.fetchall()
-    return render_template('view/carColor.html', colors = colors)
+    return render_template('view/carColor.html', colors = colors, username=session["username"])
 
 
 # ------------------------------------ Add/Insert Car Color ---------------------------------------------------
