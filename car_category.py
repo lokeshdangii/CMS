@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint
+from flask import render_template, request, redirect, url_for, flash, Blueprint, session
 import mysql.connector
 from db import db,cursor
 from auth import login_required
@@ -14,7 +14,7 @@ manage_car_category = Blueprint('manage_car_category',__name__)
 def carcategory_table():
     cursor.execute("SELECT * FROM CarCategory")
     data = cursor.fetchall()
-    return render_template('view/carCategory.html', data=data)
+    return render_template('view/carCategory.html', data=data, username=session["username"])
 
 
 # ------------------------------------ Add/Insert Car Category ---------------------------------------------------
