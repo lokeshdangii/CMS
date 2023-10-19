@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint,session,g
+from flask import render_template, request, redirect, url_for, flash, Blueprint,session,g
 import mysql.connector
 from werkzeug.security import generate_password_hash, check_password_hash
 from db import db, cursor
@@ -159,13 +159,5 @@ def dashboard():
                            engine_count=engine_count[0],
                            category_count=category_count[0], username=session["username"])
         # return f'Hello, {session["username"]}! Welcome to the dashboard.'
-    else:
-        return redirect(url_for('auth.login_form'))
-    
-
-@auth.route('/dash')
-def layout():
-    if 'username' in session:
-        return render_template('layout.html',username=session["username"])
     else:
         return redirect(url_for('auth.login_form'))
