@@ -11,7 +11,7 @@ manage_car = Blueprint('manage_car', __name__)
 @manage_car.route('/manage_car')
 def manage_car_table():
     cursor.execute("""
-        SELECT 
+    SELECT 
     C.CarID, 
     CV.VariantName, 
     CC.ColorName, 
@@ -25,14 +25,15 @@ def manage_car_table():
     CV.VariantID,     
     CC.ColorID,       
     CAT.CategoryID,   
-    CE.EngineID  
+    CE.EngineID,
+    CM.ModelID
 FROM Car AS C
 JOIN CarVariant AS CV ON C.VariantID = CV.VariantID
 JOIN CarColor AS CC ON C.ColorID = CC.ColorID
 JOIN CarCategory AS CAT ON C.CategoryID = CAT.CategoryID
 JOIN CarEngine AS CE ON C.EngineID = CE.EngineID
 JOIN CarModel AS CM ON C.ModelID = CM.ModelID
-ORDER BY C.CarID ASC
+ORDER BY C.CarID ASC;
     """)
     cars = cursor.fetchall()
     return render_template('view/car.html', cars=cars, username=session["username"])
