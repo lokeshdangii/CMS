@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block title %} Car of Color {% endblock %}
+
+{% block stylesheet %} <link rel="stylesheet" href="{{ url_for('static', filename='css/links.css') }}">  {% endblock %}
+
+
+{% block body %}
+
+    <h1>{{ count[1] }} model : {{ count[0]}} cars available </h1>
+    <!-- <h2>List of cars  {{ count[1] }} model </h2> -->
+
+    <div class="flash-messages">
+        {% for msg in get_flashed_messages() %}
+            <div class="flash-message sucess danger">{{ msg }}</div>
+        {% endfor %}
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>S.NO.</th>
+                <th>Model</th>
+                <th>Color</th>
+                <th>Variant</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in cars %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ car[0] }}</td>
+                <td>{{ car[1] }}</td>
+                <td>{{ car[2] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
