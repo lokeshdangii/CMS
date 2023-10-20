@@ -38,7 +38,8 @@
                 
             <tr>
                 <td>{{ loop.index }}</td> 
-                <td>{{ car[5] }}</td>
+
+                <td><a class="link" href="{{ url_for('links.model_table', model_id=car[14]) }}">{{ car[5] }}</a></td>
                 <td><a class="link" href="{{ url_for('links.variant_table', variant_id=car[10]) }}">{{ car[1] }}</a></td>
                 <td><a class="link" href="{{ url_for('links.color_table', color_id=car[11]) }}">{{ car[2] }}</a></td>
                 <td><a class="link" href="{{ url_for('links.category_table', category_id=car[12]) }}">{{ car[3] }}</a></td>
