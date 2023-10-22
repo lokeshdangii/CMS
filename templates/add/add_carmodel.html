@@ -29,7 +29,9 @@
         <label for="model_specifications">Model Specifications:</label>
         <input type="text" id="model_specifications" name="model_specifications" required maxlength="150">
         <br><br>
-        <input type="submit" value="Add Car Model">
+        <input type="submit" value="Add Car Model"> 
+        &nbsp &nbsp
+        <a href="http://127.0.0.1:5000/dashboard" class="go-back-button">Go Back</a>
 
         <div class="flash-messages">
             {% for msg in get_flashed_messages() %}

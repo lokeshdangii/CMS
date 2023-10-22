@@ -14,6 +14,9 @@
         <input type="text" id="category_name" name="category_name" required maxlength="100">
         <br><br>
         <input type="submit" value="Add Category">
+        &nbsp &nbsp
+        <a href="http://127.0.0.1:5000/dashboard" class="go-back-button">Go Back</a>
+
 
         <div class="flash-messages">
             {% for msg in get_flashed_messages() %}
