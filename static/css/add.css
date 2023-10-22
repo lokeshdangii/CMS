@@ -62,3 +62,12 @@ button[type="submit"]:hover {
     margin-bottom: 5px;
     text-align: center;
 }
+
+button{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+

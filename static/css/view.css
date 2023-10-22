@@ -25,7 +25,7 @@ table {
     background-color: #fff;
     /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    table-layout:auto;
+    table-layout:inherit;
     border: 1px slategrey;
 }
 
