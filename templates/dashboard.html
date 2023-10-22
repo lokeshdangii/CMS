@@ -35,7 +35,7 @@
                <div class="card bg-light" style="width: 350px">
                    <div class="card-header">Model</div>
                    <div class="card-body">
-                       <p class="card-text">No of Total Models: {{ model_count }} </p>
+                       <p class="card-text">No of Models: {{ model_count }} </p>
                        <a class="btn btn-warning" href="{{ url_for('manage_car_model.carmodel_table') }}" >View Models</a>
                        &nbsp &nbsp &nbsp
                        <a class="btn btn-warning" href="{{ url_for('manage_car_model.add_carmodel') }}" >Add Model</a>
@@ -62,7 +62,7 @@
             <div class="card bg-light" style="width: 350px">
                 <div class="card-header">Car Calors</div>
                 <div class="card-body">
-                    <p class="card-text">No of Total Colors: {{ color_count }}</p>
+                    <p class="card-text">No of Colors: {{ color_count }}</p>
                     <a class="btn btn-success" href="{{url_for('manage_car_color.carcolor_table')}}" >View Colors</a>&nbsp &nbsp &nbsp
                     <a class="btn btn-success" href="{{url_for('manage_car_color.add_carcolor')}}" >Add Color</a>
                 </div>
@@ -72,7 +72,7 @@
             <div class="card bg-light" style="width: 350px">
                 <div class="card-header">Car Engine</div>
                 <div class="card-body">
-                    <p class="card-text">No of Total Engines: {{ engine_count }}</p>
+                    <p class="card-text">No of Engines: {{ engine_count }}</p>
                     <a class="btn btn-warning" href="{{url_for('manage_car_engine.carengine_table')}}" >View Engines</a>&nbsp &nbsp &nbsp
                     <a class="btn btn-warning" href="{{url_for('manage_car_engine.add_carengine')}}" >Add Engine</a>
                 </div>
