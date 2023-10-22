@@ -7,6 +7,9 @@
 
     {% block stylesheet %}   {% endblock %}
 
+    <!-- Fontawesome Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Bootstrap CSS Link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> 
 
@@ -24,7 +27,8 @@
 			<div class="navbar-header">
 				<a class="navbar-brand" href="{{ url_for('auth.dashboard') }}">Car Management System (CMS)</a>
 			</div>
-			<font style="color: white"><span><strong>Welcome to CMS : {{ username }} </strong></span></font>
+			<font style="color: white"><span><strong> Hello : {{ username }}    </strong></span></font>
+    
 			<!-- <font style="color: white"><span><strong>Email:</strong></font> -->
 		    <ul class="nav navbar-nav navbar-right">
 		      <!-- <li class="nav-item dropdown">
