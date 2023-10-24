@@ -14,7 +14,7 @@ manage_car_color = Blueprint('manage_car_color',__name__)
 def carcolor_table():
     cursor.execute("SELECT * FROM CarColor")
     colors = cursor.fetchall()
-    return render_template('view/carColor.html', colors = colors, username=session["username"])
+    return render_template('view/carColor.html', colors = colors)
 
 
 # ------------------------------------ Add/Insert Car Color ---------------------------------------------------
@@ -73,17 +73,36 @@ def edit_car_color(color_id):
 @manage_car_color.route('/manage_car_color/delete/<int:color_id>', methods=['GET', 'POST'])
 @login_required
 def delete_car_color(color_id):
+    if request.method == 'POST':
+        if 'confirmation' in request.form:
+            confirmation = request.form['confirmation']
+            if confirmation.lower() == 'delete':
+                try:
+                    # query to delete the car color
+                    delete_query = "DELETE FROM CarColor WHERE ColorID = %s"
+                    cursor.execute(delete_query, (color_id,))
+                    db.commit()
 
-    try:
-        delete_query = "DELETE from CarColor where ColorID = %s"
-        cursor.execute(delete_query,(color_id,))
-        db.commit()
-        flash(f"Car Color with ColorID: { color_id } deleted successfully", 'success')
-        # return render_template('success.html')
+                    flash(f"Car Color with ColorID: {color_id} deleted successfully", 'success')
+                    return redirect(url_for('manage_car_color.carcolor_table'))
+                except mysql.connector.Error as e:
+                    db.rollback()
+                    flash(f'Error deleting Car Color: {e}', 'danger')
+            else:
+                flash('Deletion not confirmed. Please type "delete" to confirm.', 'warning')
+        else:
+            flash('Invalid request. Confirmation required to delete.', 'warning')
+
+    # Fetch car color to delete
+    fetch_query = "SELECT ColorID, ColorName FROM CarColor WHERE ColorID = %s"
+    cursor.execute(fetch_query, (color_id,))
+    color_data = cursor.fetchone()
+
+    if color_data is None:
+        flash('Car Color not found', 'danger')
         return redirect(url_for('manage_car_color.carcolor_table'))
 
-    except mysql.connector.Error as e:
-        db.rollback()
-        flash(f'Error deleting Car Color: {e}', 'danger')
+    return render_template('delete/delete_carcolor.html', color_data=color_data)
 
-    return redirect(url_for('manage_car_color.carcolor_table'))
+
+    # return redirect(url_for('manage_car_color.carcolor_table'))
