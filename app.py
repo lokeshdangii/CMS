@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session
 
 
 # import blueprint from scripts
@@ -15,8 +15,8 @@ from payment import payment
 from sale import sale
 from finance import finance
 from auth import auth
-from dashboard import dashboard
 from links import links
+from username import usernames
 
 
 app = Flask(__name__)
@@ -26,6 +26,11 @@ app.secret_key = '1df90c98804d9e99099c4356a9d4c3989b681e578d413d79f7759c305b18e6
 def index():
     return render_template('index.html')
 
+
+
+# Register the context processor
+# Context processors are functions that run before rendering a template and can add variables to the context that are available to all templates.
+app.context_processor(usernames)
 
 # register blueprint
 app.register_blueprint(manage_car_color)
@@ -41,7 +46,6 @@ app.register_blueprint(payment)
 app.register_blueprint(sale)
 app.register_blueprint(finance)
 app.register_blueprint(auth)
-app.register_blueprint(dashboard)
 app.register_blueprint(links)
 
 
