@@ -98,3 +98,10 @@ tr:hover {
     
 }
 
+.backlink{
+    text-align: center;
+    text-decoration:none;
+    display: flex;
+    justify-content: center;
+    font-size:larger;
+}
