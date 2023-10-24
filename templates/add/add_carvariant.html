@@ -40,16 +40,15 @@
         <input type="number" step="1" id="price" name="price" required maxlength="10" max="5000000" step="0.01">
         <br>
         <input type="submit" value="Add Car Variant">
-        &nbsp &nbsp
-        <a href="http://127.0.0.1:5000/dashboard" class="go-back-button">Go Back</a>
-
-
+        
         <div class="flash-messages">
             {% for msg in get_flashed_messages() %}
                 <div class="flash-message">{{ msg }}</div>
             {% endfor %}
         </div>
     </form>
+
+    <a class="backlink" href="/manage_car_model"> <i class="bi bi-box-arrow-left"></i>&nbsp;Back to Variants</a>
 
 
 {% endblock %}
