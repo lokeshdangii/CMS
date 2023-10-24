@@ -27,6 +27,8 @@ table {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     table-layout:inherit;
     border: 1px slategrey;
+    /* width: 600px;
+    max-width: 700px; */
 }
 
 /* Style for the table header */
@@ -112,3 +114,44 @@ h3{
 .link{
     text-decoration:none;
 }
+
+.pagination {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+
+.pagination {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination a {
+    text-decoration: none;
+    padding: 5px 15px; /* Adjust padding for more gap */
+    border: 1px solid #333;
+    background-color: #ffffff;
+    color: #000000;
+    margin: 0 10px; /* Adjust margin for more gap */
+    border-radius: 10px; /* Add border-radius for a rounded shape */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination a:hover {
+    background-color: #2889a7; /* Change color on hover */
+}
+
+
+.add_link{
+    text-align: center;
+    text-decoration:none;
+    display: flex;
+    justify-content: center;
+    font-size:larger;
+}
+
+
