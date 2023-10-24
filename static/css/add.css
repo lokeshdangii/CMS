@@ -23,18 +23,18 @@ form {
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     margin: 20px auto;
-    width: 300px;
+    width: 350px;
 }
 
 label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 select, input[type="text"], input[type="number"] {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 5px;
+    margin-bottom: 5px;
     border: 1px solid #ccc;
     border-radius: 3px;
 }
