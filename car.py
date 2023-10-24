@@ -2,6 +2,7 @@ from flask import Flask, render_template, Blueprint, request, redirect, url_for,
 import mysql.connector
 from db import db, cursor
 from auth import login_required
+from flask_paginate import Pagination
 
 # BluePrint
 manage_car = Blueprint('manage_car', __name__)
@@ -10,6 +11,11 @@ manage_car = Blueprint('manage_car', __name__)
 
 @manage_car.route('/manage_car')
 def manage_car_table():
+    page = request.args.get('page', type=int, default=1)
+    per_page = 10  # Number of cars per page
+
+    offset = (page - 1) * per_page
+
     cursor.execute("""
     SELECT 
     C.CarID, 
@@ -27,17 +33,24 @@ def manage_car_table():
     CAT.CategoryID,   
     CE.EngineID,
     CM.ModelID
-FROM Car AS C
-JOIN CarVariant AS CV ON C.VariantID = CV.VariantID
-JOIN CarColor AS CC ON C.ColorID = CC.ColorID
-JOIN CarCategory AS CAT ON C.CategoryID = CAT.CategoryID
-JOIN CarEngine AS CE ON C.EngineID = CE.EngineID
-JOIN CarModel AS CM ON C.ModelID = CM.ModelID
-ORDER BY C.CarID ASC;
-    """)
-    cars = cursor.fetchall()
-    return render_template('view/car.html', cars=cars, username=session["username"])
+    FROM Car AS C
+    JOIN CarVariant AS CV ON C.VariantID = CV.VariantID
+    JOIN CarColor AS CC ON C.ColorID = CC.ColorID
+    JOIN CarCategory AS CAT ON C.CategoryID = CAT.CategoryID
+    JOIN CarEngine AS CE ON C.EngineID = CE.EngineID
+    JOIN CarModel AS CM ON C.ModelID = CM.ModelID
+    ORDER BY C.CarID ASC
+    LIMIT %s OFFSET %s;
+    """, (per_page, offset))
 
+    cars = cursor.fetchall()
+
+    has_next = len(cars) == per_page
+
+    pagination = Pagination(page=page, per_page=per_page, total=len(cars), css_framework='bootstrap4')
+
+    return render_template('view/car.html', cars=cars, pagination=pagination, has_next=has_next, page=page, per_page = per_page)
+    
 # ------------------------------------ Add/Insert Car ---------------------------------------------------
 
 # Route to add a new Car
