@@ -20,7 +20,7 @@ def carmodel_table():
                 """)
     
     models = cursor.fetchall()
-    return render_template('view/car_model.html', models = models, username=session["username"])
+    return render_template('view/car_model.html', models = models)
 
 # ------------------------------------ Add/Insert Car Model ---------------------------------------------------
 
