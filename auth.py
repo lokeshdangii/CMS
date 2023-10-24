@@ -2,12 +2,10 @@ from flask import render_template, request, redirect, url_for, flash, Blueprint,
 import mysql.connector
 from werkzeug.security import generate_password_hash, check_password_hash
 from db import db, cursor
-from dashboard import dashboard
 from functools import wraps
 
 # Blueprint
 auth = Blueprint('auth',__name__)
-
 
 
 # ------------------------------------------------Registration Code -----------------------------------------
@@ -89,8 +87,8 @@ def login():
 def logout():
     # Clear the session to log the user out
     session.pop('username', None)
-    flash('You have been logged out.', 'info')
-    return redirect(url_for('auth.login_form'))
+    # flash('You have been logged out.', 'info')
+    return render_template('index.html')
 
 
 # ------------------------------------------- Login Required for Authentification -------------------------
@@ -151,13 +149,12 @@ def dashboard():
     # Check if the user is logged in
     if 'username' in session:
         
-        return render_template('dashboard/dashboard.html',
+        return render_template('dashboard.html',
                            car_count=car_count,  # Access the count value directly
                            model_count=model_count[0],  # Access the first element of the tuple
                            variant_count=variant_count[0],
                            color_count=color_count[0],
                            engine_count=engine_count[0],
-                           category_count=category_count[0], username=session["username"])
-        # return f'Hello, {session["username"]}! Welcome to the dashboard.'
+                           category_count=category_count[0])
     else:
         return redirect(url_for('auth.login_form'))
