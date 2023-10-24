@@ -8,12 +8,6 @@ from car_engine import manage_car_engine
 from car_model import manage_car_model
 from car_variant import manage_car_variant
 from car import manage_car
-from salesperson import salesperson
-from customer import customer
-from installment import installment
-from payment import payment
-from sale import sale
-from finance import finance
 from auth import auth
 from links import links
 from username import usernames
@@ -39,12 +33,6 @@ app.register_blueprint(manage_car_engine)
 app.register_blueprint(manage_car_model)
 app.register_blueprint(manage_car_variant)
 app.register_blueprint(manage_car)
-app.register_blueprint(salesperson)
-app.register_blueprint(customer)
-app.register_blueprint(installment)
-app.register_blueprint(payment)
-app.register_blueprint(sale)
-app.register_blueprint(finance)
 app.register_blueprint(auth)
 app.register_blueprint(links)
 
