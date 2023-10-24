@@ -26,7 +26,7 @@ def carvariant_table():
     """
     cursor.execute(query)
     data = cursor.fetchall()
-    return render_template('view/car_variant.html', data=data, username=session["username"])
+    return render_template('view/car_variant.html', data=data)
 
 
 # ------------------------------------ Add/Insert Car Variant ---------------------------------------------------
