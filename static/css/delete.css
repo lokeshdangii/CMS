@@ -1,4 +1,85 @@
-body {
+/* 
+/* manage css */
+/* Styling for the body and heading */
+ body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.flash-messages {
+    text-align: center;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.flash-message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.flash-message.success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.flash-message.danger {
+    background-color: #F44336;
+    color: white;
+}
+
+form {
+    background-color: #fff;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+form p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+button[type="submit"] {
+    background-color: #F44336;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button[type="submit"]:hover {
+    background-color: #8a0000;
+} 
+
+.backlink{
+    text-align: center;
+    text-decoration:none;
+    display: flex;
+    justify-content: center;
+    font-size:larger;
+}
+
+/* label {
+    display: block;
+    margin-bottom: 10px;
+} */
+
+
+/* body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
     margin: 0;
@@ -21,10 +102,7 @@ form {
     width: 300px;
 }
 
-label {
-    display: block;
-    margin-bottom: 10px;
-}
+
 
 select {
     width: 100%;
@@ -48,82 +126,6 @@ button[type="submit"]:hover {
     background-color: #e60000;
 }
 
-a {
-    display: block;
-    text-align: center;
-    margin-top: 10px;
-    text-decoration: none;
-    color: #333;
-    
-}
+ */
 
 
-
-/* manage css */
-/* Styling for the body and heading */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-}
-
-h1 {
-    /* background-color: #333; */
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
-
-/* Styling for flash messages */
-.flash-messages {
-    text-align: center;
-    margin: 20px auto;
-    max-width: 600px;
-}
-
-.flash-message {
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-}
-
-.flash-message.success {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.flash-message.danger {
-    background-color: #F44336;
-    color: white;
-}
-
-/* Styling for the form container */
-form {
-    background-color: #fff;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Styling for form elements */
-form p {
-    margin: 10px 0;
-    font-size: 16px;
-}
-
-button[type="submit"] {
-    background-color: #F44336;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-button[type="submit"]:hover {
-    background-color: #D32F2F;
-}
