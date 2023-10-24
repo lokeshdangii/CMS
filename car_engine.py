@@ -12,7 +12,7 @@ manage_car_engine = Blueprint('manage_car_engine',__name__)
 def carengine_table():
     cursor.execute("SELECT EngineID,EngineName FROM CarEngine")
     data = cursor.fetchall()
-    return render_template('view/carEngine.html', data=data,  username=session["username"])
+    return render_template('view/carEngine.html', data=data, )
 
 
 # ------------------------------------ Add/Insert Car Engine ---------------------------------------------------
@@ -79,17 +79,33 @@ def edit_car_engine(engine_id):
 @manage_car_engine.route('/manage_car_engine/delete/<int:engine_id>', methods=['GET', 'POST'])
 @login_required
 def delete_car_engine(engine_id):
-    
-    try:
-        delete_query = "DELETE from CarEngine where EngineID = %s"
-        cursor.execute(delete_query,(engine_id,))
-        db.commit()
-        flash(f"Car Engine with EngineID: { engine_id} deleted successfully", 'success')
-        # return render_template('success.html')
+    if request.method == 'POST':
+        if 'confirmation' in request.form:
+            confirmation = request.form['confirmation']
+            if confirmation.lower() == 'delete':
+                try:
+                    # query to delete the engine
+                    delete_query = "DELETE FROM CarEngine WHERE EngineID = %s"
+                    cursor.execute(delete_query, (engine_id,))
+                    db.commit()
+
+                    flash(f"Car Engine with EngineID: {engine_id} and associated cars deleted successfully", 'success')
+                    return redirect(url_for('manage_car_engine.carengine_table'))
+                except mysql.connector.Error as e:
+                    db.rollback()
+                    flash(f'Error deleting Car Engine: {e}', 'danger')
+            else:
+                flash('Deletion not confirmed. Please type "delete" to confirm.', 'warning')
+        else:
+            flash('Invalid request. Confirmation required to delete.', 'warning')
+
+    # Fetch car engine to delete
+    fetch_query = "SELECT EngineID, EngineName FROM CarEngine WHERE EngineID = %s"
+    cursor.execute(fetch_query, (engine_id,))
+    engine_data = cursor.fetchone()
+
+    if engine_data is None:
+        flash('Car Engine not found', 'danger')
         return redirect(url_for('manage_car_engine.carengine_table'))
 
-    except mysql.connector.Error as e:
-        db.rollback()
-        flash(f'Error deleting Car Engine: {e}', 'danger')
-
-    return redirect(url_for('manage_car_engine.carengine_table'))
+    return render_template('delete/delete_carengine.html', engine_data=engine_data)
