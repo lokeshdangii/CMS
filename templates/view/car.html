@@ -2,49 +2,45 @@
 
 {% block title %} Car {% endblock %}
 
-{% block stylesheet %} <link rel="stylesheet" href="{{ url_for('static', filename='css/view.css') }}">  {% endblock %}
-
+{% block stylesheet %} <link rel="stylesheet" href="{{ url_for('static', filename='css/view.css') }}"> {% endblock %}
 
 {% block body %}
 
-    <h1>Cars</h1>
-    <div class="flash-messages">
-        {% for msg in get_flashed_messages() %}
-            <div class="flash-message sucess danger">{{ msg }}</div>
-        {% endfor %}
-    </div>
-    
-    <!-- <table class=" table-bordered table-hover" border="2"> -->
+<h1>Cars</h1>
+<div class="flash-messages">
+    {% for msg in get_flashed_messages() %}
+        <div class="flash-message success danger">{{ msg }}</div>
+    {% endfor %}
+</div>
 
-    <table class="  table-hover" border="2">
-        <thead>
+<table class="table table-hover" border="2">
+    <!-- Table Header -->
+    <thead>
+        <tr>
+            <th>Serial No.</th>
+            <th>Model</th>
+            <th>Variant</th>
+            <th>Color</th>
+            <th>Category</th>
+            <th>Engine</th>
+            <th>VIN</th>
+            <th>Mileage</th>
+            <th>MFD Year</th>
+            <th>Company</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for car in cars %}
+            <!-- Table Rows -->
             <tr>
-                <th>Serial No.</th>
-                <th>Model</th>
-                <th>Variant</th>
-                <th>Color</th>
-                <th>Category</th>
-                <th>Engine</th>
-                <th>VIN</th>
-                <th>Mileage</th>
-                <th>MFD Year</th>
-                <th>Company</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-            {% for car in cars%}
-                
-            <tr>
-                <td>{{ loop.index }}</td> 
-
+                <!-- Calculating the starting Serial Number -->
+                <td>{{ (page - 1) * per_page + loop.index }}</td> 
                 <td><a class="link" href="{{ url_for('links.model_table', model_id=car[14]) }}">{{ car[5] }}</a></td>
                 <td><a class="link" href="{{ url_for('links.variant_table', variant_id=car[10]) }}">{{ car[1] }}</a></td>
                 <td><a class="link" href="{{ url_for('links.color_table', color_id=car[11]) }}">{{ car[2] }}</a></td>
                 <td><a class="link" href="{{ url_for('links.category_table', category_id=car[12]) }}">{{ car[3] }}</a></td>
                 <td><a class="link" href="{{ url_for('links.engine_table', engine_id=car[13]) }}">{{ car[4] }}</a></td>
-                
                 <td>{{ car[6] }}</td>
                 <td>{{ car[7] }}</td>
                 <td>{{ car[8] }}</td>
@@ -54,10 +50,21 @@
                     <a class="delete-link" href="{{ url_for('manage_car.delete_car', car_id=car[0]) }}">Delete</a>
                 </td>
             </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        {% endfor %}
+    </tbody>
+</table>
 
-    {% endblock %}
+<!-- Pagination Links -->
+<div class="pagination">
+    {% if page > 1 %}
+        <a href="{{ url_for('manage_car.manage_car_table', page=page-1) }}"><i class="bi bi-skip-backward-fill"></i> &nbsp Previous</a>
+    {% endif %}
+    {% if has_next %}
+        <a href="{{ url_for('manage_car.manage_car_table', page=page+1) }}">Next &nbsp <i class="bi bi-skip-forward-fill"></i></a>
+    {% endif %}
+</div>
 
+<br>
+<a class="add_link" href="{{ url_for('manage_car.add_car') }}"> <i class="bi bi-plus-lg"></i> Add New Car</a>
 
+{% endblock %}

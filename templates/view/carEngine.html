@@ -36,13 +36,8 @@
         </tbody>
     </table>
 
-    <script>
-        function confirmDelete(event) {
-            if (!confirm("Are you sure you want to delete this Car Engine")) {
-                event.preventDefault(); // Prevent the default link behavior
-            }
-        }
-    </script>
+    <a class="add_link" href="{{ url_for('manage_car_engine.add_carengine')}}"> <i class="bi bi-plus-lg"></i> Add New Engine</a>
+
 
 {% endblock %}
 
