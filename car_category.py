@@ -14,7 +14,7 @@ manage_car_category = Blueprint('manage_car_category',__name__)
 def carcategory_table():
     cursor.execute("SELECT * FROM CarCategory")
     data = cursor.fetchall()
-    return render_template('view/carCategory.html', data=data, username=session["username"])
+    return render_template('view/carCategory.html', data=data)
 
 
 # ------------------------------------ Add/Insert Car Category ---------------------------------------------------
@@ -54,7 +54,7 @@ def edit_car_category(category_id):
             db.rollback()
             flash(f'Error updating Category : {e}', 'danger')
         
-    # fetch car color to edit
+    # fetch car category to edit
     fetch_query = "Select CategoryID,CategoryName from CarCategory where CategoryID = %s"
     cursor.execute(fetch_query,(category_id,))
     category_data = cursor.fetchone()
@@ -69,22 +69,41 @@ def edit_car_category(category_id):
 # --------------------------- delete Car Category ---------------------------------------------------
 
 # Route for deleting a Car Category
-@manage_car_category.route('/manage_car_category/delete/<int:category_id>', methods=['GET','POST'])
+@manage_car_category.route('/manage_car_category/delete/<int:category_id>', methods=['GET', 'POST'])
 @login_required
 def delete_car_category(category_id):
+    if request.method == 'POST':
+        if 'confirmation' in request.form:
+            confirmation = request.form['confirmation']
+            if confirmation.lower() == 'delete':
+                try:
+                    # Query to delete the car category
+                    delete_query = "DELETE FROM CarCategory WHERE CategoryID = %s"
+                    cursor.execute(delete_query, (category_id,))
+                    db.commit()
+
+                    flash(f"Car Category with CategoryID: {category_id} deleted successfully", 'success')
+                    return redirect(url_for('manage_car_category.carcategory_table'))
+                except mysql.connector.Error as e:
+                    db.rollback()
+                    flash(f'Error deleting Car Category: {e}', 'danger')
+            else:
+                flash('Deletion not confirmed. Please type "delete" to confirm.', 'warning')
+        else:
+            flash('Invalid request. Confirmation required to delete.', 'warning')
+
+    # Fetch car category to delete
+    fetch_query = "SELECT CategoryID, CategoryName FROM CarCategory WHERE CategoryID = %s"
+    cursor.execute(fetch_query, (category_id,))
+    category_data = cursor.fetchone()
+
+    if category_data is None:
+        flash('Car Category not found', 'danger')
+        return redirect(url_for('manage_car_category.carcategory_table'))
+
+    return render_template('delete/delete_carcategory.html', category_data=category_data)
+
+
     
-    try:
-        delete_query = "DELETE from CarCategory where CategoryID = %s"
-        cursor.execute(delete_query,(category_id,))
-        db.commit()
-        flash(f"Car Category with CategoryID: { category_id } deleted successfully", 'success')
-        # return render_template('success.html')
-        return redirect(url_for('carcategory_table'))
-
-    except mysql.connector.Error as e:
-        db.rollback()
-        flash(f'Error deleting Car Category: {e}', 'danger')
-
-    return redirect(url_for('manage_car_category.carcategory_table'))
 
 
