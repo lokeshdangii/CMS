@@ -45,9 +45,10 @@ def manage_car_table():
 
     cars = cursor.fetchall()
 
+    # has_next is a boolean variable that is being assigned the result of the comparison len(cars) == per_page.
     has_next = len(cars) == per_page
 
-    pagination = Pagination(page=page, per_page=per_page, total=len(cars), css_framework='bootstrap4')
+    pagination = Pagination(page=page, per_page=per_page)
 
     return render_template('view/car.html', cars=cars, pagination=pagination, has_next=has_next, page=page, per_page = per_page)
     
