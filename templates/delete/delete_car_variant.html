@@ -24,7 +24,6 @@
     <form method="POST" action="{{ url_for('manage_car_variant.delete_carvariant', variant_id=variant_data[0]) }}">
 
         <p>Are you sure you want to delete the following Car Variant?</p>
-        <p>Variant ID: {{ variant_data[0] }}</p>
         <p>Model Name: {{ variant_data[1] }}</p>
         <p>Color: {{ variant_data[2] }}</p>
         <p>Category: {{ variant_data[3] }}</p>
@@ -32,7 +31,9 @@
         <p>Mileage: {{ variant_data[5] }}</p>
         <p>Price: {{ variant_data[6] }}</p>
 
-        <button type="submit">Delete Car Variant</button>
+        <button type="submit">Delete Variant</button>
+    
     </form>
 
+    <a class="backlink" href="/manage_car_variant"><i class="bi bi-box-arrow-left"></i>&nbsp;Back to Car Variant</a>
 {% endblock %}

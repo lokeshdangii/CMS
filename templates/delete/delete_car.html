@@ -22,7 +22,6 @@
     
     <form method="POST" action="{{ url_for('manage_car.delete_car', car_id=car_data[0]) }}">
         <p>Are you sure you want to delete the following car?</p>
-        <p>Car ID: {{ car_data[0] }}</p>
         <p>Variant : {{ car_data[1] }}</p>
         <p>Category : {{ car_data[2] }}</p>
         <p>Engine : {{ car_data[3] }}</p>
@@ -35,4 +34,6 @@
 
         <button type="submit">Delete Car</button>
     </form>
+
+    <a class="backlink" href="/manage_car"><i class="bi bi-box-arrow-left"></i>&nbsp;Back to Cars</a>
 {% endblock %}

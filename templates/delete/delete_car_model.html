@@ -24,13 +24,14 @@
     <form method="POST" action="{{ url_for('manage_car_model.delete_carmodel', model_id=model_data[0]) }}">
 
         <p>Are you sure you want to delete the following Model ?</p>
-        <p>Model ID: {{ model_data[0] }}</p>
         <p>Model : {{ model_data[1] }}</p>
         <p>Category : {{ model_data[2] }}</p>
         <p>Engine : {{ model_data[3] }}</p>
         <p>Model Specifications : {{ model_data[4] }}</p>
 
-        <button type="submit">Delete Car Model</button>
+        <button type="submit">Delete Model</button>
     </form>
+
+    <a class="backlink" href="/manage_car_model"><i class="bi bi-box-arrow-left"></i>&nbsp;Back to Car Models</a>
 
 {% endblock %}

@@ -1,32 +1,40 @@
 {% extends 'layout.html' %}
 
-{% block title %} Delete Color {% endblock %}
+{% block title %} Delete Car Color {% endblock %}
 
-{% block stylesheet %} <link rel="stylesheet" href="{{ url_for('static', filename='css/delete.css') }}">  {% endblock %}
-
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/delete.css') }}">
+{% endblock %}
 
 {% block body %}
-     
-    <h1>Delete Car Color</h1>
 
-    <form method="POST" action="/carcolor/delete">
-        <label for="color_to_delete">Select Color to Delete:</label>
-        <select name="color_to_delete" id="color_to_delete">
-            {% for color in colors %}
-                <option value="{{ color[0] }}">{{ color[1] }}</option>
-            {% endfor %}
-        </select>
+<h1>Delete Car Color</h1>
 
-        <button type="submit">Delete Car Color</button>
+<div class="alert alert-warning" role="alert">
+    <strong>Warning:</strong> On deleting the following color, all cars of this color will also be deleted.
+</div>
 
-        <!-- Display flashed messages -->
-        {% for message in get_flashed_messages() %}
-        <div class="flash-message">
-            {{ message }}
-        </div>
-        {% endfor %}
-    </form>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="flash-messages">
+    {% for category, message in messages %}
+    <div class="flash-message {{ category }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
 
-    <a href="/carcolor">Back to Car Colors</a>
+<form method="POST" action="{{ url_for('manage_car_color.delete_car_color', color_id=color_data[0]) }}">
+    <p>Are you sure you want to proceed?</p>
+    <p>Color : <strong>{{ color_data[1] }}</strong></p>
+    <label for="confirmation">Type <strong>"delete"</strong> to confirm:</label>
+    <input type="text" id="confirmation" name="confirmation">
+    <br><br>
+    <button type="submit">Delete Color</button>
+</form>
+
+<a class="backlink" href="{{ url_for('manage_car_color.carcolor_table') }}"><i class="bi bi-box-arrow-left"></i>&nbsp;Back to Car Colors</a>
 
 {% endblock %}

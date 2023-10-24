@@ -1,32 +1,40 @@
 {% extends 'layout.html' %}
 
-{% block title %} Delete Category {% endblock %}
+{% block title %} Delete Car Category {% endblock %}
 
-{% block stylesheet %} <link rel="stylesheet" href="{{ url_for('static', filename='css/delete.css') }}">  {% endblock %}
-
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/delete.css') }}">
+{% endblock %}
 
 {% block body %}
 
-    <h1>Delete Car Category</h1>
+<h1>Delete Car Category</h1>
 
-    <form method="POST" action="/carcategory/delete">
-        <label for="category_to_delete">Select Category to Delete:</label>
-        <select name="category_to_delete" id="category_to_delete">
-            {% for category in categories %}
-                <option value="{{ category[0] }}">{{ category[1] }}</option>
-            {% endfor %}
-        </select>
+<div class="alert alert-warning" role="alert">
+    <strong>Warning:</strong> On deleting the following category, all cars within this category will also be deleted.
+</div>
 
-        <button type="submit">Delete Car Category</button>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="flash-messages">
+    {% for category, message in messages %}
+    <div class="flash-message {{ category }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
 
-        <!-- Display flashed messages -->
-        {% for message in get_flashed_messages() %}
-        <div class="flash-message">
-            {{ message }}
-        </div>
-        {% endfor %}
-    </form>
+<form method="POST" action="{{ url_for('manage_car_category.delete_car_category', category_id=category_data[0]) }}">
+    <p>Are you sure you want to proceed?</p>
+    <p>Category : <strong>{{ category_data[1] }}</strong></p>
+    <label for="confirmation">Type <strong>"delete"</strong> to confirm:</label>
+    <input type="text" id="confirmation" name="confirmation">
+    <br><br>
+    <button type="submit">Delete Category</button>
+</form>
 
-    <a href="/carcategory">Back to Car Category</a>
-    
+<a class="backlink" href="{{ url_for('manage_car_category.carcategory_table') }}"><i class="bi bi-box-arrow-left"></i>&nbsp;Back to Car Categories</a>
+
 {% endblock %}
