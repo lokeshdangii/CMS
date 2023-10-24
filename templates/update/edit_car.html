@@ -63,10 +63,8 @@
         <input type="text" id="brand_company" name="brand_company" value="{{ car_data[8] }}" required maxlength="25" />
         <br />
 
-        <input type="submit" value="Update" />
+        <input type="submit" value="Save Changes" />
         &nbsp &nbsp
-        
-        <a href="/dashboard" class="go-back-button">Go Back</a>
 
         <div class="flash-messages">
             {% for msg in get_flashed_messages() %}
@@ -75,5 +73,7 @@
         </div>
 
     </form>
+
+    <a class="backlink go-back-button" href="/manage_car" ><i class="bi bi-box-arrow-left"></i>&nbsp;Back to Cars</a>
 
 {% endblock %}

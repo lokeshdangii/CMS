@@ -14,10 +14,8 @@
         <input type="text" id="new_engine_name" name="new_engine_name" value="{{ engine_data[1] }}" maxlength="15" required>
         <br>
 
-        <input type="submit" value="Save New Engine Name">
+        <input type="submit" value="Save New Name">
         &nbsp &nbsp
-        
-        <a href="/dashboard" class="go-back-button">Go Back</a>
         
         <div class="flash-messages">
             {% for msg in get_flashed_messages() %}
@@ -25,5 +23,7 @@
             {% endfor %}
         </div>
     </form>
+
+    <a class="backlink go-back-button" href="/manage_car_engine" ><i class="bi bi-box-arrow-left"></i>&nbsp;Back to Car Engines</a>
 
 {% endblock %}

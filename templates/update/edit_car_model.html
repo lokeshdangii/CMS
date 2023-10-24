@@ -32,10 +32,9 @@
         <input type="text" id="new_model_specification" name="new_model_specification" value="{{ model_data[4] }}" required />
         <br/>
 
-        <input type="submit" value="Edit Car Model">
+        <input type="submit" value="Save Changes">
         &nbsp &nbsp
         
-        <a href="/dashboard" class="go-back-button">Go Back</a>
 
         <div class="flash-messages">
             {% for msg in get_flashed_messages() %}
@@ -44,6 +43,8 @@
         </div>
 
     </form>
+
+    <a class="backlink" href="/manage_car_model"><i class="bi bi-box-arrow-left"></i>&nbsp;Back to Car Models</a>
 
     
 {% endblock %}
