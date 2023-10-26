@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, flash, Blueprint,session,g
+from flask import render_template, request, redirect, url_for, flash, Blueprint,session
 import mysql.connector
 from werkzeug.security import generate_password_hash, check_password_hash
 from db import db, cursor
@@ -118,8 +118,7 @@ def login_required(view):
 
 # Car Count
 cursor.execute("SELECT COUNT(*) FROM Car")
-result = cursor.fetchall()
-car_count = result[0][0]
+car_count = cursor.fetchone()
 
 # Car Model Count
 cursor.execute("SELECT COUNT(*) FROM CarModel")
@@ -150,7 +149,7 @@ def dashboard():
     if 'username' in session:
         
         return render_template('dashboard.html',
-                           car_count=car_count,  # Access the count value directly
+                           car_count=car_count[0],  # Access the count value directly
                            model_count=model_count[0],  # Access the first element of the tuple
                            variant_count=variant_count[0],
                            color_count=color_count[0],
