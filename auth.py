@@ -36,7 +36,7 @@ def register():
             return redirect(url_for('auth.register_form'))
 
         # Hash the password before storing it in the database
-        hashed_password = generate_password_hash(password, method='sha256')
+        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
         # Insert the user into the database
         insert_user_query = "INSERT INTO User (Username, Password) VALUES (%s, %s)"
