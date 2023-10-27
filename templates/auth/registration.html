@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>Admin Registration</h1>
-    <form method="POST" action="{{ url_for('auth.register') }}">
+    <form method="POST" action="{{ url_for('auth.register') }}" id="registration-form">
 
         <!-- flash message -->
         <div class="flash-messages">
@@ -28,17 +28,17 @@
 
         
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required maxlength="25">
+        <input type="text" id="username" name="username" required maxlength="25" minlength="8">
         <br><br>
 
        
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required maxlength="25">
+        <input type="password" id="password" name="password" required maxlength="25" minlength="8">
         <br><br>
 
        
         <label for="confirm_password">Confirm Password:</label>
-        <input type="password" id="confirm_password" name="confirm_password" required maxlength="25">
+        <input type="password" id="confirm_password" name="confirm_password" required maxlength="25" minlength="8">
         <br><br>
 
         
@@ -47,4 +47,46 @@
 
     <p>Already have an account? <a href="{{ url_for('auth.login') }}">Login</a></p>
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const registrationForm = document.getElementById('registration-form');
+        registrationForm.addEventListener('submit', function (event) {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            let usernameError = '';
+            let passwordError = '';
+
+            // Check for username format
+            if (/^\d+$/.test(username)) {
+                usernameError = 'Username cannot consist of only numbers.';
+            }
+
+            // Check for password format
+            if (!/\d/.test(password) || !/[!@#$%^&*]/.test(password)) {
+                passwordError = 'Password must contain at least one number and one special symbol.';
+            }
+
+            // Check if password is the same as the username
+            if (username === password) {
+                passwordError = 'Password cannot be the same as the username.';
+            }
+
+            // Display specific error messages
+            if (usernameError || passwordError) {
+                event.preventDefault(); // Prevent the form from submitting
+
+                if (usernameError && passwordError) {
+                    alert(usernameError + '\n' + passwordError);
+                } else if (usernameError) {
+                    alert(usernameError);
+                } else {
+                    alert(passwordError);
+                }
+            }
+        });
+    });
+</script>
+
+
 </html>
