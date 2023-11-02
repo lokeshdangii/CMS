@@ -127,5 +127,3 @@ The CMS Application offers the following essential functionalities:
 6. Manage Cars
 
 Users can effortlessly perform CRUD operations on these components, enabling them to add, view, update, or delete entries as necessary.
-
-With the CMS Application, efficient car data management is just a few clicks away. Ensure you've completed the database initialization and configuration steps for a seamless user experience.
