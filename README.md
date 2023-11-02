@@ -1,4 +1,4 @@
-# CMS Application
+# CMS - Car Management System
 
 The CMS (Car Management System) Application is a web-based system designed to manage car-related data and specifications. This application allows users to perform Create, Read, Update, and Delete (CRUD) operations on various car-related data components and specification. Here's a comprehensive guide on using the CMS Application.
 
@@ -126,4 +126,4 @@ The CMS Application offers the following essential functionalities:
 5. Manage Car Engines
 6. Manage Cars
 
-Users can effortlessly perform CRUD operations on these components, enabling them to add, view, update, or delete entries as necessary.
+Users can easily perform CRUD operations on these components, enabling them to add, view, update, or delete entries as necessary.
