@@ -44,15 +44,15 @@ This application ensures that car-related data can be easily viewed, added, edit
 The project directory includes the following files and directories:
 
 - `app.py`: The main application file that initializes the Flask instance and connects various functionalities using Blueprints.
-- `auth.py`: Responsible for user authentication and authorization.
+- `auth.py`: Contains views for login,register and authentication.
 - `car.py`: Contains logic and views for CRUD operations related to Cars.
-- `car_category.py`: Manages CRUD operations for Car Categories.
-- `car_color.py`: Handles CRUD operations for Car Colors.
-- `car_engine.py`: Manages CRUD operations for Car Engines.
-- `car_model.py`: Manages CRUD operations for Car Models.
-- `car_variant.py`: Handles CRUD operations for Car Variants.
+- `car_category.py`: Contains logic and views for CRUD operations related to Car Categories.
+- `car_color.py`: Contains logic and views for CRUD operations related to Car Colors.
+- `car_engine.py`: Contains logic and views for CRUD operations related to Car Engines.
+- `car_model.py`: Contains logic and views for CRUD operations related to Car Models.
+- `car_variant.py`: Contains logic and views for CRUD operations related to Car Variants.
 - `cardb.sql`: An SQL script for initializing the database schema.
-- `db.py`: Configures the database for the project.
+- `db.py`: Configures the database for the CMS.
 
 ##### Directory 
 - `templates` : This directory contain all the HTML files.
