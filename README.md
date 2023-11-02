@@ -1,7 +1,6 @@
-# CMS
 # CMS Application
 
-The CMS (Car Management System) Application is a web-based system that offers functionality for managing various aspects of car-related data, including Car Colors, Car Categories, Car Models, Car Variants, Car Engines, and Cars. Users can perform Create, Read, Update, and Delete (CRUD) operations on these components, making car data management more efficient and user-friendly.
+The CMS (Car Management System) Application is a web-based system designed to manage car-related data and specifications. This application allows users to perform Create, Read, Update, and Delete (CRUD) operations on various car-related data components and specification. Here's a comprehensive guide on using the CMS Application.
 
 ## Table of Contents
 
@@ -16,7 +15,7 @@ The CMS (Car Management System) Application is a web-based system that offers fu
 
 ## Introduction
 
-The CMS Application simplifies the management of car-related data, offering essential components for handling:
+The CMS Application simplifies car data management by offering an intuitive web-based interface. Users can effortlessly perform CRUD operations on the following key components:
 
 - Car Colors
 - Car Categories
@@ -25,7 +24,7 @@ The CMS Application simplifies the management of car-related data, offering esse
 - Car Engines
 - Cars
 
-Users can interact with these components through a web-based interface, facilitating operations like viewing, adding, editing, or deleting entries. The application also ensures user authentication for enhanced security.
+This application ensures that car-related data can be easily viewed, added, edited, or deleted, with an added layer of security through user authentication.
 
 ## Technology Stack
 
@@ -42,9 +41,9 @@ Users can interact with these components through a web-based interface, facilita
 
 ## Project Structure
 
-The project directory comprises the following files and directories:
+The project directory includes the following files and directories:
 
-- `app.py`: The primary application file that initializes the Flask instance and connects various functionalities using Blueprints.
+- `app.py`: The main application file that initializes the Flask instance and connects various functionalities using Blueprints.
 - `auth.py`: Responsible for user authentication and authorization.
 - `car.py`: Contains logic and views for CRUD operations related to Cars.
 - `car_category.py`: Manages CRUD operations for Car Categories.
@@ -55,12 +54,17 @@ The project directory comprises the following files and directories:
 - `cardb.sql`: An SQL script for initializing the database schema.
 - `db.py`: Configures the database for the project.
 
+##### Directory 
+- `templates` : This directory contain all the HTML files.
+- `static` : This directory contain CSS and image files.
+
 ## Prerequisites
 
 Before proceeding with the installation and execution of the application, ensure you have the following dependencies installed on your system:
 
 - Python 3.x
 - Git
+- MySQL server installed and running.
 
 ## Installation
 
@@ -124,4 +128,4 @@ The CMS Application offers the following essential functionalities:
 
 Users can effortlessly perform CRUD operations on these components, enabling them to add, view, update, or delete entries as necessary.
 
-With the CMS Application, you can efficiently manage car-related data and streamline your operations. Ensure you've completed the database initialization and configuration steps for a seamless user experience.
+With the CMS Application, efficient car data management is just a few clicks away. Ensure you've completed the database initialization and configuration steps for a seamless user experience.
