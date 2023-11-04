@@ -27,7 +27,10 @@
             <th>Mileage</th>
             <th>MFD Year</th>
             <th>Company</th>
-            <th>Action</th>
+
+            {% if role == 'Admin' %}
+                <th>Action</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -45,10 +48,14 @@
                 <td>{{ car[7] }}</td>
                 <td>{{ car[8] }}</td>
                 <td>{{ car[9] }}</td>
-                <td>
-                    <a class="edit-link" href="{{ url_for('manage_car.edit_car', car_id=car[0]) }}">Edit</a>
-                    <a class="delete-link" href="{{ url_for('manage_car.delete_car', car_id=car[0]) }}">Delete</a>
-                </td>
+
+                {% if role == 'Admin' %}
+                    <td>
+                        <a class="edit-link" href="{{ url_for('manage_car.edit_car', car_id=car[0]) }}">Edit</a>
+                        <a class="delete-link" href="{{ url_for('manage_car.delete_car', car_id=car[0]) }}">Delete</a>
+                    </td>
+                {% endif %}
+                
             </tr>
         {% endfor %}
     </tbody>
