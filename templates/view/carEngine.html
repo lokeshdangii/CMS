@@ -19,7 +19,10 @@
             <tr>
                 <th>S.NO.</th>
                 <th>EngineName</th>
+
+                {% if role == 'Admin' %}
                 <th>Action</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -27,10 +30,14 @@
             <tr>
                 <td>{{ loop.index }}</td>
                 <td>{{ row[1] }}</td>
+
+                {% if role == 'Admin' %}
                 <td>
                     <a class="edit-link" href="{{ url_for('manage_car_engine.edit_car_engine' , engine_id = row[0]) }}">Edit</a>
                     <a class="delete-link" href="{{ url_for('manage_car_engine.delete_car_engine' , engine_id = row[0]) }}" >Delete</a>
                 </td>
+                {% endif %}
+                
             </tr>
             {% endfor %}
         </tbody>
