@@ -2,96 +2,109 @@
 
 {% block title %} CMS Dashboard {% endblock %}
 
-{% block stylesheet %} <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">  {% endblock %}
-
+{% block stylesheet %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
 
 {% block body %}
 
     <!-- Div -->
     <div class="content">
         <h1>Car Management System Dashboard</h1>
+        <br><br>
 
-        <!-- flash message -->
-      <div class="flash-messages">
-          {% for msg in get_flashed_messages() %}
-              <div class="flash-message">{{ msg }}</div>
-          {% endfor %}
-      </div>
-        
-        <!-- Row 1 -->
-      <div class="row">
-        
-           <div class="col-md-3" style="margin: 0px">
-               <div class="card bg-light" style="width: 350px">
-                   <div class="card-header">Total Car</div>
-                   <div class="card-body">
-                       <p class="card-text">No of cars : {{ car_count }} </p>
-                       <a class="btn btn-success" href="{{url_for('manage_car.manage_car_table')}}" >View Cars</a> &nbsp &nbsp &nbsp
-                       <a class="btn btn-success" href="{{url_for('manage_car.add_car')}}" >Add Car</a>
-                   </div>
-               </div>
-           </div> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-           <div class="col-md-3" style="margin: 0px">
-               <div class="card bg-light" style="width: 350px">
-                   <div class="card-header">Model</div>
-                   <div class="card-body">
-                       <p class="card-text">No of Models: {{ model_count }} </p>
-                       <a class="btn btn-warning" href="{{ url_for('manage_car_model.carmodel_table') }}" >View Models</a>
-                       &nbsp &nbsp &nbsp
-                       <a class="btn btn-warning" href="{{ url_for('manage_car_model.add_carmodel') }}" >Add Model</a>
-                       
-                   </div>
-               </div>
-           </div> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-           <div class="col-md-3" style="margin: 0px">
-               <div class="card bg-light" style="width: 350px">
-                   <div class="card-header">No. of Variant</div>
-                   <div class="card-body">
-                       <p class="card-text">No of Variants: {{ variant_count }}</p>
-                       <a class="btn btn-primary" href="{{url_for('manage_car_variant.carvariant_table')}}" >View Variants</a>&nbsp &nbsp &nbsp
-                       <a class="btn btn-primary" href="{{url_for('manage_car_variant.add_carvariant')}}" >Add Variant</a>
-                   </div>
-               </div>
-           </div>
-       </div>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-
-       <!-- Row 2 -->
-      <div class="row">
-        
-        <div class="col-md-3" style="margin: 0px">
-            <div class="card bg-light" style="width: 350px">
-                <div class="card-header">Car Calors</div>
-                <div class="card-body">
-                    <p class="card-text">No of Colors: {{ color_count }}</p>
-                    <a class="btn btn-success" href="{{url_for('manage_car_color.carcolor_table')}}" >View Colors</a>&nbsp &nbsp &nbsp
-                    <a class="btn btn-success" href="{{url_for('manage_car_color.add_carcolor')}}" >Add Color</a>
-                </div>
-            </div>
-        </div> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        <div class="col-md-3" style="margin: 0px">
-            <div class="card bg-light" style="width: 350px">
-                <div class="card-header">Car Engine</div>
-                <div class="card-body">
-                    <p class="card-text">No of Engines: {{ engine_count }}</p>
-                    <a class="btn btn-warning" href="{{url_for('manage_car_engine.carengine_table')}}" >View Engines</a>&nbsp &nbsp &nbsp
-                    <a class="btn btn-warning" href="{{url_for('manage_car_engine.add_carengine')}}" >Add Engine</a>
-                </div>
-            </div>
-        </div> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        <div class="col-md-3" style="margin: 0px">
-            <div class="card bg-light" style="width: 350px">
-                <div class="card-header">Car Category</div>
-                <div class="card-body">
-                    <p class="card-text">No of Categories: {{ category_count }}</p>
-                    <a class="btn btn-primary" href="{{url_for('manage_car_category.carcategory_table')}}" >View Categories</a>&nbsp &nbsp &nbsp
-                    <a class="btn btn-primary" href="{{url_for('manage_car_category.add_carcategory')}}" >Add Categories</a>
-                </div>
-            </div>
+        <!-- Flash message -->
+        <div class="flash-messages">
+            {% for msg in get_flashed_messages() %}
+                <div class="flash-message">{{ msg }}</div>
+            {% endfor %}
         </div>
-      </div>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
 
+        <!-- Row 1 -->
+        <div class="row">
+            <div class="col-md-3" style="margin: 0px">
+                <div class="card bg-light" style="width: 350px">
+                    <div class="card-header">Total Car</div>
+                    <div class="card-body">
+                        <p class="card-text">No of cars : {{ car_count }}</p>
+                        <a class="btn btn-success" href="{{url_for('manage_car.manage_car_table')}}">View Cars</a> &nbsp &nbsp &nbsp
+                        
+                        {% if role == 'Admin' %}
+                            <a class="btn btn-success" href="{{url_for('manage_car.add_car')}}">Add Car</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+            <div class="col-md-3" style="margin: 0px">
+                <div class="card bg-light" style="width: 350px">
+                    <div class="card-header">Model</div>
+                    <div class="card-body">
+                        <p class="card-text">No of Models: {{ model_count }}</p>
+                        <a class="btn btn-warning" href="{{ url_for('manage_car_model.carmodel_table') }}">View Models</a>
+                        &nbsp &nbsp &nbsp
+                        
+                        {% if role == 'Admin' %}
+                            <a class="btn btn-warning" href="{{ url_for('manage_car_model.add_carmodel') }}">Add Model</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+            <div class="col-md-3" style="margin: 0px">
+                <div class= "card bg-light" style="width: 350px">
+                    <div class="card-header">No. of Variant</div>
+                    <div class="card-body">
+                        <p class="card-text">No of Variants: {{ variant_count }}</p>
+                        <a class="btn btn-primary" href="{{url_for('manage_car_variant.carvariant_table')}}">View Variants</a>&nbsp &nbsp &nbsp
+                        
+                        {% if role == 'Admin' %}
+                            <a class="btn btn-primary" href="{{url_for('manage_car_variant.add_carvariant')}}">Add Variant</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+
+        <!-- Row 2 -->
+        <div class="row">
+            <div class="col-md-3" style="margin: 0px">
+                <div class="card bg-light" style="width: 350px">
+                    <div class="card-header">Car Calors</div>
+                    <div class="card-body">
+                        <p class="card-text">No of Colors: {{ color_count }}</p>
+                        <a class="btn btn-success" href="{{url_for('manage_car_color.carcolor_table')}}">View Colors</a>&nbsp &nbsp &nbsp
+                        
+                        {% if role == 'Admin' %}
+                            <a class="btn btn-success" href="{{url_for('manage_car_color.add_carcolor')}}">Add Color</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+            <div class="col-md-3" style="margin: 0px">
+                <div class="card bg-light" style="width: 350px">
+                    <div class="card-header">Car Engine</div>
+                    <div class="card-body">
+                        <p class="card-text">No of Engines: {{ engine_count }}</p>
+                        <a class="btn btn-warning" href="{{url_for('manage_car_engine.carengine_table')}}">View Engines</a>&nbsp &nbsp &nbsp
+                        
+                        {% if role == 'Admin' %}
+                            <a class="btn btn-warning" href="{{url_for('manage_car_engine.add_carengine')}}">Add Engine</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+            <div class="col-md-3" style="margin: 0px">
+                <div class="card bg-light" style="width: 350px">
+                    <div class="card-header">Car Category</div>
+                    <div class="card-body">
+                        <p class="card-text">No of Categories: {{ category_count }}</p>
+                        <a class="btn btn-primary" href="{{url_for('manage_car_category.carcategory_table')}}">View Categories</a>&nbsp &nbsp &nbsp
+                        
+                        {% if role == 'Admin' %}
+                            <a class="btn btn-primary" href="{{url_for('manage_car_category.add_carcategory')}}">Add Categories</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
     </div>
-
-
 {% endblock %}
-
