@@ -3,7 +3,6 @@ import mysql.connector
 from werkzeug.security import generate_password_hash, check_password_hash
 from db import db, cursor
 from functools import wraps
-import re
 
 # Blueprint
 auth = Blueprint('auth',__name__)
