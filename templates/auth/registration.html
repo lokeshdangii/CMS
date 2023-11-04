@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Registration</title>
+    <title>User Registration</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/auth.css') }}">
 
 </head>
 <body>
-    <h1>Admin Registration</h1>
+    <h1>User Registration</h1>
     <form method="POST" action="{{ url_for('auth.register') }}" id="registration-form">
 
         <!-- flash message -->
@@ -45,7 +45,10 @@
         <input type="submit" value="Register">
     </form>
 
-    <p>Already have an account? <a href="{{ url_for('auth.login') }}">Login</a></p>
+    <p>Already have an account? 
+        <a href="{{ url_for('auth.user_login_form') }}">Login User</a><br>
+        <a href="{{ url_for('auth.login_form') }}">Login Admin</a>
+    </p>
 </body>
 
 <script>
