@@ -72,6 +72,9 @@
 </div>
 
 <br>
+
+{% if role == 'Admin' %}
 <a class="add_link" href="{{ url_for('manage_car.add_car') }}"> <i class="bi bi-plus-lg"></i> Add New Car</a>
+{% endif %}
 
 {% endblock %}
