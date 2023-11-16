@@ -45,8 +45,9 @@
         </tbody>
     </table>
 
+    {% if role == 'Admin' %}
     <a class="add_link" href="{{url_for('manage_car_color.add_carcolor')}}"> <i class="bi bi-plus-lg"></i> Add New Color</a>
-
+    {% endif %}
 
 {% endblock %}
 
