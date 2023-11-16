@@ -43,8 +43,9 @@
         </tbody>
     </table>
 
+    {% if role == 'Admin' %}
     <a class="add_link" href="{{ url_for('manage_car_engine.add_carengine')}}"> <i class="bi bi-plus-lg"></i> Add New Engine</a>
-
+    {% endif %}
 
 {% endblock %}
 
