@@ -88,9 +88,71 @@ Before proceeding with the installation and execution of the application, ensure
 
 ## Database Initialization and Configuration
 
-Before running the application, it's essential to initialize the database and configure the connection. Follow these steps:
+*Before running the application, it's essential to initialize the database and configure the connection. Follow these steps carefully:*
 
-1. Import the database schema by running the SQL script (`cardb.sql`) provided in the repository. This script will set up the required tables and initial data.
+### 1. Import the Database Schema
+
+- Import the database schema by running the SQL script (`cardb.sql`) provided in the repository. This script will create the required tables and initial data. Below are the two steps on how to import data in MySQL from the cardb.sql into the new database. 
+
+#### Importing Database in MySQL from cardb.sql
+
+##### (a) Using MySQL Interpreter
+
+1. **Login to MySQL Interpreter**
+
+    ```bash
+    $ mysql -u root -p
+    ```
+
+2. **Create a new database**
+
+    ```sql
+    CREATE DATABASE new_database_name;
+    ```
+
+3. **Use the newly created database**
+
+    ```sql
+    USE new_database_name;
+    ```
+
+4. **Import the SQL script**
+
+    ```sql
+    source /path/to/cardb.sql;
+    ```
+
+##### (b) Using Terminal 
+##### (b.1) In Linux(Ubuntu)
+ 
+
+1. **Create a new database**
+
+    ```bash
+    $ mysql -u [username] -p -e "CREATE DATABASE new_database_name;"
+    ```
+
+2. **Import the data from your SQL file into the newly created database**
+
+    ```bash
+    $ mysql -u [username] -p new_database_name < /path/to/cardb.sql
+    ```
+
+##### (b.2) In Windows
+
+1. **Create a new database**
+
+    ```bash
+    mysql -uroot -ppassword -e "CREATE DATABASE new_database_name"
+    ```
+
+2. **Import the data from your SQL file into the newly created database**
+
+    ```bash
+    mysql -u username -p new_database_name < path\to\cardb.sql
+    
+
+#### After importing the database, update the database configuration as mentioned in the next step.
 
 2. Update the MySQL database configuration in the `db.py` file. Open `db.py` and provide your MySQL database connection details as follows:
 
