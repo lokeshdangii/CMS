@@ -101,7 +101,7 @@ Before proceeding with the installation and execution of the application, ensure
 1. **Login to MySQL Interpreter**
 
     ```bash
-    $ mysql -u root -p
+    mysql -u root -p
     ```
 
 2. **Create a new database**
@@ -129,13 +129,13 @@ Before proceeding with the installation and execution of the application, ensure
 1. **Create a new database**
 
     ```bash
-    $ mysql -u [username] -p -e "CREATE DATABASE new_database_name;"
+    mysql -u [username] -p -e "CREATE DATABASE new_database_name;"
     ```
 
 2. **Import the data from your SQL file into the newly created database**
 
     ```bash
-    $ mysql -u [username] -p new_database_name < /path/to/cardb.sql
+    mysql -u [username] -p new_database_name < /path/to/cardb.sql
     ```
 
 ##### (b.2) In Windows
