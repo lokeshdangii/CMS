@@ -5,6 +5,7 @@
 
 echo "Step 1: Installation"
 sudo apt update -y > /dev/null
+sudo apt-get remove needrestart -y
 sudo apt install python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools -y
 sudo apt-get install python3-venv -y > /dev/null
 sudo apt install mysql-server -y
