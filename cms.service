@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI instance to serve CMS Application
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/CMS
+Environment="PATH=/home/ubuntu/CMS/env/bin"
+ExecStart=/home/ubuntu/CMS/env/bin/uwsgi --ini app.ini
+
+[Install]
+WantedBy=multi-user.target
