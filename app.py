@@ -37,7 +37,6 @@ app.register_blueprint(auth)
 app.register_blueprint(links)
 
 
-if __name__ == '__main__':
-    # app.run(debug=True, host="0.0.0.0", port=4500)
-    app.run(debug=False, host="0.0.0.0", port=4500)
-    # app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=False, host="0.0.0.0", port=80)
+#     # app.run(debug=False)
