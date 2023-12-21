@@ -1,6 +1,8 @@
 [Unit]
 Description=Gunicorn instance to serve CMS Application
 After=network.target
+StartLimitIntervalSec=30
+StartLimitBurst=2
 
 [Service]
 User=ubuntu
