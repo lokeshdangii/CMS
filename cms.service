@@ -8,6 +8,7 @@ Group=www-data
 WorkingDirectory=/home/ubuntu/CMS
 Environment="PATH=/home/ubuntu/CMS/env/bin"
 ExecStart=/home/ubuntu/CMS/env/bin/gunicorn --workers 3 --bind unix:app.sock -m 007 wsgi:app
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
