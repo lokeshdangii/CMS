@@ -12,6 +12,7 @@ sudo apt install mysql-server -y
 echo "Installation completed successfully."
 
 echo "Step 2: Setting Up Application"
+cd /home/ubuntu
 git clone https://github.com/lokeshdangii/CMS
 cd CMS/
 python3 -m venv env
